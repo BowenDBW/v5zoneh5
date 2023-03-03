@@ -1,3 +1,4 @@
+import React from 'react';
 import {
     Box,
     Button,
@@ -13,57 +14,49 @@ import {
     TextField,
     Typography
 } from "@mui/material";
-
-import {
-    Visibility,
-    VisibilityOff
-} from "@mui/icons-material";
-
-import React from "react";
 import {useNavigate} from "react-router-dom";
-import {IsDesktop} from "../../components/utils/IsDesktop";
+import {Visibility, VisibilityOff} from "@mui/icons-material";
+import {post} from "../../request";
+import {JudgeDevice} from "../templates/JudgeDevice";
 
-
-function Login(){
+function LoginForm() {
     const [showPassword, setShowPassword] = React.useState(false);
     const [username, setUsername] = React.useState("");
     const [password, setPassword] = React.useState("");
-    const [usernameInvalid, setUsernameInvalid] = React.useState(false);
-    const [passwordInvalid, setPasswordInvalid] = React.useState(false);
 
     const navigate = useNavigate()
-    const isDesktop = IsDesktop()
+    const isDesktop = JudgeDevice()
 
-    const handleUsernameChange = (event: React.ChangeEvent<HTMLInputElement>) => setUsername(event.target.value);
-    const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => setPassword(event.target.value);
+    const handleUsernameChange = (event) => setUsername(event.target.value);
+    const handlePasswordChange = (event) => setPassword(event.target.value);
 
     const handleClickShowPassword = () => setShowPassword((show) => !show);
-    const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
+    const handleMouseDownPassword = (event) => {
         event.preventDefault();
     };
 
-    const onClickLogin = () => {
+    const onClickYes = () => {
         const data = {
             "id": username,
             "password": password
         }
 
-        localStorage.setItem("v5_token", "undefined");
+        localStorage.setItem("v5_token", "undefined")
 
-        // post("/auth/authenticate", data).then((res => {
-        //     if (res.status === 200) {
-        //         localStorage.setItem('v5_token', res.data.token);
-        //         console.log(res.data.token);
-        //         localStorage.setItem('v5_id', res.data.id);
-        //         console.log(res.data.id);
-        //         localStorage.setItem('v5_contact_tech', "全部");
-        //         localStorage.setItem('v5_contact_college', "全部");
-        //         localStorage.setItem('v5_contact_session', "现役");
+        post("/auth/authenticate", data).then((res => {
+            if (res.status === 200) {
+                localStorage.setItem('v5_token', res.data.token);
+                console.log(res.data.token);
+                localStorage.setItem('v5_id', res.data.id);
+                console.log(res.data.id);
+                localStorage.setItem('v5_contact_tech', "全部");
+                localStorage.setItem('v5_contact_college', "全部");
+                localStorage.setItem('v5_contact_session', "现役");
                 navigate("/homepage");
-        //     }
-        // })).catch(() => {
-        //     alert("用户名或密码错误！")
-        // })
+            }
+        })).catch(() => {
+            alert("用户名或密码错误！")
+        })
     }
 
     return (
@@ -108,7 +101,6 @@ function Login(){
                         margin: 3,
                         height: 40
                     }}
-                    error = {usernameInvalid}
                     value={username}
                     onChange={handleUsernameChange}
                 />
@@ -129,14 +121,12 @@ function Login(){
                                     onClick={handleClickShowPassword}
                                     onMouseDown={handleMouseDownPassword}
                                     edge="end"
-                                >
-                                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                                >{showPassword ? <VisibilityOff/> : <Visibility/>}
                                 </IconButton>
                             </InputAdornment>
                         }
-                        error = {passwordInvalid}
-                        label = "密码"
-                        value = {password}
+                        label="密码"
+                        value={password}
                         onChange={handlePasswordChange}
                     />
                 </FormControl>
@@ -181,7 +171,7 @@ function Login(){
                             }}
                             variant="text"
                             onClick={() => {
-                                navigate('../reset')
+                                navigate('../reset_password')
                             }}
                         >
                             忘记密码？
@@ -196,7 +186,7 @@ function Login(){
                             width: 120,
                         }}
                         variant="contained"
-                        onClick={onClickLogin}
+                        onClick={onClickYes}
                     >登录</Button>
                     <Button
                         sx={{
@@ -207,12 +197,13 @@ function Login(){
                         }}
                         disabled={true}
                         variant="outlined"
-                        onClick={onClickLogin}
+                        onClick={onClickYes}
                     >Gitlab登录</Button>
                 </Box>
             </Stack>
         </Box>
     );
-};
 
-export default Login;
+}
+
+export default LoginForm;

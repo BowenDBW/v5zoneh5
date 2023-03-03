@@ -1,8 +1,8 @@
 import React from 'react';
 import './App.css';
-import {HashRouter} from "react-router-dom";
 import {useRoutes} from "react-router-dom";
-import routes from "./routes"
+import routes from "./routes";
+import {Box} from "@mui/material";
 
 
 function App() {
@@ -10,11 +10,9 @@ function App() {
   const element = useRoutes(routes)
 
   return (
-      <React.StrictMode>
-        <HashRouter>
+      <Box>
           {element}
-        </HashRouter>
-      </React.StrictMode>
+      </Box>
   );
 }
 

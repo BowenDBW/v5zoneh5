@@ -1,7 +1,11 @@
-import React from "react";
+import React from 'react';
 
-export function Reset() {
+function Reset(){
     return (
-        <div/>
+        <div>
+
+        </div>
     );
-}
+};
+
+export default Reset;

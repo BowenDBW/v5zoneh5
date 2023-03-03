@@ -1,7 +1,11 @@
 import React from 'react';
 
-export function CheckBoard() {
+const CheckBoard = () => {
     return (
-        <div/>
+        <div>
+
+        </div>
     );
-}
+};
+
+export default CheckBoard;

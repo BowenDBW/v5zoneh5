@@ -1,7 +1,11 @@
 import React from 'react';
 
-export function Prize() {
+const Prize = () => {
     return (
-        <div/>
+        <div>
+            
+        </div>
     );
-}
+};
+
+export default Prize;

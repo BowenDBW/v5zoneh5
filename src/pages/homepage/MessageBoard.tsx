@@ -1,7 +1,11 @@
 import React from 'react';
 
-export function MessageBoard() {
+const MessageBoard = () => {
     return (
-        <div/>
+        <div>
+            
+        </div>
     );
-}
+};
+
+export default MessageBoard;

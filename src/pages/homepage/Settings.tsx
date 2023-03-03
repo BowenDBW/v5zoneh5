@@ -1,7 +1,11 @@
 import React from 'react';
 
-export function Settings() {
+const Settings = () => {
     return (
-        <div/>
+        <div>
+               
+        </div>
     );
-}
+};
+
+export default Settings;

@@ -1,7 +1,11 @@
 import React from 'react';
 
-export function ImageBad() {
+const ImageBad = () => {
     return (
-        <div/>
+        <div>
+            
+        </div>
     );
-}
+};
+
+export default ImageBad;

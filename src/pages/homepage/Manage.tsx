@@ -1,7 +1,11 @@
 import React from 'react';
 
-export function Manage() {
+const Manage = () => {
     return (
-        <div/>
+        <div>
+            
+        </div>
     );
-}
+};
+
+export default Manage;

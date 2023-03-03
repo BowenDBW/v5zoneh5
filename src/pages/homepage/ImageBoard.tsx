@@ -1,7 +1,11 @@
 import React from 'react';
 
-export function ImageBoard() {
+const ImageBoard = () => {
     return (
-        <div/>
+        <div>
+            
+        </div>
     );
-}
+};
+
+export default ImageBoard;
