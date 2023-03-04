@@ -1,11 +1,10 @@
 import React from 'react';
 import {Outlet} from "react-router-dom";
-import {IsDesktop} from "../components/utils/IsDesktop";
+import Global from "../GlobalParams";
 import Footer from "../components/desktop/Footer";
+import {Stack} from "@mui/material";
 
 const Auth = () => {
-
-    const isDesktop = IsDesktop()
 
     const CSS_BASIC = {
         display: "flex",
@@ -27,10 +26,10 @@ const Auth = () => {
     }
 
     return (
-        <div style={isDesktop ? {...CSS_BASIC, ...DESKTOP_FEATURE} : {...CSS_BASIC, ...MOBILE_FEATURE}}>
+        <Stack style={Global.isDesktop ? {...CSS_BASIC, ...DESKTOP_FEATURE} : {...CSS_BASIC, ...MOBILE_FEATURE}}>
             <Outlet/>
             <Footer/>
-        </div>
+        </Stack>
     );
 }
 

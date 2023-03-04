@@ -22,6 +22,7 @@ import {
 import React from "react";
 import {useNavigate} from "react-router-dom";
 import {IsDesktop} from "../../components/utils/IsDesktop";
+import {post} from "../../components/utils/Request";
 
 
 function Login(){
@@ -47,10 +48,9 @@ function Login(){
             "id": username,
             "password": password
         }
-
-        localStorage.setItem("v5_token", "undefined");
-
-        // post("/auth/authenticate", data).then((res => {
+        // localStorage.setItem("v5_token", "undefined");
+        //
+        // post("/auth/authenticate", data).then(((res:any) => {
         //     if (res.status === 200) {
         //         localStorage.setItem('v5_token', res.data.token);
         //         console.log(res.data.token);
@@ -59,7 +59,7 @@ function Login(){
         //         localStorage.setItem('v5_contact_tech', "全部");
         //         localStorage.setItem('v5_contact_college', "全部");
         //         localStorage.setItem('v5_contact_session', "现役");
-                navigate("/homepage");
+                 navigate("/homepage");
         //     }
         // })).catch(() => {
         //     alert("用户名或密码错误！")
@@ -69,10 +69,10 @@ function Login(){
     return (
         <Box
             sx={{
-                width: 480,
+                width: 480 > window.innerWidth ? 0.8 * window.innerWidth : 480,
                 height: 400,
-                backgroundColor: '#b7bcc3',
-                opacity: 0.90,
+                backgroundColor: '#ffffff',
+                opacity: 0.85,
                 borderRadius: 5,
             }}
         >
@@ -103,12 +103,12 @@ function Login(){
                 <TextField
                     required
                     id="outlined-required"
-                    label="学号"
+                    label={usernameInvalid ? "用户名不存在，请检查":"学号"}
                     sx={{
                         margin: 3,
                         height: 40
                     }}
-                    error = {usernameInvalid}
+                    error={usernameInvalid}
                     value={username}
                     onChange={handleUsernameChange}
                 />
@@ -117,7 +117,8 @@ function Login(){
                     sx={{
                         margin: 3,
                     }}
-                    variant="outlined">
+                    variant="outlined"
+                >
                     <InputLabel htmlFor="outlined-adornment-password">密码</InputLabel>
                     <OutlinedInput
                         id="outlined-adornment-password"
@@ -135,7 +136,7 @@ function Login(){
                             </InputAdornment>
                         }
                         error = {passwordInvalid}
-                        label = "密码"
+                        label ={passwordInvalid ? "密码有误，请重新输入":"密码"}
                         value = {password}
                         onChange={handlePasswordChange}
                     />
