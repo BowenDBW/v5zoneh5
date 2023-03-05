@@ -1,5 +1,9 @@
 import React from 'react';
 import {
+    Button, Dialog,
+    DialogActions,
+    DialogContent, DialogContentText,
+    DialogTitle,
     Divider,
     Drawer,
     List,
@@ -7,7 +11,7 @@ import {
     ListItemButton,
     ListItemIcon,
     ListItemText,
-    Toolbar,
+    Toolbar, Typography,
 } from "@mui/material";
 import TaskIcon from '@mui/icons-material/Task';
 import PhoneIcon from '@mui/icons-material/Phone';
@@ -22,11 +26,22 @@ import CloudDownloadIcon from '@mui/icons-material/CloudDownload';
 import CoffeeIcon from '@mui/icons-material/Coffee';
 import {useNavigate} from "react-router-dom";
 import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
-import FooterShort from "../FooterShort";
+import Global from "../../GlobalParams";
+import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 
 const DrawerDesktop = () => {
 
-    const drawerWidth = "13%";
+    const drawerWidth = "15%";
+
+    const [openDialog, setOpenDialog] = React.useState(false);
+
+    const handleClickOpen = () => {
+        setOpenDialog(true);
+    };
+
+    const handleClose = () => {
+        setOpenDialog(false);
+    };
 
     const navigate = useNavigate();
 
@@ -207,7 +222,52 @@ const DrawerDesktop = () => {
                     </ListItemButton>
                 </ListItem>
             </List>
-            <FooterShort/>
+            <Divider/>
+            <br/>
+            <Button
+                sx={{color:"#a4a4a4"}}
+                onClick={handleClickOpen}
+            >
+                <Typography>
+                    ICP信息
+                </Typography>
+                <HelpOutlineIcon/>
+            </Button>
+            <Dialog
+                open={openDialog}
+                onClose={handleClose}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+            >
+                <DialogTitle id="alert-dialog-title">
+                    {"V5Zone ICP信息"}
+                </DialogTitle>
+                <DialogContent>
+                    <DialogContentText
+                        sx={{
+                            color:"#b0b0b0",
+                            textAlign: "center",
+                        }}
+                        id="alert-dialog-slide-description"
+                    >
+                        @2003-{new Date().getFullYear()} 西北工业大学-足球机器人创新实践基地V5++组
+                    </DialogContentText>
+                    <DialogContentText
+                        sx={{
+                            color:"#b0b0b0",
+                            textAlign: "center",
+                        }}
+                        id="alert-dialog-slide-description"
+                    >
+                        ICP备案号：<a href="https://beian.miit.gov.cn/">{Global.icp}</a>
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleClose}>
+                        返回
+                    </Button>
+                </DialogActions>
+            </Dialog>
         </Drawer>
     );
 };
