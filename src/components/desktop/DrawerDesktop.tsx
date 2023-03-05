@@ -22,6 +22,7 @@ import CloudDownloadIcon from '@mui/icons-material/CloudDownload';
 import CoffeeIcon from '@mui/icons-material/Coffee';
 import {useNavigate} from "react-router-dom";
 import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
+import FooterShort from "../FooterShort";
 
 const DrawerDesktop = () => {
 
@@ -206,6 +207,7 @@ const DrawerDesktop = () => {
                     </ListItemButton>
                 </ListItem>
             </List>
+            <FooterShort/>
         </Drawer>
     );
 };

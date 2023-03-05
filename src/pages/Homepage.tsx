@@ -1,13 +1,12 @@
 import React from 'react';
 import {
     Stack,
-    Box
 } from "@mui/material";
 import DrawerDesktop from "../components/desktop/DrawerDesktop";
-import Header from "../components/desktop/Header";
+import HeaderDesktop from "../components/desktop/HeaderDesktop";
 import {Outlet} from "@mui/icons-material";
 import {IsDesktop} from "../components/utils/IsDesktop";
-import Footer from "../components/desktop/Footer";
+import HeaderMobile from "../components/mobile/HeaderMobile";
 
 const Homepage = () => {
 
@@ -19,14 +18,15 @@ const Homepage = () => {
                 <div>
                     <Stack direction="row">
                         <DrawerDesktop/>
-                        <Header/>
+                        <HeaderDesktop/>
                     </Stack>
                     <Outlet/>
-                    <Footer/>
                 </div>
                 :
                 <div>
-
+                    <Stack>
+                        <HeaderMobile/>
+                    </Stack>
                 </div>
             }
         </div>

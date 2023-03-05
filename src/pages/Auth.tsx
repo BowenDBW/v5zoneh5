@@ -1,7 +1,7 @@
 import React from 'react';
 import {Outlet} from "react-router-dom";
 import Global from "../GlobalParams";
-import Footer from "../components/desktop/Footer";
+import Footer from "../components/Footer";
 import {Stack} from "@mui/material";
 
 const Auth = () => {
@@ -26,7 +26,12 @@ const Auth = () => {
     }
 
     return (
-        <Stack style={Global.isDesktop ? {...CSS_BASIC, ...DESKTOP_FEATURE} : {...CSS_BASIC, ...MOBILE_FEATURE}}>
+        <Stack
+            style={Global.isDesktop ?
+                {...CSS_BASIC, ...DESKTOP_FEATURE}
+                :
+                {...CSS_BASIC, ...MOBILE_FEATURE}}
+        >
             <Outlet/>
             <Footer/>
         </Stack>

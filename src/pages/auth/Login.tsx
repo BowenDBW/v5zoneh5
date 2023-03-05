@@ -69,7 +69,7 @@ function Login(){
     return (
         <Box
             sx={{
-                width: 480 > window.innerWidth ? 0.8 * window.innerWidth : 480,
+                width: 480 > window.innerWidth ? 0.83 * window.innerWidth : 480,
                 height: 400,
                 backgroundColor: '#ffffff',
                 opacity: 0.85,
@@ -145,9 +145,10 @@ function Login(){
                     container spacing={2}
                     sx={{
                         marginLeft: 4,
+                        justifyContent: "left",
                     }}
                 >
-                    <Grid xs={4}>
+                    <Grid>
                         <FormControlLabel
                             control={<Checkbox defaultChecked/>}
                             label="记住我"
@@ -158,22 +159,26 @@ function Login(){
                             }}
                         />
                     </Grid>
-                    <Grid>
-                        <Button
-                            sx={{
-                                fontWeight: "bold",
-                                font: 18,
-                            }}
-                            variant="text"
-                            onClick={() => {
-                                if (isDesktop) {
-                                    navigate('../registry')
-                                } else return (
-                                    alert("该功能仅限桌面端")
-                                )
-                            }}
-                        >是新队员？</Button>
-                    </Grid>
+                    {isDesktop ?
+                        <Grid>
+                            <Button
+                                sx={{
+                                    fontWeight: "bold",
+                                    font: 18,
+                                }}
+                                variant="text"
+                                onClick={() => {
+                                    if (isDesktop) {
+                                        navigate('../registry')
+                                    } else return (
+                                        alert("该功能仅限桌面端")
+                                    )
+                                }}
+                            >是新队员？</Button>
+                        </Grid>
+                        :
+                        <Grid xs={2}/>
+                    }
                     <Grid>
                         <Button
                             sx={{
@@ -194,7 +199,7 @@ function Login(){
                         sx={{
                             margin: 3,
                             textAlign: "center",
-                            width: 120,
+                            width: isDesktop ? 120 : 100,
                         }}
                         variant="contained"
                         onClick={onClickLogin}
@@ -203,13 +208,13 @@ function Login(){
                         sx={{
                             margin: 3,
                             textAlign: "center",
-                            width: 120,
+                            width: isDesktop ? 120 : 100,
                             fontWeight: "bold",
                         }}
                         disabled={true}
                         variant="outlined"
                         onClick={onClickLogin}
-                    >Gitlab登录</Button>
+                    >{isDesktop ? "Gitlab登录" : "单点登录"}</Button>
                 </Box>
             </Stack>
         </Box>
