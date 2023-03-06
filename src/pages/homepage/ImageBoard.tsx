@@ -11,11 +11,11 @@ const ImageBoard = () => {
 
     function init() {
         post("/album/get_public", localStorage.getItem("v5_id"))
-            .then((res:any) => {
+            .then((res: any) => {
                 console.log(res);
                 if (res.status === 200) {
                     const list = res.data.reverse();
-                    list.map((item:any) => {
+                    list.map((item: any) => {
                         item.title = item.resourceLink;
                         item.resourceLink = GlobalParams.baseUrl
                             + "/album/download/"
@@ -45,7 +45,7 @@ const ImageBoard = () => {
                 >Zone 照片墙</Typography>
             }
             <ImageList variant="masonry" cols={3} gap={8}>
-                {imageList.map((item:any) => (
+                {imageList.map((item: any) => (
                     <ImageListItem key={item.img}>
                         <img
                             src={`${item.resourceLink}?w=248&fit=crop&auto=format`}

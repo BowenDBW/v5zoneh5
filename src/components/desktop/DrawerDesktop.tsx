@@ -1,8 +1,10 @@
 import React from 'react';
 import {
-    Button, Dialog,
+    Button,
+    Dialog,
     DialogActions,
-    DialogContent, DialogContentText,
+    DialogContent,
+    DialogContentText,
     DialogTitle,
     Divider,
     Drawer,
@@ -11,7 +13,8 @@ import {
     ListItemButton,
     ListItemIcon,
     ListItemText,
-    Toolbar, Typography,
+    Toolbar,
+    Typography,
 } from "@mui/material";
 import TaskIcon from '@mui/icons-material/Task';
 import PhoneIcon from '@mui/icons-material/Phone';
@@ -47,7 +50,7 @@ const DrawerDesktop = () => {
 
     return (
         <Drawer
-            variant = "permanent"
+            variant="permanent"
             sx={{
                 width: drawerWidth,
                 flexShrink: 0,
@@ -225,7 +228,7 @@ const DrawerDesktop = () => {
             <Divider/>
             <br/>
             <Button
-                sx={{color:"#a4a4a4"}}
+                sx={{color: "#a4a4a4"}}
                 onClick={handleClickOpen}
             >
                 <Typography>
@@ -245,7 +248,7 @@ const DrawerDesktop = () => {
                 <DialogContent>
                     <DialogContentText
                         sx={{
-                            color:"#b0b0b0",
+                            color: "#b0b0b0",
                             textAlign: "center",
                         }}
                         id="alert-dialog-slide-description"
@@ -254,7 +257,7 @@ const DrawerDesktop = () => {
                     </DialogContentText>
                     <DialogContentText
                         sx={{
-                            color:"#b0b0b0",
+                            color: "#b0b0b0",
                             textAlign: "center",
                         }}
                         id="alert-dialog-slide-description"

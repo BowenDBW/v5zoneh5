@@ -7,11 +7,12 @@ import React from "react";
 import {useNavigate} from "react-router-dom";
 
 interface HeaderProps {
-    setAnchorEl:Function,
-    anchorEl:any,
+    setAnchorEl: Function,
+    anchorEl: any,
     open: boolean,
 }
-export const HeaderMenu:React.FC<HeaderProps> = (props) => {
+
+export const HeaderMenu: React.FC<HeaderProps> = (props) => {
 
     const {open, anchorEl, setAnchorEl} = props;
 
@@ -50,7 +51,7 @@ export const HeaderMenu:React.FC<HeaderProps> = (props) => {
             <MenuList>
                 <MenuItem onClick={onSetAvatar}>
                     <ListItemIcon>
-                        <CenterFocusWeakIcon fontSize="small" />
+                        <CenterFocusWeakIcon fontSize="small"/>
                     </ListItemIcon>
                     {/* eslint-disable-next-line react/jsx-no-undef */}
                     <ListItemText>
@@ -60,22 +61,22 @@ export const HeaderMenu:React.FC<HeaderProps> = (props) => {
                 </MenuItem>
                 <MenuItem onClick={onViewProfile}>
                     <ListItemIcon>
-                        <AccountBoxIcon fontSize="small" />
+                        <AccountBoxIcon fontSize="small"/>
                     </ListItemIcon>
                     <ListItemText>个人资料</ListItemText>
                 </MenuItem>
                 <MenuItem onClick={onResetPassword}>
                     <ListItemIcon>
-                        <LockResetIcon fontSize="small" />
+                        <LockResetIcon fontSize="small"/>
                     </ListItemIcon>
                     <ListItemText>重置密码</ListItemText>
                 </MenuItem>
-                <Divider />
+                <Divider/>
                 <MenuItem onClick={onLogout}>
                     <ListItemIcon>
-                        <LogoutIcon sx={{color:"#ea7373"}} fontSize="small" />
+                        <LogoutIcon sx={{color: "#ea7373"}} fontSize="small"/>
                     </ListItemIcon>
-                    <ListItemText sx={{color:"#ea7373"}}>退出登录</ListItemText>
+                    <ListItemText sx={{color: "#ea7373"}}>退出登录</ListItemText>
                 </MenuItem>
             </MenuList>
         </Menu>

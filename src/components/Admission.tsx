@@ -15,11 +15,11 @@ export default function Admission() {
 
     function init() {
         post("/auth/is_monitor", localStorage.getItem("v5_id"))
-            .then((res:any) => {
+            .then((res: any) => {
                 setVice(res.data === "VICE_CAPTAIN");
             })
         post("/transaction/get_admission_needed_list",
-            localStorage.getItem("v5_id")).then((res:any) => {
+            localStorage.getItem("v5_id")).then((res: any) => {
             if (res.status === 200) {
                 if (res.data.records !== "") {
                     setRenderRows(res.data.records);
@@ -32,11 +32,11 @@ export default function Admission() {
         init();
     }, [])
 
-    const clickDeny = (event:any) => {
+    const clickDeny = (event: any) => {
         post("/transaction/admin", {
             "id": event.target.value,
             "message": "interrupted",
-        }).then((res:any) => {
+        }).then((res: any) => {
             if (res.status === 200) {
                 alert("操作成功");
                 navigate(0);
@@ -45,11 +45,11 @@ export default function Admission() {
 
     }
 
-    const clickPass = (event:any) => {
+    const clickPass = (event: any) => {
         post("/transaction/admin", {
             "id": event.target.value,
             "message": "forward",
-        }).then((res:any) => {
+        }).then((res: any) => {
             if (res.status === 200) {
                 alert("操作成功")
             }
@@ -58,12 +58,12 @@ export default function Admission() {
         });
     }
 
-    const openInNewTab = (url:string) => {
+    const openInNewTab = (url: string) => {
         // 👇️ setting target to _blank with window.open
         window.open(url, '_blank', 'noopener,noreferrer');
     };
 
-    const clickDownload = (event:any) => {
+    const clickDownload = (event: any) => {
         const url = GlobalParams.baseUrl
             + "/transaction/download/"
             + event.target.value;
@@ -98,7 +98,7 @@ export default function Admission() {
                         </TableHead>
                         <TableBody>
                             {
-                                renderRows.map((row:any) => (
+                                renderRows.map((row: any) => (
                                     <TableRow
                                         key={row.name}
                                         sx={{'&:last-child td, &:last-child th': {border: 0}}}

@@ -2,9 +2,9 @@ import {Button, Stack, Typography} from "@mui/material";
 import React from "react";
 import GlobalParams from "../GlobalParams";
 
-export default function POI() {
+export default function Poi() {
 
-    const openInNewTab = (url:string) => {
+    const openInNewTab = (url: string) => {
         // 👇️ setting target to _blank with window.open
         window.open(url, '_blank', 'noopener,noreferrer');
     };
@@ -21,7 +21,7 @@ export default function POI() {
         openInNewTab(url);
     }
 
-    const handleInvoiceDownload = (event:any) => {
+    const handleInvoiceDownload = (event: any) => {
         const url = GlobalParams.baseUrl
             + "/poi/invoice/" + event.target.value + ".zip"
         openInNewTab(url);

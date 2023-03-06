@@ -8,11 +8,9 @@ import MessageBoard from "../pages/homepage/MessageBoard";
 import Manage from "../pages/homepage/Manage";
 import Budget from "../pages/homepage/Budget";
 import Prize from "../pages/homepage/Prize";
-import Profile from "../components/Profile";
 import CheckBoard from "../pages/homepage/CheckBoard";
 import Contact from "../pages/homepage/Contact";
 import ImageBoard from "../pages/homepage/ImageBoard";
-import Settings from "../components/Settings";
 
 function ImageBad() {
     return null;

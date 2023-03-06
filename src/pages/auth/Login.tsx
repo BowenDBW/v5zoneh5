@@ -14,18 +14,14 @@ import {
     Typography
 } from "@mui/material";
 
-import {
-    Visibility,
-    VisibilityOff
-} from "@mui/icons-material";
+import {Visibility, VisibilityOff} from "@mui/icons-material";
 
 import React from "react";
 import {useNavigate} from "react-router-dom";
 import {IsDesktop} from "../../components/utils/IsDesktop";
-import {post} from "../../components/utils/Request";
 
 
-function Login(){
+function Login() {
     const [showPassword, setShowPassword] = React.useState(false);
     const [username, setUsername] = React.useState("");
     const [password, setPassword] = React.useState("");
@@ -59,7 +55,7 @@ function Login(){
         //         localStorage.setItem('v5_contact_tech', "全部");
         //         localStorage.setItem('v5_contact_college', "全部");
         //         localStorage.setItem('v5_contact_session', "现役");
-                 navigate("/homepage");
+        navigate("/homepage");
         //     }
         // })).catch(() => {
         //     alert("用户名或密码错误！")
@@ -103,7 +99,7 @@ function Login(){
                 <TextField
                     required
                     id="outlined-required"
-                    label={usernameInvalid ? "用户名不存在，请检查":"学号"}
+                    label={usernameInvalid ? "用户名不存在，请检查" : "学号"}
                     sx={{
                         margin: 3,
                         height: 40
@@ -131,13 +127,13 @@ function Login(){
                                     onMouseDown={handleMouseDownPassword}
                                     edge="end"
                                 >
-                                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                                    {showPassword ? <VisibilityOff/> : <Visibility/>}
                                 </IconButton>
                             </InputAdornment>
                         }
-                        error = {passwordInvalid}
-                        label ={passwordInvalid ? "密码有误，请重新输入":"密码"}
-                        value = {password}
+                        error={passwordInvalid}
+                        label={passwordInvalid ? "密码有误，请重新输入" : "密码"}
+                        value={password}
                         onChange={handlePasswordChange}
                     />
                 </FormControl>

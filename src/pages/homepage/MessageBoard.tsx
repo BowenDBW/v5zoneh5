@@ -10,11 +10,10 @@ import {
     TextField,
     Typography,
 } from '@mui/material';
-import {useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {IsDesktop} from "../../components/utils/IsDesktop";
 import {useNavigate} from "react-router-dom";
 import {post} from "../../components/utils/Request"
-import React from 'react';
 import MessageCard from "../../components/MessageCard";
 
 const MessageBoard = () => {
@@ -38,7 +37,7 @@ const MessageBoard = () => {
         init();
     }, []);
 
-    const handleOnChange = (event:any) => {
+    const handleOnChange = (event: any) => {
         setMsg(event.target.value);
     }
 
@@ -46,17 +45,17 @@ const MessageBoard = () => {
         setTimeout(function () {
         }, 500);
         post("/message_board/get_all",
-            localStorage.getItem("v5_id")).then((res:any) => {
+            localStorage.getItem("v5_id")).then((res: any) => {
             console.log(res);
             if (res.status === 200) {
                 setMessages(res.data.reverse());
-                res.data.map((option:any) => {
+                res.data.map((option: any) => {
                     console.log(option.uploader)
                 });
             }
         });
         post("/member/name",
-            localStorage.getItem("v5_id")).then((res:any) => {
+            localStorage.getItem("v5_id")).then((res: any) => {
             console.log(res);
             if (res.status === 200) {
                 setNameFromId(res.data.msg);
@@ -69,7 +68,7 @@ const MessageBoard = () => {
         post("/message_board/add", {
             uploader: localStorage.getItem("v5_id"),
             message: msg,
-        }).then((res:any) => {
+        }).then((res: any) => {
             console.log(res);
             if (res.status === 200) {
                 alert("添加成功");
@@ -126,12 +125,12 @@ const MessageBoard = () => {
             {isDesktop ?
                 <Box>
                     <Grid container spacing={2}>
-                        {messages.map((option:any) => (
+                        {messages.map((option: any) => (
                             <Grid xs={4}>
                                 <MessageCard name={option.uploader}
-                                         date={option.date}
-                                         message={option.message}
-                                         isMine={nameFromId === option.uploader}
+                                             date={option.date}
+                                             message={option.message}
+                                             isMine={nameFromId === option.uploader}
                                 />
                             </Grid>
                         ))}
@@ -139,11 +138,11 @@ const MessageBoard = () => {
                 </Box>
                 :
                 <Stack>
-                    {messages.map((option:any) => (
+                    {messages.map((option: any) => (
                         <MessageCard name={option.uploader}
-                                 date={option.date}
-                                 message={option.message}
-                                 isMine={nameFromId === option.uploader}
+                                     date={option.date}
+                                     message={option.message}
+                                     isMine={nameFromId === option.uploader}
                         />
                     ))}
                 </Stack>

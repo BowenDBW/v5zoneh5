@@ -7,13 +7,13 @@ import {Box} from "@mui/material";
 
 function App() {
 
-  const element = useRoutes(routes)
+    const element = useRoutes(routes)
 
-  return (
-      <Box>
-          {element}
-      </Box>
-  );
+    return (
+        <Box>
+            {element}
+        </Box>
+    );
 }
 
 export default App;

@@ -40,10 +40,10 @@ function MarkdownTable() {
         },
     ];
 
-    const clickDelete = (event:any) => {
+    const clickDelete = (event: any) => {
         post("/markdown/delete", {
             fileLink: event.target.value,
-        }).then((res:any) => {
+        }).then((res: any) => {
             console.log(res);
             if (res.status === 200) {
                 alert("操作成功");
@@ -52,11 +52,11 @@ function MarkdownTable() {
         })
     }
 
-    function onMethodChanged(fileLink:string, isPublished:boolean) {
+    function onMethodChanged(fileLink: string, isPublished: boolean) {
         post("/markdown/update", {
             fileLink: fileLink,
             isPublished: !isPublished,
-        }).then((res:any) => {
+        }).then((res: any) => {
             if (res.status === 200) {
                 alert("操作成功");
                 navigate(0);
@@ -66,7 +66,7 @@ function MarkdownTable() {
 
     function init() {
         post("/markdown/all",
-            localStorage.getItem("v5_id")).then((res:any) => {
+            localStorage.getItem("v5_id")).then((res: any) => {
             if (res.status === 200) {
                 setRenderRows(res.data.reverse());
             }
@@ -77,12 +77,12 @@ function MarkdownTable() {
         init();
     }, [])
 
-    const openInNewTab = (url:string) => {
+    const openInNewTab = (url: string) => {
         // 👇️ setting target to _blank with window.open
         window.open(url, '_blank', 'noopener,noreferrer');
     };
 
-    const clickDownload = (event:any) => {
+    const clickDownload = (event: any) => {
         const url = axios.defaults.baseURL
             + "/markdown/download/"
             + event.target.value;
@@ -103,7 +103,7 @@ function MarkdownTable() {
                 </TableHead>
                 <TableBody>
                     {
-                        renderRows.map((row:any) => (
+                        renderRows.map((row: any) => (
                             <TableRow
                                 key={row.fileLink}
                                 sx={{'&:last-child td, &:last-child th': {border: 0}}}
@@ -174,7 +174,7 @@ function Article() {
     const [imageLink, setImageLink] = useState("")
     const [applyType, setApplyType] = useState("暂不发布");
     const [open, setOpen] = React.useState(false);
-    let fileName:string = "";
+    let fileName: string = "";
 
     const type = [
         {
@@ -187,14 +187,14 @@ function Article() {
         },
     ];
 
-    const handleTitleChanged = (event:any) => {
+    const handleTitleChanged = (event: any) => {
         setTitle(event.target.value);
     }
 
-    const handleImageLinkChanged = (event:any) => {
+    const handleImageLinkChanged = (event: any) => {
         setImageLink(event.target.value);
     }
-    const handleTypeChanged = (event:any) => {
+    const handleTypeChanged = (event: any) => {
         setApplyType(event.target.value);
     }
 
@@ -206,7 +206,7 @@ function Article() {
         setOpen(true);
     };
 
-    function upload(formData:FormData) {
+    function upload(formData: FormData) {
         fetch(axios.defaults.baseURL + '/markdown/upload', {
             method: 'post',
             body: formData,
@@ -235,7 +235,7 @@ function Article() {
         handleClose();
     }
 
-    const fileInputChange = (event:any) => {
+    const fileInputChange = (event: any) => {
         const newFile = event.target.files[0];
         if (newFile.size >= 1048576 * 10) {
             alert("文件不能大于 10M ");

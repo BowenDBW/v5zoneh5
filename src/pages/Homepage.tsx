@@ -1,7 +1,5 @@
 import React from 'react';
-import {
-    Stack,
-} from "@mui/material";
+import {Stack,} from "@mui/material";
 import DrawerDesktop from "../components/desktop/DrawerDesktop";
 import HeaderDesktop from "../components/desktop/HeaderDesktop";
 import {Outlet} from "@mui/icons-material";
@@ -10,7 +8,7 @@ import HeaderMobile from "../components/mobile/HeaderMobile";
 
 const Homepage = () => {
 
-    const isDesktop:boolean = IsDesktop()
+    const isDesktop: boolean = IsDesktop()
 
     return (
         <div>

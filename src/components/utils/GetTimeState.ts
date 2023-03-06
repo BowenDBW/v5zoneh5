@@ -14,7 +14,7 @@ export function GetTimeState() {
         text = `下午好`;
     } else if (hours > 18 && hours < 24) {
         text = `晚上好`;
-    }else if (hours >= 0 && hours < 6) {
+    } else if (hours >= 0 && hours < 6) {
         text = `快休息`;
     }
     return text;

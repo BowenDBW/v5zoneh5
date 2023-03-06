@@ -14,7 +14,7 @@ function Invite() {
         post("/auth/send_invite_code", {
             id: email,
             message: "重置密码验证码",
-        }).then(((res:any) => {
+        }).then(((res: any) => {
             if (res.status === 200) {
                 alert("发送成功");
             }

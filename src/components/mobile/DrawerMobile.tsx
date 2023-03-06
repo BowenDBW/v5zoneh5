@@ -1,5 +1,12 @@
 import React from 'react';
 import {
+    Box,
+    Button,
+    Dialog,
+    DialogActions,
+    DialogContent,
+    DialogContentText,
+    DialogTitle,
     Divider,
     Drawer,
     List,
@@ -7,7 +14,7 @@ import {
     ListItemButton,
     ListItemIcon,
     ListItemText,
-    Button, Typography, DialogTitle, DialogContent, Dialog, DialogContentText, DialogActions, Box
+    Typography
 } from "@mui/material";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import CoffeeIcon from "@mui/icons-material/Coffee";
@@ -238,7 +245,7 @@ const DrawerMobile: React.FC<DrawerInterface> = (props) => {
                 <Divider/>
                 <br/>
                 <Button
-                    sx={{color:"#a4a4a4"}}
+                    sx={{color: "#a4a4a4"}}
                     onClick={handleClickOpen}
                 >
                     <Typography>
@@ -259,7 +266,7 @@ const DrawerMobile: React.FC<DrawerInterface> = (props) => {
                 <DialogContent>
                     <DialogContentText
                         sx={{
-                            color:"#b0b0b0",
+                            color: "#b0b0b0",
                             textAlign: "center",
                         }}
                         id="alert-dialog-slide-description"
@@ -268,7 +275,7 @@ const DrawerMobile: React.FC<DrawerInterface> = (props) => {
                     </DialogContentText>
                     <DialogContentText
                         sx={{
-                            color:"#b0b0b0",
+                            color: "#b0b0b0",
                             textAlign: "center",
                         }}
                         id="alert-dialog-slide-description"

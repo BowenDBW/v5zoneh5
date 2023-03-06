@@ -28,7 +28,7 @@ const ImageBad = () => {
     const [imageList, setImageList] = useState([]);
     const [open, setOpen] = React.useState(false);
     const [file, setFile] = useState(null);
-    let fileName:string = "";
+    let fileName: string = "";
 
     const method = [
         {
@@ -41,7 +41,7 @@ const ImageBad = () => {
         },
     ];
 
-    function upload(formData:FormData) {
+    function upload(formData: FormData) {
         fetch(GlobalParams.baseUrl + '/album/upload', {
             method: 'post',
             body: formData,
@@ -51,7 +51,7 @@ const ImageBad = () => {
             });
     }
 
-    const fileInputChange = (event:any) => {
+    const fileInputChange = (event: any) => {
         const newFile = event.target.files[0];
         if (newFile.size >= 1048576 * 10) {
             alert("文件不能大于 10M ");
@@ -63,14 +63,14 @@ const ImageBad = () => {
 
     function init() {
         post("/album/get_mine",
-            localStorage.getItem("v5_id")).then((res:any) => {
+            localStorage.getItem("v5_id")).then((res: any) => {
             if (res.status === 200) {
                 const list = res.data.reverse();
                 console.log("test_base_url: " + GlobalParams.baseUrl);
-                list.map((item:any) => {
+                list.map((item: any) => {
                     item.title = item.resourceLink;
                     item.resourceLink =
-                       GlobalParams.baseUrl
+                        GlobalParams.baseUrl
                         + "/album/download/"
                         + item.resourceLink;
                 });
@@ -111,7 +111,7 @@ const ImageBad = () => {
         handleClose();
     }
 
-    const onMethodChanged = (event:any) => {
+    const onMethodChanged = (event: any) => {
         setMethodState(event.target.value);
     }
 
@@ -206,11 +206,11 @@ const ImageBad = () => {
             {isDesktop ?
                 <Box>
                     <Grid container spacing={2}>
-                        {imageList.map((option:any) => (
+                        {imageList.map((option: any) => (
                             <Grid xs={4}>
                                 <ImageCard imageUrl={option.resourceLink}
-                                       access={option.isPublic}
-                                       title={option.title}
+                                           access={option.isPublic}
+                                           title={option.title}
                                 />
                             </Grid>
                         ))}
@@ -218,10 +218,10 @@ const ImageBad = () => {
                 </Box>
                 :
                 <Stack>
-                    {imageList.map((option:any) => (
+                    {imageList.map((option: any) => (
                         <ImageCard imageUrl={option.resourceLink}
-                               access={option.isPublic}
-                               title={option.title}
+                                   access={option.isPublic}
+                                   title={option.title}
                         />
                     ))}
                 </Stack>

@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Registry(){
+function Registry() {
     return (
         <div>
 

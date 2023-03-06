@@ -41,7 +41,7 @@ export const ContactRows = () => {
                 sessionSelect: method,
                 techSelect: techGroup,
                 collegeSelect: school,
-            }).then((res:any) => {
+            }).then((res: any) => {
             console.log(res);
             if (res.status === 200) {
                 setRenderRows(res.data.contactInfo);
@@ -72,7 +72,7 @@ export const ContactRows = () => {
                 </TableHead>
                 <TableBody>
                     {
-                        renderRows.map((row:any) => (
+                        renderRows.map((row: any) => (
                             <TableRow
                                 key={row.name}
                                 sx={{'&:last-child td, &:last-child th': {border: 0}}}

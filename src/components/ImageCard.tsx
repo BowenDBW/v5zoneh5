@@ -2,10 +2,10 @@ import {useNavigate} from "react-router-dom";
 import React, {useState} from "react";
 import {post} from "./utils/Request";
 import {Button, Card, CardActionArea, CardActions, CardMedia, MenuItem, TextField} from "@mui/material";
-import copy = Simulate.copy;
 import {Simulate} from "react-dom/test-utils";
+import copy = Simulate.copy;
 
-export default function ImageCard(props:any) {
+export default function ImageCard(props: any) {
 
     const navigate = useNavigate()
     const {imageUrl, access, title} = props;
@@ -22,13 +22,13 @@ export default function ImageCard(props:any) {
         },
     ];
 
-    const handleChange = (event:any) => {
+    const handleChange = (event: any) => {
         setIsPublic(event.target.value === "公开上墙")
         post("/album/set_public", {
             uploader: localStorage.getItem("v5_id"),
             isPublic: !isPublic,
             resourceLink: title,
-        }).then((res:any) => {
+        }).then((res: any) => {
             console.log(res);
             if (res.status === 200) {
                 console.log(res.data);
@@ -42,7 +42,7 @@ export default function ImageCard(props:any) {
             uploader: localStorage.getItem("v5_id"),
             isPublic: isPublic,
             resourceLink: title,
-        }).then((res:any) => {
+        }).then((res: any) => {
             console.log(res.data);
         })
 

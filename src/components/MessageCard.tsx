@@ -3,7 +3,7 @@ import {post} from "./utils/Request";
 import {Box, Button, CardContent, Divider, Typography} from "@mui/material";
 import React from "react";
 
-export default function MessageCard(props:any) {
+export default function MessageCard(props: any) {
     const {name, message, date, isMine} = props
 
     const navigate = useNavigate();
@@ -13,7 +13,7 @@ export default function MessageCard(props:any) {
             uploader: localStorage.getItem("v5_id"),
             message: message,
             date: date,
-        }).then((res:any) => {
+        }).then((res: any) => {
             console.log(res.data);
         })
 

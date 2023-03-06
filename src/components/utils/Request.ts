@@ -36,7 +36,7 @@ axios.interceptors.response.use(
  * @param params  请求参数
  * @returns {Promise}
  */
-export function get(url:string, params = {}) {
+export function get(url: string, params = {}) {
     return new Promise((resolve, reject) => {
         axios.get(url, {
             params: params,
@@ -59,7 +59,7 @@ export function get(url:string, params = {}) {
  * @param data
  * @returns {Promise}
  */
-export function post(url:string, data:any) {
+export function post(url: string, data: any) {
     return new Promise((resolve, reject) => {
         axios.post(url, data, {
             headers: {
@@ -79,7 +79,7 @@ export function post(url:string, data:any) {
 }
 
 //统一接口处理，返回数据
-export function postForm(path:string, formBody:FormData){
+export function postForm(path: string, formBody: FormData) {
     fetch(GlobalParams.baseUrl + path, {
         method: 'post',
         body: formBody,

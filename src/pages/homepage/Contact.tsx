@@ -1,4 +1,4 @@
-import {Grid, MenuItem, TextField, Box, Typography} from '@mui/material';
+import {Box, Grid, MenuItem, TextField, Typography} from '@mui/material';
 import React from 'react';
 import {useNavigate} from "react-router-dom";
 import {IsDesktop} from "../../components/utils/IsDesktop";
@@ -54,17 +54,17 @@ const Contact = () => {
         },
     ];
 
-    const onTechGroupChanged = (event:any) => {
+    const onTechGroupChanged = (event: any) => {
         localStorage.setItem("v5_contact_tech", event.target.value);
         navigate(0);
     }
 
-    const onSchoolChanged = (event:any) => {
+    const onSchoolChanged = (event: any) => {
         localStorage.setItem("v5_contact_college", event.target.value);
         navigate(0);
     }
 
-    const onMethodChanged = (event:any) => {
+    const onMethodChanged = (event: any) => {
         localStorage.setItem("v5_contact_session", event.target.value);
         navigate(0);
     }
@@ -84,7 +84,7 @@ const Contact = () => {
                         }}
                     >组员联系方式</Typography>
                 }
-                <Grid container spacing={1} sx={{textAlign:"center",margin:2}}>
+                <Grid container spacing={1} sx={{textAlign: "center", margin: 2}}>
                     <Grid xs={4}>
                         <TextField
                             id="届次筛选"

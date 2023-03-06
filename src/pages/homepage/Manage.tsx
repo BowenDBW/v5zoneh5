@@ -5,7 +5,7 @@ import {post} from "../../components/utils/Request";
 import Admission from "../../components/Admission";
 import Article from "../../components/Article";
 import Invite from "../../components/Invite";
-import POI from "../../components/POI";
+import Poi from "../../components/Poi";
 
 const Manage = () => {
     const isDesktop = IsDesktop()
@@ -15,7 +15,7 @@ const Manage = () => {
 
     function init() {
         post("/auth/is_monitor", localStorage.getItem("v5_id"))
-            .then((res:any) => {
+            .then((res: any) => {
                 setVice(res.data === "VICE_CAPTAIN");
             })
     }
@@ -57,7 +57,7 @@ const Manage = () => {
                     <Grid xs={3}></Grid>
                     <Grid xs={3}></Grid>
                     <Grid xs={6}>
-                        <POI/>
+                        <Poi/>
                     </Grid>
                     <Grid xs={3}></Grid>
                 </Grid>
@@ -70,7 +70,7 @@ const Manage = () => {
                     <Divider/>
                     <Invite/>
                     <Divider/>
-                    <POI/>
+                    <Poi/>
                     <Divider/>
                 </Stack>
             }

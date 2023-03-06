@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Reset(){
+function Reset() {
     return (
         <div>
 
