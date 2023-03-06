@@ -11,35 +11,51 @@ import {
     OutlinedInput,
     Stack,
     TextField,
-    Typography
+    Typography,
+    CircularProgress,
+    Backdrop
 } from "@mui/material";
-
 import {Visibility, VisibilityOff} from "@mui/icons-material";
-
-import React from "react";
 import {useNavigate} from "react-router-dom";
 import {IsDesktop} from "../../components/utils/IsDesktop";
+import React from "react";
 
+// https://github.com/caijf/rc-slider-captcha
+import SliderCaptcha from "rc-slider-captcha";
 
 function Login() {
+
     const [showPassword, setShowPassword] = React.useState(false);
     const [username, setUsername] = React.useState("");
     const [password, setPassword] = React.useState("");
     const [usernameInvalid, setUsernameInvalid] = React.useState(false);
     const [passwordInvalid, setPasswordInvalid] = React.useState(false);
+    const [open, setOpen] = React.useState(false);
 
-    const navigate = useNavigate()
-    const isDesktop = IsDesktop()
+    const navigate = useNavigate();
+    const isDesktop = IsDesktop();
 
-    const handleUsernameChange = (event: React.ChangeEvent<HTMLInputElement>) => setUsername(event.target.value);
-    const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => setPassword(event.target.value);
+    const handleClose = () => {
+        setOpen(false);
+    };
+    const handleToggle = () => {
+        setOpen(true);
+    };
 
-    const handleClickShowPassword = () => setShowPassword((show) => !show);
+    const handleUsernameChange = (event: React.ChangeEvent<HTMLInputElement>) =>
+        setUsername(event.target.value);
+    const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) =>
+        setPassword(event.target.value);
+
+    const handleClickShowPassword = () =>
+        setShowPassword((show) => !show);
     const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
     };
 
     const onClickLogin = () => {
+        handleToggle();
+
         const data = {
             "id": username,
             "password": password
@@ -60,6 +76,8 @@ function Login() {
         // })).catch(() => {
         //     alert("用户名或密码错误！")
         // })
+
+        handleClose();
     }
 
     return (
@@ -190,6 +208,19 @@ function Login() {
                         </Button>
                     </Grid>
                 </Grid>
+                <SliderCaptcha
+                    request={async () => {
+                        return {
+                            bgUrl: 'background image url',
+                            puzzleUrl: 'puzzle image url'
+                        };
+                    }}
+                    onVerify={async (data) => {
+                        console.log(data);
+                        // verify data
+                        return Promise.resolve();
+                    }}
+                />
                 <Box sx={{textAlign: "center"}}>
                     <Button
                         sx={{
@@ -213,6 +244,12 @@ function Login() {
                     >{isDesktop ? "Gitlab登录" : "单点登录"}</Button>
                 </Box>
             </Stack>
+            <Backdrop
+                sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                open={open}
+            >
+                <CircularProgress color="inherit" />
+            </Backdrop>
         </Box>
     );
 };

@@ -90,7 +90,9 @@ const MessageBoard = () => {
                         height: 32,
                         marginTop: 2
                     }}
-                >Zone 留言板</Typography>
+                >
+                    Zone 留言板
+                </Typography>
             }
             <Button
                 variant="contained"
