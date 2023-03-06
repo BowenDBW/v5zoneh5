@@ -79,36 +79,6 @@ export function post(url:string, data:any) {
 }
 
 //统一接口处理，返回数据
-export default function (fecth:string, url:string, param:any) {
-    return new Promise((resolve, reject) => {
-        switch (fecth) {
-            case "get":
-                console.log("begin a get request,and url:", url);
-                get(url, param)
-                    .then(function (response) {
-                        resolve(response);
-                    })
-                    .catch(function (error) {
-                        console.log("get request GET failed.", error);
-                        reject(error);
-                    });
-                break;
-            case "post":
-                post(url, param)
-                    .then(function (response) {
-                        resolve(response);
-                    })
-                    .catch(function (error) {
-                        console.log("get request POST failed.", error);
-                        reject(error);
-                    });
-                break;
-            default:
-                break;
-        }
-    });
-}
-
 export function postForm(path:string, formBody:FormData){
     fetch(GlobalParams.baseUrl + path, {
         method: 'post',

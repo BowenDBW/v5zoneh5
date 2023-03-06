@@ -8,11 +8,11 @@ import MessageBoard from "../pages/homepage/MessageBoard";
 import Manage from "../pages/homepage/Manage";
 import Budget from "../pages/homepage/Budget";
 import Prize from "../pages/homepage/Prize";
-import Profile from "../pages/homepage/Profile";
+import Profile from "../components/Profile";
 import CheckBoard from "../pages/homepage/CheckBoard";
 import Contact from "../pages/homepage/Contact";
 import ImageBoard from "../pages/homepage/ImageBoard";
-import Settings from "../pages/homepage/Settings";
+import Settings from "../components/Settings";
 
 function ImageBad() {
     return null;
@@ -70,16 +70,8 @@ export default [
                 element: <Prize/>
             },
             {
-                path: 'settings',
-                element: <Settings/>
-            },
-            {
                 path: 'budget',
                 element: <Budget/>
-            },
-            {
-                path: "profile",
-                element: <Profile/>
             },
         ]
     },
