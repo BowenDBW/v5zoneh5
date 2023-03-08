@@ -14,12 +14,12 @@ export default function Admission() {
     const [isVice, setVice] = useState(false);
 
     function init() {
-        post("/auth/is_monitor", localStorage.getItem("v5_id"))
+        post("/auth/is-monitor", localStorage.getItem("v5_token"))
             .then((res: any) => {
                 setVice(res.data === "VICE_CAPTAIN");
             })
-        post("/transaction/get_admission_needed_list",
-            localStorage.getItem("v5_id")).then((res: any) => {
+        post("/transaction/get-admission-needed-list",
+            localStorage.getItem("v5_token")).then((res: any) => {
             if (res.status === 200) {
                 if (res.data.records !== "") {
                     setRenderRows(res.data.records);

@@ -18,6 +18,7 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import {useNavigate} from "react-router-dom/";
 import {IsDesktop} from "../../components/utils/IsDesktop";
 import React from "react";
+import {post} from "../../components/utils/Request"
 
 function Login() {
 
@@ -52,21 +53,21 @@ function Login() {
     const onClickLogin = () => {
         handleToggleBackdrop();
 
-        // localStorage.setItem("v5_token", "undefined");
-        // post("/auth/authenticate", {"id": username,"password": password}).then(((res:any) => {
-        //     if (res.status === 200) {
-        //         localStorage.setItem('v5_token', res.data.token);
-        //         console.log(res.data.token);
-        //         localStorage.setItem('v5_id', res.data.id);
-        //         console.log(res.data.id);
-        //         localStorage.setItem('v5_contact_tech', "全部");
-        //         localStorage.setItem('v5_contact_college', "全部");
-        //         localStorage.setItem('v5_contact_session', "现役");
-        navigate("/homepage");
-        //     }
-        // })).catch(() => {
-        //     alert("用户名或密码错误！")
-        // })
+        localStorage.setItem("v5_token", "undefined");
+        post("/auth/authenticate", {"id": username,"password": password}).then(((res:any) => {
+            if (res.status === 200) {
+                localStorage.setItem('v5_token', res.data.token);
+                console.log(res.data.token);
+                localStorage.setItem('v5_id', res.data.id);
+                console.log(res.data.id);
+                localStorage.setItem('v5_contact_tech', "全部");
+                localStorage.setItem('v5_contact_college', "全部");
+                localStorage.setItem('v5_contact_session', "现役");
+                navigate("/homepage");
+            }
+        })).catch(() => {
+            alert("用户名或密码错误！")
+        })
 
         handleCloseBackdrop();
     }

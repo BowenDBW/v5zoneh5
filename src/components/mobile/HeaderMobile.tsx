@@ -1,20 +1,33 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {AppBar, Avatar, Box, Button, IconButton, Toolbar, Typography,} from "@mui/material";
 import MenuIcon from '@mui/icons-material/Menu';
 import DrawerMobile from "./DrawerMobile";
 import {deepOrange} from "@mui/material/colors";
 import {HeaderMenu} from "../HeaderMenu";
-
+import {post} from "../utils/Request";
+import {useNavigate} from "react-router-dom";
 
 const HeaderMobile = () => {
-
+    const navigate = useNavigate();
     const [openDrawer, setOpenDrawer] = useState(false);
-
+    const [name, setName] = React.useState<string>("");
+    const [avatar, setAvatar] = React.useState<string>("");
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const openMenu = Boolean(anchorEl);
     const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
         setAnchorEl(event.currentTarget);
     };
+
+    useEffect(()=>{
+        post("/member/name",
+            localStorage.getItem("v5_token")).then((res:any) => {
+                setName(res.data.msg);
+            }
+        ).catch(() => {
+            alert("登录信息过期，请重新登录");
+            navigate("/login/auth");
+        });
+    },[])
 
     return (
         <Box sx={{flexGrow: 1}}>
@@ -67,7 +80,11 @@ const HeaderMobile = () => {
                     onClick={handleClick}
                     variant="text"
                 >
-                    <Avatar sx={{bgcolor: deepOrange[500]}}>邓</Avatar>
+                    {avatar === "" ?
+                        <Avatar sx={{bgcolor: deepOrange[500]}}>{name[0]}</Avatar>
+                        :
+                        <Avatar sx={{color:"#000000",borderStyle:"solid", borderWidth:"1px"}} src={avatar}/>
+                    }
                 </Button>
             </AppBar>
             <HeaderMenu open={openMenu} anchorEl={anchorEl} setAnchorEl={setAnchorEl}/>

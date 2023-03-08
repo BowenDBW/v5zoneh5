@@ -1,16 +1,32 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Avatar, Box, Button, Divider, Toolbar, Typography,} from "@mui/material";
 import {deepOrange} from '@mui/material/colors';
 import {HeaderMenu} from "../HeaderMenu";
 import {GetTimeState} from "../utils/GetTimeState";
+import {post} from "../utils/Request"
+import {useNavigate} from "react-router-dom";
 
 const HeaderDesktop = () => {
 
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+    const [name, setName] = React.useState<string>("");
+    const [avatar, setAvatar] = React.useState<string>("");
     const open = Boolean(anchorEl);
+    const navigate = useNavigate();
     const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
         setAnchorEl(event.currentTarget);
     };
+
+    useEffect(()=>{
+        post("/member/name",
+            localStorage.getItem("v5_token")).then((res:any) => {
+                setName(res.data.msg);
+            }
+        ).catch(() => {
+            alert("登录信息过期，请重新登录");
+            navigate("/login/auth");
+        });
+    },[])
 
     const getTimeState = GetTimeState()
 
@@ -56,9 +72,13 @@ const HeaderDesktop = () => {
                             color: "#000000",
                         }}
                     >
-                        {getTimeState}! 邓博文
+                        {getTimeState}! {name}
                     </Typography>
-                    <Avatar sx={{bgcolor: deepOrange[500]}}>邓</Avatar>
+                    {avatar === "" ?
+                        <Avatar sx={{bgcolor: deepOrange[500]}}>{name[0]}</Avatar>
+                        :
+                        <Avatar sx={{color:"#000000",borderStyle:"solid", borderWidth:"1px"}} src={avatar}/>
+                    }
                 </Button>
             </Toolbar>
             <Divider/>

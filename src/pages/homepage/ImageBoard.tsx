@@ -10,7 +10,7 @@ const ImageBoard = () => {
     const [imageList, setImageList] = useState([])
 
     function init() {
-        post("/album/get_public", localStorage.getItem("v5_id"))
+        post("/album/get-public", localStorage.getItem("v5_token"))
             .then((res: any) => {
                 console.log(res);
                 if (res.status === 200) {

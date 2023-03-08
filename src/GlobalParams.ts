@@ -1,7 +1,7 @@
 import {IsDesktop} from "./components/utils/IsDesktop";
 
 export default {
-    baseUrl: "https://www.npu5v5.cn:8849",
+    baseUrl: "http://127.0.0.1:8849",
 
     isDesktop: IsDesktop(),
 

@@ -9,8 +9,8 @@ export default function MessageCard(props: any) {
     const navigate = useNavigate();
 
     const onDelete = () => {
-        post("/message_board/delete", {
-            uploader: localStorage.getItem("v5_id"),
+        post("/message-board/delete", {
+            uploader: localStorage.getItem("v5_token"),
             message: message,
             date: date,
         }).then((res: any) => {

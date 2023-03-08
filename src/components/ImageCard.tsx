@@ -24,7 +24,7 @@ export default function ImageCard(props: any) {
 
     const handleChange = (event: any) => {
         setIsPublic(event.target.value === "公开上墙")
-        post("/album/set_public", {
+        post("/album/set-public", {
             uploader: localStorage.getItem("v5_id"),
             isPublic: !isPublic,
             resourceLink: title,

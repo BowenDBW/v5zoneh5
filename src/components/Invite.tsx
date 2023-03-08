@@ -11,7 +11,7 @@ function Invite() {
             alert("邮箱格式有误，应为 xxx@xx.com");
             return;
         }
-        post("/auth/send_invite_code", {
+        post("/auth/send-invite-code", {
             id: email,
             message: "重置密码验证码",
         }).then(((res: any) => {

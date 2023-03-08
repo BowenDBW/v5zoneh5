@@ -66,7 +66,7 @@ function MarkdownTable() {
 
     function init() {
         post("/markdown/all",
-            localStorage.getItem("v5_id")).then((res: any) => {
+            localStorage.getItem("v5_token")).then((res: any) => {
             if (res.status === 200) {
                 setRenderRows(res.data.reverse());
             }
