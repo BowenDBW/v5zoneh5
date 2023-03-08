@@ -1,27 +1,23 @@
-import {
-    Box,
-    Button,
-    Checkbox,
-    FormControl,
-    FormControlLabel,
-    Grid,
-    IconButton,
-    InputAdornment,
-    InputLabel,
-    OutlinedInput,
-    Stack,
-    TextField,
-    Typography,
-    CircularProgress,
-    Backdrop
-} from "@mui/material";
-import {Visibility, VisibilityOff} from "@mui/icons-material";
-import {useNavigate} from "react-router-dom";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Checkbox from "@mui/material/Checkbox";
+import FormControl from "@mui/material/FormControl";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Grid from "@mui/material/Grid";
+import IconButton from "@mui/material/IconButton";
+import InputAdornment from "@mui/material/InputAdornment";
+import InputLabel from "@mui/material/InputLabel";
+import OutlinedInput from "@mui/material/OutlinedInput";
+import Stack from "@mui/material/Stack";
+import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
+import CircularProgress from "@mui/material/CircularProgress";
+import Backdrop from "@mui/material/Backdrop";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import {useNavigate} from "react-router-dom/";
 import {IsDesktop} from "../../components/utils/IsDesktop";
 import React from "react";
-
-// https://github.com/caijf/rc-slider-captcha
-import SliderCaptcha from "rc-slider-captcha";
 
 function Login() {
 
@@ -30,16 +26,16 @@ function Login() {
     const [password, setPassword] = React.useState("");
     const [usernameInvalid, setUsernameInvalid] = React.useState(false);
     const [passwordInvalid, setPasswordInvalid] = React.useState(false);
-    const [open, setOpen] = React.useState(false);
+    const [openBackDrop, setOpenBackDrop] = React.useState(false);
 
     const navigate = useNavigate();
     const isDesktop = IsDesktop();
 
-    const handleClose = () => {
-        setOpen(false);
+    const handleCloseBackdrop = () => {
+        setOpenBackDrop(false);
     };
-    const handleToggle = () => {
-        setOpen(true);
+    const handleToggleBackdrop = () => {
+        setOpenBackDrop(true);
     };
 
     const handleUsernameChange = (event: React.ChangeEvent<HTMLInputElement>) =>
@@ -54,15 +50,10 @@ function Login() {
     };
 
     const onClickLogin = () => {
-        handleToggle();
+        handleToggleBackdrop();
 
-        const data = {
-            "id": username,
-            "password": password
-        }
         // localStorage.setItem("v5_token", "undefined");
-        //
-        // post("/auth/authenticate", data).then(((res:any) => {
+        // post("/auth/authenticate", {"id": username,"password": password}).then(((res:any) => {
         //     if (res.status === 200) {
         //         localStorage.setItem('v5_token', res.data.token);
         //         console.log(res.data.token);
@@ -77,7 +68,7 @@ function Login() {
         //     alert("用户名或密码错误！")
         // })
 
-        handleClose();
+        handleCloseBackdrop();
     }
 
     return (
@@ -208,19 +199,6 @@ function Login() {
                         </Button>
                     </Grid>
                 </Grid>
-                <SliderCaptcha
-                    request={async () => {
-                        return {
-                            bgUrl: 'background image url',
-                            puzzleUrl: 'puzzle image url'
-                        };
-                    }}
-                    onVerify={async (data) => {
-                        console.log(data);
-                        // verify data
-                        return Promise.resolve();
-                    }}
-                />
                 <Box sx={{textAlign: "center"}}>
                     <Button
                         sx={{
@@ -241,12 +219,13 @@ function Login() {
                         disabled={true}
                         variant="outlined"
                         onClick={onClickLogin}
-                    >{isDesktop ? "Gitlab登录" : "单点登录"}</Button>
+                    >单点登录</Button>
                 </Box>
             </Stack>
+
             <Backdrop
                 sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-                open={open}
+                open={openBackDrop}
             >
                 <CircularProgress color="inherit" />
             </Backdrop>
