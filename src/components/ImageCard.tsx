@@ -1,16 +1,22 @@
 import {useNavigate} from "react-router-dom";
 import React, {useState} from "react";
 import {post} from "./utils/Request";
-import {Button, Card, CardActionArea, CardActions, CardMedia, MenuItem, TextField} from "@mui/material";
-import {Simulate} from "react-dom/test-utils";
-import copy = Simulate.copy;
+import {
+    Button,
+    Card,
+    CardActionArea,
+    CardActions,
+    CardMedia,
+    MenuItem,
+    TextField
+} from "@mui/material";
+import copy from "copy-to-clipboard";
 
 export default function ImageCard(props: any) {
 
-    const navigate = useNavigate()
+    const navigate = useNavigate();
     const {imageUrl, access, title} = props;
     const [isPublic, setIsPublic] = useState(access === true);
-
     const imageType = [
         {
             value: '公开上墙',

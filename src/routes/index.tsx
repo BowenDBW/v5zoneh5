@@ -11,6 +11,7 @@ import Prize from "../pages/homepage/Prize";
 import CheckBoard from "../pages/homepage/CheckBoard";
 import Contact from "../pages/homepage/Contact";
 import ImageBoard from "../pages/homepage/ImageBoard";
+import {ProfileMobile} from "../components/mobile/ProfileMobile";
 
 function ImageBad() {
     return null;
@@ -71,6 +72,10 @@ export default [
                 path: 'budget',
                 element: <Budget/>
             },
+            {
+                path: "profile",
+                element: <ProfileMobile/>
+            }
         ]
     },
     {

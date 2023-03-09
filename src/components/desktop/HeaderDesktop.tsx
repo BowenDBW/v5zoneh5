@@ -5,6 +5,7 @@ import {HeaderMenu} from "../HeaderMenu";
 import {GetTimeState} from "../utils/GetTimeState";
 import {post} from "../utils/Request"
 import {useNavigate} from "react-router-dom";
+import ProfileDesktop from "./ProfileDesktop";
 
 const HeaderDesktop = () => {
 
@@ -24,7 +25,7 @@ const HeaderDesktop = () => {
             }
         ).catch(() => {
             alert("登录信息过期，请重新登录");
-            navigate("/login/auth");
+            navigate("/auth/login");
         });
     },[])
 

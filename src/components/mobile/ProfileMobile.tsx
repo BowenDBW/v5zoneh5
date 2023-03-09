@@ -1,11 +1,9 @@
 import React from 'react';
 
-const Profile = () => {
+export const ProfileMobile = () => {
     return (
         <div>
 
         </div>
     );
 };
-
-export default Profile;

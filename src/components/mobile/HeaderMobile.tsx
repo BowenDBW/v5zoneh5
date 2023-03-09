@@ -25,7 +25,7 @@ const HeaderMobile = () => {
             }
         ).catch(() => {
             alert("登录信息过期，请重新登录");
-            navigate("/login/auth");
+            navigate("/auth/login");
         });
     },[])
 
