@@ -272,9 +272,8 @@ const ProfileDesktop:React.FC<SimpleDialogProps> = (props) => {
                         }}
                     >我的个人信息</Typography>
                     <Grid container spacing={1}>
-                        <Grid xs={4}></Grid>
-                        <Grid xs={4} sx={{textAlign: "center"}}>
-
+                        {/*row 1*/}
+                        <Grid xs={6} sx={{textAlign: "center"}}>
                             <TextField
                                 disabled={true}
                                 aria-readonly={true}
@@ -286,9 +285,8 @@ const ProfileDesktop:React.FC<SimpleDialogProps> = (props) => {
                                 }}
                                 value={id}
                             />
-
                         </Grid>
-                        <Grid xs={3} sx={{
+                        <Grid xs={5} sx={{
                             textAlign: "right",
                             margin: 1,
                         }}>
@@ -304,10 +302,13 @@ const ProfileDesktop:React.FC<SimpleDialogProps> = (props) => {
                             > V5 隐私政策
                             </Button>
                         </Grid>
-                        <Grid xs={4}>
+
+                        {/*row 2*/}
+                        <Grid xs={6}>
                             <Button
                                 sx={{
                                     marginX: 3,
+                                    marginTop: 1,
                                     textAlign: "center",
                                     fontSize: 14
                                 }}
@@ -318,15 +319,17 @@ const ProfileDesktop:React.FC<SimpleDialogProps> = (props) => {
                             > 点击复制少数民族姓名分隔标点
                             </Button>
                         </Grid>
-                        <Grid xs={8}></Grid>
-                        <Grid xs={3}>
+                        <Grid xs={6}/>
+
+                        {/*row 2*/}
+                        <Grid xs={6}>
                             <TextField
                                 required
                                 id="outlined-required"
                                 label="姓名"
                                 sx={{
                                     marginX: 3,
-                                    marginBottom: 3,
+                                    marginBottom: 6,
                                     height: 30
                                 }}
                                 value={name}
@@ -335,8 +338,7 @@ const ProfileDesktop:React.FC<SimpleDialogProps> = (props) => {
                                 }}
                             />
                         </Grid>
-
-                        <Grid xs={3}>
+                        <Grid xs={6}>
                             <TextField
                                 required
                                 id="outlined-required"
@@ -352,7 +354,8 @@ const ProfileDesktop:React.FC<SimpleDialogProps> = (props) => {
                             />
                         </Grid>
 
-                        <Grid xs={3}>
+                        {/*row 3*/}
+                        <Grid xs={6}>
                             <FormControl
                                 sx={{
                                     width: 240,
@@ -383,8 +386,7 @@ const ProfileDesktop:React.FC<SimpleDialogProps> = (props) => {
                                 </Select>
                             </FormControl>
                         </Grid>
-
-                        <Grid xs={3}>
+                        <Grid xs={6}>
                             <TextField
                                 required
                                 id="outlined-required"
@@ -400,7 +402,8 @@ const ProfileDesktop:React.FC<SimpleDialogProps> = (props) => {
                             />
                         </Grid>
 
-                        <Grid xs={3}>
+                        {/*row 4*/}
+                        <Grid xs={6}>
                             <TextField
                                 id="outlined-select-currency"
                                 select
@@ -426,8 +429,7 @@ const ProfileDesktop:React.FC<SimpleDialogProps> = (props) => {
                                 ))}
                             </TextField>
                         </Grid>
-
-                        <Grid xs={3}>
+                        <Grid xs={6}>
                             <TextField
                                 required
                                 id="outlined-required"
@@ -443,7 +445,8 @@ const ProfileDesktop:React.FC<SimpleDialogProps> = (props) => {
                             />
                         </Grid>
 
-                        <Grid xs={3}>
+                        {/*row 5*/}
+                        <Grid xs={6}>
                             <TextField
                                 required
                                 id="outlined-required"
@@ -459,7 +462,7 @@ const ProfileDesktop:React.FC<SimpleDialogProps> = (props) => {
                             />
                         </Grid>
 
-                        <Grid xs={3}>
+                        <Grid xs={6}>
                             <TextField
                                 required
                                 id="outlined-required"
@@ -475,7 +478,8 @@ const ProfileDesktop:React.FC<SimpleDialogProps> = (props) => {
                             />
                         </Grid>
 
-                        <Grid xs={3}>
+                        {/*row 6*/}
+                        <Grid xs={8}>
                             <TextField
                                 id="outlined-required"
                                 label="身份证号（用于报名比赛）"
@@ -490,14 +494,14 @@ const ProfileDesktop:React.FC<SimpleDialogProps> = (props) => {
                             />
                         </Grid>
 
-                        <Grid xs={3}>
+                        <Grid xs={4}>
                             <TextField
                                 id="outlined-select-currency"
                                 select
                                 label="性别"
                                 sx={{
                                     marginTop: 3,
-                                    width: 240,
+                                    width: 130,
                                     marginLeft: 3,
                                 }}
                                 value={sex}
@@ -517,7 +521,7 @@ const ProfileDesktop:React.FC<SimpleDialogProps> = (props) => {
                             </TextField>
                         </Grid>
 
-                        <Grid xs={3}>
+                        <Grid xs={6}>
                             <Grid container spacing={1}
                                   sx={{
                                       textAlign: "center",
@@ -549,7 +553,7 @@ const ProfileDesktop:React.FC<SimpleDialogProps> = (props) => {
                             </Grid>
                         </Grid>
 
-                        <Grid xs={3}>
+                        <Grid xs={6}>
                             <TextField
                                 required
                                 id="outlined-required"
@@ -565,7 +569,7 @@ const ProfileDesktop:React.FC<SimpleDialogProps> = (props) => {
                             />
                         </Grid>
 
-                        <Grid xs={3} sx={{
+                        <Grid xs={6} sx={{
                             marginLeft: 3,
                             marginTop: 3,
                         }}>
@@ -582,7 +586,7 @@ const ProfileDesktop:React.FC<SimpleDialogProps> = (props) => {
                             {/*/>*/}
                         </Grid>
 
-                        <Grid xs={3}>
+                        <Grid xs={6}>
                             <TextField
                                 required
                                 id="outlined-required"
@@ -598,7 +602,7 @@ const ProfileDesktop:React.FC<SimpleDialogProps> = (props) => {
                             />
                         </Grid>
 
-                        <Grid xs={3}>
+                        <Grid xs={6}>
                             <TextField
                                 required
                                 id="outlined-required"
