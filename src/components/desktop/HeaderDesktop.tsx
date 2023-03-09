@@ -38,7 +38,8 @@ const HeaderDesktop = () => {
                 flexGrow: 1,
                 top: 0,
                 width: "100%",
-
+                position: "sticky",
+                backgroundColor: "#FFF",
             }}
         >
             <Toolbar sx={{height: 80,}}>

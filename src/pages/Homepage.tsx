@@ -1,5 +1,5 @@
 import React from 'react';
-import {Stack} from "@mui/material";
+import {Box, Stack} from "@mui/material";
 import DrawerDesktop from "../components/desktop/DrawerDesktop";
 import HeaderDesktop from "../components/desktop/HeaderDesktop";
 import {IsDesktop} from "../components/utils/IsDesktop";
@@ -15,10 +15,12 @@ const Homepage = () => {
             {isDesktop ?
                 <div>
                     <Stack direction="row">
-                        <DrawerDesktop/>
-                        <HeaderDesktop/>
+                        <DrawerDesktop width="15%"/>
+                        <Box sx={{width : "85%"}}>
+                            <HeaderDesktop/>
+                            <Outlet/>
+                        </Box>
                     </Stack>
-                    <Outlet/>
                 </div>
                 :
                 <div>

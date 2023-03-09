@@ -32,9 +32,12 @@ import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
 import Global from "../../GlobalParams";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 
-const DrawerDesktop = () => {
+interface DrawerProps{
+    width: string,
+}
 
-    const drawerWidth = "15%";
+const DrawerDesktop = (props:DrawerProps) => {
+    const width = props;
 
     const [openDialog, setOpenDialog] = React.useState(false);
 
@@ -52,10 +55,10 @@ const DrawerDesktop = () => {
         <Drawer
             variant="permanent"
             sx={{
-                width: drawerWidth,
+                width: width,
                 flexShrink: 0,
                 '& .MuiDrawer-paper': {
-                    width: drawerWidth,
+                    width: width,
                     boxSizing: 'border-box',
                 },
             }}

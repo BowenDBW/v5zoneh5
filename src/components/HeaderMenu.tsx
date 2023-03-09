@@ -99,7 +99,11 @@ export const HeaderMenu: React.FC<HeaderProps> = (props) => {
             </Menu>
             {
                 isDesktop ?
-                    <ProfileDesktop open={profileDesktop} setOpen={setProfileDesktop}/>
+                    <ProfileDesktop
+                        open={profileDesktop}
+                        setOpen={setProfileDesktop}
+                        setMenuClose={handleClose}
+                    />
                     :
                     <ProfileMobile/>
             }

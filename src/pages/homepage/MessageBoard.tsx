@@ -44,8 +44,8 @@ const MessageBoard = () => {
     function init() {
         setTimeout(function () {
         }, 500);
-        post("/message_board/get_all",
-            localStorage.getItem("v5_id")).then((res: any) => {
+        post("/message-board/get-all",
+            localStorage.getItem("v5_token")).then((res: any) => {
             console.log(res);
             if (res.status === 200) {
                 setMessages(res.data.reverse());
@@ -55,7 +55,7 @@ const MessageBoard = () => {
             }
         });
         post("/member/name",
-            localStorage.getItem("v5_id")).then((res: any) => {
+            localStorage.getItem("v5_token")).then((res: any) => {
             console.log(res);
             if (res.status === 200) {
                 setNameFromId(res.data.msg);
@@ -65,8 +65,8 @@ const MessageBoard = () => {
     }
 
     const handleApply = () => {
-        post("/message_board/add", {
-            uploader: localStorage.getItem("v5_id"),
+        post("/message-board/add", {
+            uploader: localStorage.getItem("v5_token"),
             message: msg,
         }).then((res: any) => {
             console.log(res);
@@ -106,10 +106,11 @@ const MessageBoard = () => {
                 open={open}
                 onClose={handleClose}
             >
-                <DialogTitle>新建留言</DialogTitle>
+                <DialogTitle sx={{width:500}}>新建留言</DialogTitle>
                 <DialogContent>
                     <TextField
                         autoFocus
+                        multiline
                         margin="dense"
                         label="你的留言"
                         type="text"

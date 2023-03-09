@@ -94,7 +94,8 @@ const Contact = () => {
                                 .getItem("v5_contact_session")}
                             size="small"
                             sx={{
-                                margin: 2
+                                margin: 2,
+                                zIndex: -1,
                             }}
                             onChange={onMethodChanged}
                         >
@@ -114,7 +115,8 @@ const Contact = () => {
                                 .getItem("v5_contact_college")}
                             size="small"
                             sx={{
-                                margin: 2
+                                margin: 2,
+                                zIndex: -1,
                             }}
                             onChange={onSchoolChanged}
                         >
@@ -134,7 +136,8 @@ const Contact = () => {
                                 .getItem("v5_contact_tech")}
                             size="small"
                             sx={{
-                                margin: 2
+                                margin: 2,
+                                zIndex: -1,
                             }}
                             onChange={onTechGroupChanged}
                         >

@@ -9,29 +9,32 @@ import colleges from "../utils/Colleges";
 import {post} from "../utils/Request";
 import {
     Box,
-    Grid,
-    MenuItem,
-    Select,
-    Typography,
-    TextField,
     FormControl,
+    Grid,
+    InputAdornment,
     InputLabel,
+    MenuItem,
     OutlinedInput,
+    Select,
+    TextField,
+    Typography,
 } from "@mui/material";
 import copy from "copy-to-clipboard";
-import {LocalizationProvider} from "@mui/x-date-pickers/LocalizationProvider";
-import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
-import {DatePicker} from "@mui/x-date-pickers";
+import {LocalizationProvider} from '@mui/x-date-pickers';
+import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs';
+import {DesktopDatePicker} from '@mui/x-date-pickers/DesktopDatePicker';
 import dayjs, {Dayjs} from "dayjs";
 
 interface SimpleDialogProps {
     open: boolean,
     setOpen: Function,
+
+    setMenuClose:Function,
 }
 
-const ProfileDesktop:React.FC<SimpleDialogProps> = (props) => {
+const ProfileDesktop: React.FC<SimpleDialogProps> = (props) => {
 
-    const {open, setOpen} = props;
+    const {open, setOpen, setMenuClose} = props;
 
     const sexItem = [
         {
@@ -62,8 +65,8 @@ const ProfileDesktop:React.FC<SimpleDialogProps> = (props) => {
     const navigate = useNavigate();
     const collegeItem = colleges;
 
-    const split:any = "·";
-    const [birthday, setBirthday] =  React.useState<Dayjs | null>(dayjs('1970-1-1'));
+    const split: any = "·";
+    const [birthday, setBirthday] = React.useState("1970-1-1");
     const [name, setName] = useState("");
     const [id, setId] = useState("");
     const [session, setSession] = useState("");
@@ -110,8 +113,8 @@ const ProfileDesktop:React.FC<SimpleDialogProps> = (props) => {
             alert("饮食习惯不得为空，无禁忌请填无");
             return false;
         }
-        if (birthday === dayjs('1970-1-1')) {
-            alert("请检查生日信息，1970-1-1 是不被允许的日期");
+        if (birthday === "1970-1-1") {
+            alert("请检查生日信息，不允许为默认值");
             return false;
         }
         if (college === "") {
@@ -168,7 +171,7 @@ const ProfileDesktop:React.FC<SimpleDialogProps> = (props) => {
     function init() {
         post("/member/get-member",
             localStorage.getItem("v5_token")
-        ).then(((res:any) => {
+        ).then(((res: any) => {
             if (res.status === 200) {
                 setQq(res.data.qqId);
                 setId(res.data.id);
@@ -207,12 +210,17 @@ const ProfileDesktop:React.FC<SimpleDialogProps> = (props) => {
         init();
     }, [])
 
-    function onClickConfirm() {
+    function handleClose() {
+        setMenuClose();
+        setOpen(false);
+    }
+
+    function handleSetProfile() {
         if (!validate()) {
             return;
         }
         post("/member/update", {
-            id: id,
+            id: localStorage.getItem("v5_token"),
             name: name,
             telephone: telephone,
             email: email,
@@ -233,19 +241,12 @@ const ProfileDesktop:React.FC<SimpleDialogProps> = (props) => {
             if (res.status === 200) {
                 if (res.data.msg === "success") {
                     alert("修改成功");
+                    handleClose();
                 } else {
                     alert(res.data.msg);
                 }
             }
         }))
-    }
-
-    function handleClose(){
-        setOpen(false);
-    }
-
-    function handleSetProfile(){
-
     }
 
     // @ts-ignore
@@ -256,21 +257,11 @@ const ProfileDesktop:React.FC<SimpleDialogProps> = (props) => {
             aria-labelledby="alert-dialog-title"
             aria-describedby="alert-dialog-description"
         >
-            <DialogTitle id="alert-dialog-title">
-                {"V5Zone ICP信息"}
+            <DialogTitle id="alert-dialog-title" sx={{fontWeight:"bold", textAlign:"center"}}>
+                {"我的个人信息"}
             </DialogTitle>
             <DialogContent>
                 <Box>
-                    <Typography
-                        align="center"
-                        sx={{
-                            fontFamily: "黑体",
-                            fontSize: 20,
-                            fontWeight: "bold",
-                            height: 32,
-                            marginTop: 2
-                        }}
-                    >我的个人信息</Typography>
                     <Grid container spacing={1}>
                         {/*row 1*/}
                         <Grid xs={6} sx={{textAlign: "center"}}>
@@ -333,7 +324,7 @@ const ProfileDesktop:React.FC<SimpleDialogProps> = (props) => {
                                     height: 30
                                 }}
                                 value={name}
-                                onChange={(event:any) => {
+                                onChange={(event: any) => {
                                     setName(event.target.value);
                                 }}
                             />
@@ -348,7 +339,7 @@ const ProfileDesktop:React.FC<SimpleDialogProps> = (props) => {
                                     height: 30
                                 }}
                                 value={session}
-                                onChange={(event:any) => {
+                                onChange={(event: any) => {
                                     setSession(event.target.value);
                                 }}
                             />
@@ -358,7 +349,7 @@ const ProfileDesktop:React.FC<SimpleDialogProps> = (props) => {
                         <Grid xs={6}>
                             <FormControl
                                 sx={{
-                                    width: 240,
+                                    width: 225,
                                     marginX: 3,
                                 }}
                             >
@@ -396,7 +387,7 @@ const ProfileDesktop:React.FC<SimpleDialogProps> = (props) => {
                                     height: 30,
                                 }}
                                 value={major}
-                                onChange={(event:any) => {
+                                onChange={(event: any) => {
                                     setMajor(event.target.value);
                                 }}
                             />
@@ -410,11 +401,11 @@ const ProfileDesktop:React.FC<SimpleDialogProps> = (props) => {
                                 label="技术组别"
                                 sx={{
                                     marginTop: 3,
-                                    width: 240,
-                                    marginLeft: 3,
+                                    width: 225,
+                                    marginX: 3,
                                 }}
                                 value={techGroup}
-                                onChange={(event:any) => {
+                                onChange={(event: any) => {
                                     setTechGroup(event.target.value);
                                 }}
                             >
@@ -439,7 +430,7 @@ const ProfileDesktop:React.FC<SimpleDialogProps> = (props) => {
                                     height: 30
                                 }}
                                 value={telephone}
-                                onChange={(event:any) => {
+                                onChange={(event: any) => {
                                     setTelephone(event.target.value);
                                 }}
                             />
@@ -456,7 +447,7 @@ const ProfileDesktop:React.FC<SimpleDialogProps> = (props) => {
                                     height: 30
                                 }}
                                 value={email}
-                                onChange={(event:any) => {
+                                onChange={(event: any) => {
                                     setEmail(event.target.value);
                                 }}
                             />
@@ -472,7 +463,7 @@ const ProfileDesktop:React.FC<SimpleDialogProps> = (props) => {
                                     height: 30
                                 }}
                                 value={qq}
-                                onChange={(event:any) => {
+                                onChange={(event: any) => {
                                     setQq(event.target.value);
                                 }}
                             />
@@ -485,10 +476,11 @@ const ProfileDesktop:React.FC<SimpleDialogProps> = (props) => {
                                 label="身份证号（用于报名比赛）"
                                 sx={{
                                     margin: 3,
-                                    height: 30
+                                    height: 30,
+                                    width: "80%",
                                 }}
                                 value={idCard}
-                                onChange={(event:any) => {
+                                onChange={(event: any) => {
                                     setIdCard(event.target.value);
                                 }}
                             />
@@ -500,12 +492,12 @@ const ProfileDesktop:React.FC<SimpleDialogProps> = (props) => {
                                 select
                                 label="性别"
                                 sx={{
-                                    marginTop: 3,
+                                    margin: 3,
                                     width: 130,
-                                    marginLeft: 3,
+                                    marginX: 3,
                                 }}
                                 value={sex}
-                                onChange={(event:any) => {
+                                onChange={(event: any) => {
                                     setSex(event.target.value);
                                 }}
                             >
@@ -522,35 +514,28 @@ const ProfileDesktop:React.FC<SimpleDialogProps> = (props) => {
                         </Grid>
 
                         <Grid xs={6}>
-                            <Grid container spacing={1}
-                                  sx={{
-                                      textAlign: "center",
-                                      margin: 3,
-                                      marginLeft: 3,
-                                      height: 30,
-                                  }}>
-                                <Grid xs={6}>
-                                    <TextField
-                                        required
-                                        id="outlined-required"
-                                        label="民族"
-                                        value={nation}
-                                        onChange={(event:any) => {
-                                            setNation(event.target.value);
-                                        }}
-                                    />
-                                </Grid>
-                                <Grid xs={6}>
-                                    <Typography
-                                        sx={{
-                                            textAlign: "left",
-                                            marginTop: 2,
-                                            marginLeft: 2,
-                                            fontSize: 20,
-                                        }}
-                                    >族</Typography>
-                                </Grid>
-                            </Grid>
+                            <FormControl
+                                sx={{
+                                    marginBottom: 3,
+                                    marginX: 3,
+                                    height: 30}}
+                            >
+                                <InputLabel htmlFor="outlined-adornment-password">民族</InputLabel>
+                                <OutlinedInput
+                                    label="民族"
+                                    id="outlined-required"
+                                    endAdornment={<InputAdornment position="end">族</InputAdornment>}
+                                    inputProps={{
+                                        'aria-label': 'weight',
+                                    }}
+                                    required
+                                    value={nation}
+                                    onChange={(event: any) => {
+                                        setNation(event.target.value);
+                                    }}
+
+                                />
+                            </FormControl>
                         </Grid>
 
                         <Grid xs={6}>
@@ -559,31 +544,15 @@ const ProfileDesktop:React.FC<SimpleDialogProps> = (props) => {
                                 id="outlined-required"
                                 label="饮食习惯（无禁忌填“正常”）"
                                 sx={{
-                                    margin: 3,
+                                    marginBottom: 3,
+                                    marginX: 3,
                                     height: 30
                                 }}
                                 value={foodHabit}
-                                onChange={(event:any) => {
+                                onChange={(event: any) => {
                                     setFoodHabit(event.target.value);
                                 }}
                             />
-                        </Grid>
-
-                        <Grid xs={6} sx={{
-                            marginLeft: 3,
-                            marginTop: 3,
-                        }}>
-
-                            {/*<DatePicker*/}
-                            {/*    label="出生日期"*/}
-                            {/*    value={birthday}*/}
-                            {/*    onChange={(newValue:any) => {*/}
-                            {/*        if (newValue.toString() === "Invalid Date") {*/}
-                            {/*            alert("请点击图标更改此栏位");*/}
-                            {/*        }*/}
-                            {/*        setBirthday(newValue.format('YYYY-MM-DD'));*/}
-                            {/*    }}*/}
-                            {/*/>*/}
                         </Grid>
 
                         <Grid xs={6}>
@@ -592,11 +561,11 @@ const ProfileDesktop:React.FC<SimpleDialogProps> = (props) => {
                                 id="outlined-required"
                                 label="籍贯(xx省xx市)"
                                 sx={{
-                                    marginY: 3,
+                                    margin: 3,
                                     height: 30
                                 }}
                                 value={hometown}
-                                onChange={(event:any) => {
+                                onChange={(event: any) => {
                                     setHometown(event.target.value);
                                 }}
                             />
@@ -608,27 +577,42 @@ const ProfileDesktop:React.FC<SimpleDialogProps> = (props) => {
                                 id="outlined-required"
                                 label="常住地(xx省xx市)"
                                 sx={{
-                                    marginY: 3,
+                                    margin: 3,
                                     height: 30
                                 }}
                                 value={residence}
-                                onChange={(event:any) => {
+                                onChange={(event: any) => {
                                     setResidence(event.target.value);
                                 }}
                             />
                         </Grid>
 
-                        <Grid xs={2.5}>
+                        <Grid xs={5} sx={{
+                            marginX: 3,
+                            marginTop: 3,
+                        }}>
+                            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                <DesktopDatePicker
+                                    label="出生日期"
+                                    value={dayjs(birthday)}
+                                    onChange={(newValue: any) => {
+                                        setBirthday(newValue.toString());
+                                    }}
+                                />
+                            </LocalizationProvider>
+                        </Grid>
+
+                        <Grid xs={5.9}>
                             <TextField
                                 required
                                 id="outlined-required"
                                 label="生源高中"
                                 sx={{
-                                    marginY: 3,
+                                    margin: 3,
                                     height: 30
                                 }}
                                 value={highSchool}
-                                onChange={(event:any) => {
+                                onChange={(event: any) => {
                                     setHighSchool(event.target.value);
                                 }}
                             />
@@ -636,11 +620,21 @@ const ProfileDesktop:React.FC<SimpleDialogProps> = (props) => {
                     </Grid>
                 </Box>
             </DialogContent>
-            <DialogActions>
-                <Button onClick={handleSetProfile}>
+            <DialogActions sx={{justifyContent:"center"}}>
+                <Button
+                    variant="contained"
+                    onClick={handleSetProfile}
+                    size="large"
+                    sx={{fontWeight: "bold", marginX: 2}}
+                >
                     确认修改
                 </Button>
-                <Button onClick={handleClose}>
+                <Button
+                    variant="outlined"
+                    onClick={handleClose}
+                    size="large"
+                    sx={{fontWeight: "bold", marginX: 2}}
+                >
                     返回
                 </Button>
             </DialogActions>
