@@ -15,6 +15,8 @@ import {IsDesktop} from "../../components/utils/IsDesktop";
 import {useNavigate} from "react-router-dom";
 import {post} from "../../components/utils/Request"
 import MessageCard from "../../components/MessageCard";
+import CircularProgress from "@mui/material/CircularProgress";
+import Backdrop from "@mui/material/Backdrop";
 
 const MessageBoard = () => {
 
@@ -24,6 +26,14 @@ const MessageBoard = () => {
     const navigate = useNavigate()
     const [messages, setMessages] = useState([]);
     const [nameFromId, setNameFromId] = useState("");
+    const [openBackDrop, setOpenBackDrop] = React.useState(false);
+
+    const handleCloseBackdrop = () => {
+        setOpenBackDrop(false);
+    };
+    const handleToggleBackdrop = () => {
+        setOpenBackDrop(true);
+    };
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -42,8 +52,7 @@ const MessageBoard = () => {
     }
 
     function init() {
-        setTimeout(function () {
-        }, 500);
+        handleToggleBackdrop();
         post("/message-board/get-all",
             localStorage.getItem("v5_token")).then((res: any) => {
             console.log(res);
@@ -62,9 +71,11 @@ const MessageBoard = () => {
                 console.log(nameFromId);
             }
         })
+        handleCloseBackdrop();
     }
 
     const handleApply = () => {
+        handleToggleBackdrop();
         post("/message-board/add", {
             uploader: localStorage.getItem("v5_token"),
             message: msg,
@@ -76,10 +87,17 @@ const MessageBoard = () => {
             }
         })
         setOpen(false);
+        handleCloseBackdrop();
     };
 
     return (
         <Box>
+            <Backdrop
+                sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                open={openBackDrop}
+            >
+                <CircularProgress color="inherit" />
+            </Backdrop>
             {isDesktop ? <div/> :
                 <Typography
                     align="center"

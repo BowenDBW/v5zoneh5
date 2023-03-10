@@ -2,21 +2,34 @@ import {useNavigate} from "react-router-dom";
 import {post} from "./utils/Request";
 import {Box, Button, CardContent, Divider, Typography} from "@mui/material";
 import React from "react";
+import CircularProgress from "@mui/material/CircularProgress";
+import Backdrop from "@mui/material/Backdrop";
 
 export default function MessageCard(props: any) {
-    const {name, message, date, isMine} = props
 
+    const {name, message, date, isMine} = props
     const navigate = useNavigate();
 
+    const [openBackDrop, setOpenBackDrop] = React.useState(false);
+
+    const handleCloseBackdrop = () => {
+        setOpenBackDrop(false);
+    };
+    const handleToggleBackdrop = () => {
+        setOpenBackDrop(true);
+    };
+
     const onDelete = () => {
+        handleToggleBackdrop();
         post("/message-board/delete", {
             uploader: localStorage.getItem("v5_token"),
             message: message,
             date: date,
         }).then((res: any) => {
+            alert("操作成功");
             console.log(res.data);
         })
-
+        handleCloseBackdrop();
         navigate(0);
     }
 
@@ -54,6 +67,12 @@ export default function MessageCard(props: any) {
                 </CardContent>
             </React.Fragment>
             <Divider/>
+            <Backdrop
+                sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                open={openBackDrop}
+            >
+                <CircularProgress color="inherit" />
+            </Backdrop>
         </Box>
 
     );

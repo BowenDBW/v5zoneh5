@@ -17,13 +17,14 @@ import {
     OutlinedInput,
     Select,
     TextField,
-    Typography,
 } from "@mui/material";
 import copy from "copy-to-clipboard";
 import {LocalizationProvider} from '@mui/x-date-pickers';
 import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs';
 import {DesktopDatePicker} from '@mui/x-date-pickers/DesktopDatePicker';
-import dayjs, {Dayjs} from "dayjs";
+import dayjs from "dayjs";
+import CircularProgress from "@mui/material/CircularProgress";
+import Backdrop from "@mui/material/Backdrop";
 
 interface SimpleDialogProps {
     open: boolean,
@@ -65,6 +66,15 @@ const ProfileDesktop: React.FC<SimpleDialogProps> = (props) => {
     const navigate = useNavigate();
     const collegeItem = colleges;
 
+    const [openBackDrop, setOpenBackDrop] = React.useState(false);
+
+    const handleCloseBackdrop = () => {
+        setOpenBackDrop(false);
+    };
+    const handleToggleBackdrop = () => {
+        setOpenBackDrop(true);
+    };
+
     const split: any = "·";
     const [birthday, setBirthday] = React.useState("1970-1-1");
     const [name, setName] = useState("");
@@ -101,8 +111,8 @@ const ProfileDesktop: React.FC<SimpleDialogProps> = (props) => {
             alert("邮箱格式有误，应为 xxx@xx.com");
             return false;
         }
-        if (!/^[1][3,4,5,7,8][0-9]{9}$/.test(telephone)) {
-            alert("手机号码格式有误，应为 1开头;3,4,5,7,8作为第二位的11位数字");
+        if (!/^[1][3,4,5,7,8,9][0-9]{9}$/.test(telephone)) {
+            alert("手机号码格式有误，应为 1开头;3,4,5,7,8,9作为第二位的11位数字");
             return false;
         }
         if (!/(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/.test(idCard)) {
@@ -169,6 +179,7 @@ const ProfileDesktop: React.FC<SimpleDialogProps> = (props) => {
     };
 
     function init() {
+        handleToggleBackdrop();
         post("/member/get-member",
             localStorage.getItem("v5_token")
         ).then(((res: any) => {
@@ -204,6 +215,7 @@ const ProfileDesktop: React.FC<SimpleDialogProps> = (props) => {
                     .substring(0, res.data.nation.length - 1));
             }
         }))
+        handleCloseBackdrop();
     }
 
     useEffect(() => {
@@ -216,7 +228,9 @@ const ProfileDesktop: React.FC<SimpleDialogProps> = (props) => {
     }
 
     function handleSetProfile() {
+        handleToggleBackdrop();
         if (!validate()) {
+            handleCloseBackdrop();
             return;
         }
         post("/member/update", {
@@ -247,6 +261,7 @@ const ProfileDesktop: React.FC<SimpleDialogProps> = (props) => {
                 }
             }
         }))
+        handleCloseBackdrop();
     }
 
     // @ts-ignore
@@ -257,8 +272,14 @@ const ProfileDesktop: React.FC<SimpleDialogProps> = (props) => {
             aria-labelledby="alert-dialog-title"
             aria-describedby="alert-dialog-description"
         >
+            <Backdrop
+                sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                open={openBackDrop}
+            >
+                <CircularProgress color="inherit" />
+            </Backdrop>
             <DialogTitle id="alert-dialog-title" sx={{fontWeight:"bold", textAlign:"center"}}>
-                {"我的个人信息"}
+                我的个人信息
             </DialogTitle>
             <DialogContent>
                 <Box>

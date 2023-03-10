@@ -23,15 +23,15 @@ import {post} from "../../components/utils/Request"
 
 function Login() {
 
+    const navigate = useNavigate();
+    const isDesktop = IsDesktop();
+
     const [showPassword, setShowPassword] = React.useState(false);
     const [username, setUsername] = React.useState("");
     const [password, setPassword] = React.useState("");
     const [usernameInvalid, setUsernameInvalid] = React.useState(false);
     const [passwordInvalid, setPasswordInvalid] = React.useState(false);
     const [openBackDrop, setOpenBackDrop] = React.useState(false);
-
-    const navigate = useNavigate();
-    const isDesktop = IsDesktop();
 
     const handleCloseBackdrop = () => {
         setOpenBackDrop(false);

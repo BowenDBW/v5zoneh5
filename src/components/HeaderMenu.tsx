@@ -16,6 +16,8 @@ import {useNavigate} from "react-router-dom";
 import ProfileDesktop from "./desktop/ProfileDesktop";
 import {IsDesktop} from "./utils/IsDesktop";
 import {ProfileMobile} from "./mobile/ProfileMobile";
+import {ResetPasswordMobile} from "./mobile/ResetPasswordMobile";
+import ResetPasswordDesktop from "./desktop/ResetPasswordDesktop";
 
 interface HeaderProps {
     setAnchorEl: Function,
@@ -26,6 +28,7 @@ interface HeaderProps {
 export const HeaderMenu: React.FC<HeaderProps> = (props) => {
 
     const [profileDesktop, setProfileDesktop] = React.useState(false);
+    const [passwordDesktop, setPasswordDesktop] = React.useState(false);
     const {open, anchorEl, setAnchorEl} = props;
     const navigate = useNavigate();
     const isDesktop = IsDesktop();
@@ -51,7 +54,11 @@ export const HeaderMenu: React.FC<HeaderProps> = (props) => {
     }
 
     const onResetPassword = () => {
-
+        if(isDesktop){
+            setPasswordDesktop(true);
+        }else{
+            navigate("/homepage/reset-password");
+        }
     }
 
     return (
@@ -106,6 +113,16 @@ export const HeaderMenu: React.FC<HeaderProps> = (props) => {
                     />
                     :
                     <ProfileMobile/>
+            }
+            {
+                isDesktop ?
+                    <ResetPasswordDesktop
+                        open={passwordDesktop}
+                        setOpen={setPasswordDesktop}
+                        setMenuClose={handleClose}
+                    />
+                    :
+                    <ResetPasswordMobile/>
             }
         </Box>
     );
