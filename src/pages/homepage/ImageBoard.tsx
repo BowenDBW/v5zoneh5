@@ -1,13 +1,18 @@
-import {Box, ImageList, ImageListItem, Typography} from '@mui/material';
+import {
+    Box,
+    ImageList,
+    ImageListItem,
+    Typography
+} from '@mui/material';
 import React, {useEffect, useState} from 'react';
 import {IsDesktop} from "../../components/utils/IsDesktop";
 import {post} from "../../components/utils/Request";
 import GlobalParams from "../../GlobalParams";
 
 const ImageBoard = () => {
-    const isDesktop = IsDesktop()
+    const isDesktop = IsDesktop();
 
-    const [imageList, setImageList] = useState([])
+    const [imageList, setImageList] = useState([]);
 
     function init() {
         post("/album/get-public", localStorage.getItem("v5_token"))
@@ -32,7 +37,9 @@ const ImageBoard = () => {
 
     return (
         <Box>
-            {isDesktop ? <div/> :
+            {isDesktop ?
+                <div/>
+                :
                 <Typography
                     align="center"
                     sx={{
@@ -42,7 +49,9 @@ const ImageBoard = () => {
                         height: 32,
                         marginTop: 2
                     }}
-                >Zone 照片墙</Typography>
+                >
+                    Zone 照片墙
+                </Typography>
             }
             <ImageList variant="masonry" cols={3} gap={8}>
                 {imageList.map((item: any) => (

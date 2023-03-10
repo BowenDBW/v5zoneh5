@@ -19,16 +19,25 @@ import GlobalParams from "../../GlobalParams";
 import {IsDesktop} from "../../components/utils/IsDesktop";
 import DriveFolderUploadIcon from '@mui/icons-material/DriveFolderUpload';
 import ImageCard from "../../components/ImageCard";
+import CircularProgress from "@mui/material/CircularProgress";
+import Backdrop from "@mui/material/Backdrop";
 
 
 const ImageBad = () => {
-    const navigate = useNavigate()
     const [methodState, setMethodState] = useState("公开上墙");
     const isDesktop = IsDesktop();
     const [imageList, setImageList] = useState([]);
     const [open, setOpen] = React.useState(false);
-    const [file, setFile] = useState(null);
-    let fileName: string = "";
+    const [file, setFile] = React.useState(null);
+    const [fileName, setFileName] = React.useState("");
+    const [openBackDrop, setOpenBackDrop] = React.useState(false);
+
+    const handleCloseBackdrop = () => {
+        setOpenBackDrop(false);
+    };
+    const handleToggleBackdrop = () => {
+        setOpenBackDrop(true);
+    };
 
     const method = [
         {
@@ -42,6 +51,7 @@ const ImageBad = () => {
     ];
 
     function upload(formData: FormData) {
+        handleToggleBackdrop();
         fetch(GlobalParams.baseUrl + '/album/upload', {
             method: 'post',
             body: formData,
@@ -49,21 +59,27 @@ const ImageBad = () => {
             .then(data => {
                 console.log(data);
             });
+        handleCloseBackdrop();
     }
 
     const fileInputChange = (event: any) => {
+        handleToggleBackdrop();
         const newFile = event.target.files[0];
         if (newFile.size >= 1048576 * 10) {
             alert("文件不能大于 10M ");
+            handleCloseBackdrop();
             return;
         }
         setFile(event.target.files[0]);
-        fileName = newFile.name;
+        setFileName(newFile.name);
+        console.log(fileName);
+        handleCloseBackdrop();
     }
 
     function init() {
-        post("/album/get_mine",
-            localStorage.getItem("v5_id")).then((res: any) => {
+        handleToggleBackdrop();
+        post("/album/get-mine",
+            localStorage.getItem("v5_token")).then((res: any) => {
             if (res.status === 200) {
                 const list = res.data.reverse();
                 console.log("test_base_url: " + GlobalParams.baseUrl);
@@ -77,6 +93,7 @@ const ImageBad = () => {
                 setImageList(list);
             }
         })
+        handleCloseBackdrop();
     }
 
     useEffect(() => {
@@ -92,8 +109,10 @@ const ImageBad = () => {
     };
 
     function handleApply() {
+        handleToggleBackdrop();
         if (file === null) {
             alert("请选择一个文件，再上传！");
+            handleCloseBackdrop();
             return;
         }
 
@@ -101,13 +120,15 @@ const ImageBad = () => {
 
         let formData = new FormData();
         // @ts-ignore
-        formData.append("id", localStorage.getItem("v5_id"));
+        formData.append("id", localStorage.getItem("v5_token"));
         formData.append("isPublic", isPublic);
         formData.append("file", file);
 
         upload(formData);
+        alert("上传成功!");
 
-        navigate(0)
+        init();
+        handleCloseBackdrop();
         handleClose();
     }
 
@@ -117,7 +138,15 @@ const ImageBad = () => {
 
     return (
         <Box>
-            {isDesktop ? <div/> :
+            <Backdrop
+                sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                open={openBackDrop}
+            >
+                <CircularProgress color="inherit" />
+            </Backdrop>
+            {isDesktop ?
+                <div/>
+                :
                 <Typography
                     align="center"
                     sx={{
@@ -139,7 +168,7 @@ const ImageBad = () => {
                 }}
                 onClick={handleClickOpen}
             >
-                上传新文件
+                上传新照片
             </Button>
             <Dialog
                 open={open}
@@ -156,10 +185,10 @@ const ImageBad = () => {
                             select
                             label="访问限制"
                             defaultValue="公开上墙"
-                            size="small"
+                            size="medium"
                             sx={{
                                 margin: 2,
-                                width: 120,
+                                width: "30%",
                             }}
                             value={methodState}
                             onChange={onMethodChanged}
@@ -211,6 +240,7 @@ const ImageBad = () => {
                                 <ImageCard imageUrl={option.resourceLink}
                                            access={option.isPublic}
                                            title={option.title}
+                                           init={init}
                                 />
                             </Grid>
                         ))}

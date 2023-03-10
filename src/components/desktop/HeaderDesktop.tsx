@@ -40,6 +40,7 @@ const HeaderDesktop = () => {
                 width: "100%",
                 position: "sticky",
                 backgroundColor: "#FFF",
+                zIndex: 10,
             }}
         >
             <Toolbar sx={{height: 80,}}>

@@ -11,11 +11,8 @@ import Prize from "../pages/homepage/Prize";
 import CheckBoard from "../pages/homepage/CheckBoard";
 import Contact from "../pages/homepage/Contact";
 import ImageBoard from "../pages/homepage/ImageBoard";
+import ImageBad from "../pages/homepage/ImageBad";
 import {ProfileMobile} from "../components/mobile/ProfileMobile";
-
-function ImageBad() {
-    return null;
-}
 
 export default [
     {

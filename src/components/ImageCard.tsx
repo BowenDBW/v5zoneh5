@@ -11,12 +11,23 @@ import {
     TextField
 } from "@mui/material";
 import copy from "copy-to-clipboard";
+import CircularProgress from "@mui/material/CircularProgress";
+import Backdrop from "@mui/material/Backdrop";
 
 export default function ImageCard(props: any) {
 
     const navigate = useNavigate();
     const {imageUrl, access, title} = props;
     const [isPublic, setIsPublic] = useState(access === true);
+    const [openBackDrop, setOpenBackDrop] = React.useState(false);
+
+    const handleCloseBackdrop = () => {
+        setOpenBackDrop(false);
+    };
+    const handleToggleBackdrop = () => {
+        setOpenBackDrop(true);
+    };
+
     const imageType = [
         {
             value: '公开上墙',
@@ -29,9 +40,10 @@ export default function ImageCard(props: any) {
     ];
 
     const handleChange = (event: any) => {
+        handleToggleBackdrop();
         setIsPublic(event.target.value === "公开上墙")
         post("/album/set-public", {
-            uploader: localStorage.getItem("v5_id"),
+            token: localStorage.getItem("v5_token"),
             isPublic: !isPublic,
             resourceLink: title,
         }).then((res: any) => {
@@ -40,12 +52,13 @@ export default function ImageCard(props: any) {
                 console.log(res.data);
             }
         })
+        handleCloseBackdrop();
     }
 
     const onDelete = () => {
-
+        handleToggleBackdrop();
         post("/album/delete", {
-            uploader: localStorage.getItem("v5_id"),
+            token: localStorage.getItem("v5_token"),
             isPublic: isPublic,
             resourceLink: title,
         }).then((res: any) => {
@@ -53,17 +66,28 @@ export default function ImageCard(props: any) {
         })
 
         navigate(0);
+        handleCloseBackdrop();
     }
 
     return (
         <Card sx={{
             margin: 3,
+            height: 400,
         }}>
+            <Backdrop
+                sx={{
+                    color: '#fff',
+                    zIndex: (theme) => theme.zIndex.drawer + 1,
+                }}
+                open={openBackDrop}
+            >
+                <CircularProgress color="inherit" />
+            </Backdrop>
             <CardActionArea>
                 <CardMedia
                     component="img"
-                    height="100%"
-                    width="100%"
+                    height="300"
+                    width="300"
                     image={imageUrl}
                 />
             </CardActionArea>
@@ -80,7 +104,7 @@ export default function ImageCard(props: any) {
                     size="small"
                     sx={{
                         margin: 2,
-                        width: 120,
+                        width: "34%",
                     }}
                     onChange={handleChange}
                 >
@@ -96,6 +120,7 @@ export default function ImageCard(props: any) {
                     onClick={() => {
                         copy(imageUrl);
                     }}
+                    sx={{marginX:3}}
                 >
                     复制链接
                 </Button>

@@ -1,4 +1,11 @@
-import {Box, Grid, MenuItem, TextField, Typography} from '@mui/material';
+import {
+    Box,
+    Grid,
+    MenuItem,
+    TextField,
+    Typography,
+    Select,
+} from '@mui/material';
 import React from 'react';
 import {useNavigate} from "react-router-dom";
 import {IsDesktop} from "../../components/utils/IsDesktop";
@@ -95,7 +102,6 @@ const Contact = () => {
                             size="small"
                             sx={{
                                 margin: 2,
-                                zIndex: -1,
                             }}
                             onChange={onMethodChanged}
                         >
@@ -116,7 +122,6 @@ const Contact = () => {
                             size="small"
                             sx={{
                                 margin: 2,
-                                zIndex: -1,
                             }}
                             onChange={onSchoolChanged}
                         >
@@ -137,7 +142,6 @@ const Contact = () => {
                             size="small"
                             sx={{
                                 margin: 2,
-                                zIndex: -1,
                             }}
                             onChange={onTechGroupChanged}
                         >
