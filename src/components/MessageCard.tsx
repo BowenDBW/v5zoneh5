@@ -53,9 +53,7 @@ export default function MessageCard(props: any) {
                     {isMine ?
                         <Button
                             size="small"
-                            sx={{
-                                backgroundColor: "#e69191"
-                            }}
+                            color="error"
                             variant="contained"
                             onClick={onDelete}
                         >
