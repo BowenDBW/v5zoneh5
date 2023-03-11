@@ -26,12 +26,18 @@ import {BudgetRow} from "../../components/BudgetRow";
 
 const Budget = () => {
     const [renderRows, setRenderRows] = useState([]);
-    const [applyType, setApplyType] = useState([]);
-    const [applyDescription, setApplyDescription] = useState([]);
-    const [applyAmount, setApplyAmount] = useState([]);
-    const [applyTele, setApplyTele] = useState([]);
+    const [applyType, setApplyType] = useState();
+    const [applyDescription, setApplyDescription] = useState();
+    const [applyAmount, setApplyAmount] = useState();
+    const [applyTele, setApplyTele] = useState();
+    const [isInvoiceRequired, setIsInvoiceRequired]
+        = useState(false);
 
     const navigate = useNavigate();
+
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setIsInvoiceRequired(event.target.checked);
+    };
     const handleDescriptionChanged = (event:any) => {
         setApplyDescription(event.target.value);
     }
@@ -124,7 +130,6 @@ const Budget = () => {
             value: '三月内',
             label: '三月内',
         },
-
     ];
 
     function handleTeleChanged(event:any) {
@@ -138,8 +143,8 @@ const Budget = () => {
                 setApplyTele(res.data.msg);
             }
         }).catch(() => {
-            alert("登录信息过期，请重新登录")
-            navigate("/login/auth")
+            alert("登录信息过期，请重新登录");
+            navigate("/auth/login");
         })
     }
 
@@ -166,6 +171,25 @@ const Budget = () => {
                     <DialogContentText>
                         注意！ 支出项目金额大于100需要申请发票！
                     </DialogContentText>
+                    <TextField
+                        id="申请类型"
+                        select
+                        label="申请类型"
+                        defaultValue="支出"
+                        size="small"
+                        sx={{
+                            margin: 3,
+                            width: 120,
+                        }}
+                        value={applyType}
+                        onChange={handleTypeChanged}
+                    >
+                        {type.map((option) => (
+                            <MenuItem key={option.value} value={option.value}>
+                                {option.label}
+                            </MenuItem>
+                        ))}
+                    </TextField>
                     <TextField
                         id="申请类型"
                         select
