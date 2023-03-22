@@ -67,10 +67,9 @@ function Login() {
                 navigate("/homepage");
             }
         })).catch(() => {
-            alert("用户名或密码错误！")
+            alert("用户名或密码错误！");
+            handleCloseBackdrop();
         })
-
-        handleCloseBackdrop();
     }
 
     return (

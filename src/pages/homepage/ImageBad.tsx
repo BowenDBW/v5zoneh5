@@ -51,15 +51,16 @@ const ImageBad = () => {
     ];
 
     function upload(formData: FormData) {
-        handleToggleBackdrop();
         fetch(GlobalParams.baseUrl + '/album/upload', {
             method: 'post',
             body: formData,
         }).then(response => response.json())
             .then(data => {
                 console.log(data);
+                return true;
             });
-        handleCloseBackdrop();
+
+        return false;
     }
 
     const fileInputChange = (event: any) => {
@@ -91,9 +92,9 @@ const ImageBad = () => {
                         + item.resourceLink;
                 });
                 setImageList(list);
+                handleCloseBackdrop();
             }
         })
-        handleCloseBackdrop();
     }
 
     useEffect(() => {
@@ -109,27 +110,27 @@ const ImageBad = () => {
     };
 
     function handleApply() {
-        handleToggleBackdrop();
-        if (file === null) {
-            alert("请选择一个文件，再上传！");
+        new Promise(function (resolve, reject){
+            handleToggleBackdrop();
+            if (file === null) {
+                alert("请选择一个文件，再上传！");
+                handleCloseBackdrop();
+                return;
+            }
+
+            const isPublic = (methodState === "公开上墙") ? "true" : "false";
+
+            let formData = new FormData();
+            // @ts-ignore
+            formData.append("id", localStorage.getItem("v5_token"));
+            formData.append("isPublic", isPublic);
+            formData.append("file", file);
+            resolve(upload(formData));
+        }).then(function (){
+            init();
             handleCloseBackdrop();
-            return;
-        }
-
-        const isPublic = (methodState === "公开上墙") ? "true" : "false";
-
-        let formData = new FormData();
-        // @ts-ignore
-        formData.append("id", localStorage.getItem("v5_token"));
-        formData.append("isPublic", isPublic);
-        formData.append("file", file);
-
-        upload(formData);
-        alert("上传成功!");
-
-        init();
-        handleCloseBackdrop();
-        handleClose();
+            handleClose();
+        });
     }
 
     const onMethodChanged = (event: any) => {
@@ -138,12 +139,6 @@ const ImageBad = () => {
 
     return (
         <Box>
-            <Backdrop
-                sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-                open={openBackDrop}
-            >
-                <CircularProgress color="inherit" />
-            </Backdrop>
             {isDesktop ?
                 <div/>
                 :
@@ -174,6 +169,12 @@ const ImageBad = () => {
                 open={open}
                 onClose={handleClose}
             >
+                <Backdrop
+                    sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                    open={openBackDrop}
+                >
+                    <CircularProgress color="inherit" />
+                </Backdrop>
                 <DialogTitle>新建上传</DialogTitle>
                 <DialogContent>
                     <DialogContentText>
@@ -237,10 +238,11 @@ const ImageBad = () => {
                     <Grid container spacing={2}>
                         {imageList.map((option: any) => (
                             <Grid xs={4}>
-                                <ImageCard imageUrl={option.resourceLink}
-                                           access={option.isPublic}
-                                           title={option.title}
-                                           init={init}
+                                <ImageCard
+                                    imageUrl={option.resourceLink}
+                                    access={option.isPublic}
+                                    title={option.title}
+                                    init={init}
                                 />
                             </Grid>
                         ))}
@@ -252,6 +254,7 @@ const ImageBad = () => {
                         <ImageCard imageUrl={option.resourceLink}
                                    access={option.isPublic}
                                    title={option.title}
+                                   init={init}
                         />
                     ))}
                 </Stack>

@@ -16,8 +16,7 @@ import Backdrop from "@mui/material/Backdrop";
 
 export default function ImageCard(props: any) {
 
-    const navigate = useNavigate();
-    const {imageUrl, access, title} = props;
+    const {imageUrl, access, title, init} = props;
     const [isPublic, setIsPublic] = useState(access === true);
     const [openBackDrop, setOpenBackDrop] = React.useState(false);
 
@@ -50,9 +49,9 @@ export default function ImageCard(props: any) {
             console.log(res);
             if (res.status === 200) {
                 console.log(res.data);
+                handleCloseBackdrop();
             }
         })
-        handleCloseBackdrop();
     }
 
     const onDelete = () => {
@@ -63,10 +62,9 @@ export default function ImageCard(props: any) {
             resourceLink: title,
         }).then((res: any) => {
             console.log(res.data);
+            init();
+            handleCloseBackdrop();
         })
-
-        navigate(0);
-        handleCloseBackdrop();
     }
 
     return (

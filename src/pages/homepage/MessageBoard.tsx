@@ -82,22 +82,15 @@ const MessageBoard = () => {
         }).then((res: any) => {
             console.log(res);
             if (res.status === 200) {
-                alert("添加成功");
-                navigate(0);
+                init();
+                setOpen(false);
+                handleCloseBackdrop();
             }
         })
-        setOpen(false);
-        handleCloseBackdrop();
     };
 
     return (
         <Box>
-            <Backdrop
-                sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-                open={openBackDrop}
-            >
-                <CircularProgress color="inherit" />
-            </Backdrop>
             {isDesktop ? <div/> :
                 <Typography
                     align="center"
@@ -124,6 +117,12 @@ const MessageBoard = () => {
                 open={open}
                 onClose={handleClose}
             >
+                <Backdrop
+                    sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                    open={openBackDrop}
+                >
+                    <CircularProgress color="inherit" />
+                </Backdrop>
                 <DialogTitle sx={{width:500}}>新建留言</DialogTitle>
                 <DialogContent>
                     <TextField
@@ -152,6 +151,7 @@ const MessageBoard = () => {
                                              date={option.date}
                                              message={option.message}
                                              isMine={nameFromId === option.uploader}
+                                             init={init}
                                 />
                             </Grid>
                         ))}
@@ -164,6 +164,7 @@ const MessageBoard = () => {
                                      date={option.date}
                                      message={option.message}
                                      isMine={nameFromId === option.uploader}
+                                     init={init}
                         />
                     ))}
                 </Stack>

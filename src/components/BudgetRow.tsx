@@ -1,21 +1,29 @@
 import React, {useState} from 'react';
 import {
-    Box, Button,
+    Box,
+    Button,
     Collapse,
-    Dialog, DialogActions, DialogContent,
-    DialogContentText, DialogTitle, Divider,
+    Dialog,
+    DialogActions,
+    DialogContent,
+    DialogContentText,
+    DialogTitle,
+    Divider,
     Grid,
-    IconButton, Stack, Table,
+    IconButton,
+    Stack,
+    Table,
     TableBody,
     TableCell,
-    TableHead, TableRow,
-    Typography
+    TableHead,
+    TableRow,
+    Typography,
 } from "@mui/material";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import DriveFolderUploadIcon from "@mui/icons-material/DriveFolderUpload";
 import {useNavigate} from "react-router-dom";
-import {MyStepper} from "./MyStepper";
+import MyStepper from "./MyStepper";
 import {IsDesktop} from "./utils/IsDesktop";
 import GlobalParams from "../GlobalParams";
 import {post} from "./utils/Request";
@@ -26,25 +34,13 @@ export function BudgetRow(props:any) {
     const id = row.id;
     const history = row.history;
     const [fileName, setFileName] = React.useState("");
+    const [open, setOpen] = React.useState(false);
+    const [open2, setOpen2] = React.useState(false);
+    const [file, setFile] = useState("null");
 
     function clickUpload() {
         setOpen2(true);
     }
-
-    const clickStop = (event:any) => {
-        post("/transaction/admin", {
-            "id": id,
-            "message": "canceled",
-        }).then((res:any) => {
-            if (res.status === 200) {
-                alert("操作成功");
-                navigate(0);
-            }
-        });
-    }
-
-    const [open, setOpen] = React.useState(false);
-    const [open2, setOpen2] = React.useState(false);
 
     const handleClose = () => {
         setOpen(false);
@@ -53,6 +49,18 @@ export function BudgetRow(props:any) {
     const handleClose2 = () => {
         setOpen2(false);
     };
+
+    const clickStop = (event:any) => {
+        post("/transaction/admin", {
+            "token": id,
+            "message": "canceled",
+        }).then((res:any) => {
+            if (res.status === 200) {
+                alert("操作成功");
+                navigate(0);
+            }
+        });
+    }
 
     function upload(formData:FormData) {
         fetch(GlobalParams.baseUrl + '/transaction/upload', {
@@ -64,8 +72,6 @@ export function BudgetRow(props:any) {
                 navigate(0);
             });
     }
-
-    const [file, setFile] = useState("null")
 
     function handleApply() {
         if (file === "none") {
