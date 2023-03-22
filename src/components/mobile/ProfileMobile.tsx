@@ -1,23 +1,21 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {useNavigate} from "react-router-dom";
 import colleges from "../utils/Colleges";
 import dayjs, {Dayjs} from "dayjs";
 import {post} from "../utils/Request";
-import {
-    Box,
-    FormControl,
-    InputLabel,
-    MenuItem,
-    OutlinedInput,
-    Select,
-    Stack,
-    TextField,
-    Typography
-} from "@mui/material";
 import Button from "@mui/material/Button";
+import Box from "@mui/material/Box";
+import FormControl from "@mui/material/FormControl";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import OutlinedInput from "@mui/material/OutlinedInput";
+import Select from "@mui/material/Select";
+import Stack from "@mui/material/Stack";
+import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
 import copy from "copy-to-clipboard";
 
-export const ProfileMobile = () => {
+const ProfileMobile = () => {
 
     const sexItem = [
         {
@@ -50,22 +48,22 @@ export const ProfileMobile = () => {
 
     const split: any = "·";
     const [birthday, setBirthday] = React.useState<Dayjs | null>(dayjs('1970-1-1'));
-    const [name, setName] = useState("");
-    const [id, setId] = useState("");
-    const [session, setSession] = useState("");
-    const [college, setCollege] = useState("");
-    const [major, setMajor] = useState("");
-    const [techGroup, setTechGroup] = useState("");
-    const [telephone, setTelephone] = useState("");
-    const [email, setEmail] = useState("");
-    const [qq, setQq] = useState("");
-    const [idCard, setIdCard] = useState("");
-    const [sex, setSex] = useState("");
-    const [nation, setNation] = useState("");
-    const [foodHabit, setFoodHabit] = useState("");
-    const [hometown, setHometown] = useState("");
-    const [residence, setResidence] = useState("");
-    const [highSchool, setHighSchool] = useState("");
+    const [name, setName] = React.useState("");
+    const [id, setId] = React.useState("");
+    const [session, setSession] = React.useState("");
+    const [college, setCollege] = React.useState("");
+    const [major, setMajor] = React.useState("");
+    const [techGroup, setTechGroup] = React.useState("");
+    const [telephone, setTelephone] = React.useState("");
+    const [email, setEmail] = React.useState("");
+    const [qq, setQq] = React.useState("");
+    const [idCard, setIdCard] = React.useState("");
+    const [sex, setSex] = React.useState("");
+    const [nation, setNation] = React.useState("");
+    const [foodHabit, setFoodHabit] = React.useState("");
+    const [hometown, setHometown] = React.useState("");
+    const [residence, setResidence] = React.useState("");
+    const [highSchool, setHighSchool] = React.useState("");
 
     function validate() {
         if (!/^[\u4E00-\u9FA5\uf900-\ufa2d·s]{2,20}$/.test(name)) {
@@ -189,9 +187,9 @@ export const ProfileMobile = () => {
         }))
     }
 
-    useEffect(() => {
+    React.useEffect(() => {
         init();
-    }, [])
+    }, []);
 
     function onClickConfirm() {
         if (!validate()) {
@@ -568,3 +566,5 @@ export const ProfileMobile = () => {
 
     );
 };
+
+export default ProfileMobile;

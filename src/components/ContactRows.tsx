@@ -10,8 +10,8 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 
 export const ContactRows = () => {
-    const isDesktop = IsDesktop();
 
+    const isDesktop = IsDesktop();
     const [renderRows, setRenderRows] = useState([]);
 
     function init() {

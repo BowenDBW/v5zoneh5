@@ -15,7 +15,7 @@ import React from "react";
 import {useNavigate} from "react-router-dom";
 import ProfileDesktop from "./desktop/ProfileDesktop";
 import {IsDesktop} from "./utils/IsDesktop";
-import {ProfileMobile} from "./mobile/ProfileMobile";
+import ProfileMobile from "./mobile/ProfileMobile";
 import {ResetPasswordMobile} from "./mobile/ResetPasswordMobile";
 import ResetPasswordDesktop from "./desktop/ResetPasswordDesktop";
 
