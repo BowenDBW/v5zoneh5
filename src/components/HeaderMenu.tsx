@@ -11,6 +11,7 @@ import CenterFocusWeakIcon from "@mui/icons-material/CenterFocusWeak";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import LockResetIcon from "@mui/icons-material/LockReset";
 import LogoutIcon from "@mui/icons-material/Logout";
+import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import React from "react";
 import {useNavigate} from "react-router-dom";
 import ProfileDesktop from "./desktop/ProfileDesktop";
@@ -18,6 +19,7 @@ import {IsDesktop} from "./utils/IsDesktop";
 import ProfileMobile from "./mobile/ProfileMobile";
 import {ResetPasswordMobile} from "./mobile/ResetPasswordMobile";
 import ResetPasswordDesktop from "./desktop/ResetPasswordDesktop";
+import {post} from "./utils/Request";
 
 interface HeaderProps {
     setAnchorEl: Function,
@@ -29,9 +31,17 @@ export const HeaderMenu: React.FC<HeaderProps> = (props) => {
 
     const [profileDesktop, setProfileDesktop] = React.useState(false);
     const [passwordDesktop, setPasswordDesktop] = React.useState(false);
+    const [isMonitor, setIsMonitor] = React.useState("COMMON");
     const {open, anchorEl, setAnchorEl} = props;
     const navigate = useNavigate();
     const isDesktop = IsDesktop();
+
+    const init = () => {
+        post("/auth/is-monitor", localStorage.getItem("v5_token"))
+            .then((res:any) => {
+                setIsMonitor(res.data);
+            })
+    }
 
     const handleClose = () => {
         setAnchorEl(null);
@@ -60,6 +70,15 @@ export const HeaderMenu: React.FC<HeaderProps> = (props) => {
             navigate("/homepage/reset-password");
         }
     }
+
+    const onManage = () => {
+        setAnchorEl(null);
+        navigate("/homepage/manage");
+    }
+
+    React.useEffect(() => {
+        init();
+    },[])
 
     return (
         <Box>
@@ -95,6 +114,16 @@ export const HeaderMenu: React.FC<HeaderProps> = (props) => {
                         </ListItemIcon>
                         <ListItemText>重置密码</ListItemText>
                     </MenuItem>
+                    {isMonitor === "COMMON" ?
+                        <div/>
+                        :
+                        <MenuItem onClick={onManage}>
+                            <ListItemIcon>
+                                <ManageAccountsIcon fontSize="small"/>
+                            </ListItemIcon>
+                            <ListItemText>管理员界面</ListItemText>
+                        </MenuItem>
+                    }
                     <Divider/>
                     <MenuItem onClick={onLogout}>
                         <ListItemIcon>

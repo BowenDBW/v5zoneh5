@@ -64,7 +64,7 @@ function Login() {
                 localStorage.setItem('v5_contact_tech', "全部");
                 localStorage.setItem('v5_contact_college', "全部");
                 localStorage.setItem('v5_contact_session', "现役");
-                navigate("/homepage");
+                navigate("/homepage/check-board");
             }
         })).catch(() => {
             alert("用户名或密码错误！");

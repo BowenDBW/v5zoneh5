@@ -9,11 +9,57 @@ import React from 'react';
 import {useNavigate} from "react-router-dom";
 import {IsDesktop} from "../../components/utils/IsDesktop";
 import {ContactRows} from "../../components/ContactRows";
+import {post} from "../../components/utils/Request";
 
 const Contact = () => {
 
     const isDesktop = IsDesktop();
     const navigate = useNavigate();
+    const [renderRows, setRenderRows] = React.useState([]);
+
+    function init() {
+        let method = "onServe";
+        let school = "all";
+        let techGroup = "all";
+        if (localStorage.getItem("v5_contact_session") === "全部") {
+            method = "all";
+        } else if (localStorage.getItem("v5_contact_session") === "现役") {
+            method = "onServe";
+        } else if (localStorage.getItem("v5_contact_session") === "同届次") {
+            method = "sameSession";
+        }
+        if (localStorage.getItem("v5_contact_tech") === "全部") {
+            techGroup = "all";
+        } else if (localStorage.getItem("v5_contact_tech") === "机械组") {
+            techGroup = "mechanic";
+        } else if (localStorage.getItem("v5_contact_tech") === "硬件组") {
+            techGroup = "hardware";
+        } else if (localStorage.getItem("v5_contact_tech") === "软件组") {
+            techGroup = "software";
+        }
+        if (localStorage.getItem("v5_contact_college") === "全部") {
+            school = "all";
+        } else if (localStorage.getItem("v5_contact_college") === "同学院") {
+            school = "sameCollege";
+        }
+        console.log(method + "," + school + "," + techGroup);
+        post("/member/contact",
+            {
+                token: localStorage.getItem("v5_token"),
+                sessionSelect: method,
+                techSelect: techGroup,
+                collegeSelect: school,
+            }).then((res: any) => {
+            console.log(res);
+            if (res.status === 200) {
+                setRenderRows(res.data.contactInfo);
+            }
+        })
+    }
+
+    React.useEffect(() => {
+        init();
+    }, [])
 
     const method = [
         {
@@ -62,17 +108,17 @@ const Contact = () => {
 
     const onTechGroupChanged = (event: any) => {
         localStorage.setItem("v5_contact_tech", event.target.value);
-        navigate(0);
+        init();
     }
 
     const onSchoolChanged = (event: any) => {
         localStorage.setItem("v5_contact_college", event.target.value);
-        navigate(0);
+        init();
     }
 
     const onMethodChanged = (event: any) => {
         localStorage.setItem("v5_contact_session", event.target.value);
-        navigate(0);
+        init();
     }
 
     return (
@@ -153,7 +199,7 @@ const Contact = () => {
                     </Grid>
                 </Grid>
             </Box>
-            <ContactRows/>
+            <ContactRows renderRows={renderRows}/>
         </Box>
     );
 };

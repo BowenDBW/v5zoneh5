@@ -141,7 +141,7 @@ const DrawerDesktop = (props:DrawerProps) => {
                 <ListItem key={'公告栏'} disablePadding>
                     <ListItemButton
                         onClick={() => {
-                            navigate('/homepage/');
+                            navigate('/homepage/check-board');
                         }}
                     >
                         <ListItemIcon>

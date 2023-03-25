@@ -1,6 +1,4 @@
 import {IsDesktop} from "./utils/IsDesktop";
-import React, {useEffect, useState} from "react";
-import {post} from "./utils/Request";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -9,54 +7,10 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 
-export const ContactRows = () => {
+export const ContactRows = (props:any) => {
 
+    const {renderRows} = props;
     const isDesktop = IsDesktop();
-    const [renderRows, setRenderRows] = useState([]);
-
-    function init() {
-        let method = "onServe";
-        let school = "all";
-        let techGroup = "all";
-        if (localStorage.getItem("v5_contact_session") === "全部") {
-            method = "all";
-        } else if (localStorage.getItem("v5_contact_session") === "现役") {
-            method = "onServe";
-        } else if (localStorage.getItem("v5_contact_session") === "同届次") {
-            method = "sameSession";
-        }
-        if (localStorage.getItem("v5_contact_tech") === "全部") {
-            techGroup = "all";
-        } else if (localStorage.getItem("v5_contact_tech") === "机械组") {
-            techGroup = "mechanic";
-        } else if (localStorage.getItem("v5_contact_tech") === "硬件组") {
-            techGroup = "hardware";
-        } else if (localStorage.getItem("v5_contact_tech") === "软件组") {
-            techGroup = "software";
-        }
-        if (localStorage.getItem("v5_contact_college") === "全部") {
-            school = "all";
-        } else if (localStorage.getItem("v5_contact_college") === "同学院") {
-            school = "sameCollege";
-        }
-        console.log(method + "," + school + "," + techGroup);
-        post("/member/contact",
-            {
-                token: localStorage.getItem("v5_token"),
-                sessionSelect: method,
-                techSelect: techGroup,
-                collegeSelect: school,
-            }).then((res: any) => {
-            console.log(res);
-            if (res.status === 200) {
-                setRenderRows(res.data.contactInfo);
-            }
-        })
-    }
-
-    useEffect(() => {
-        init();
-    }, [])
 
     return (
         <TableContainer component={Paper}>

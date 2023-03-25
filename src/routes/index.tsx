@@ -13,6 +13,7 @@ import Contact from "../pages/homepage/Contact";
 import ImageBoard from "../pages/homepage/ImageBoard";
 import ImageBad from "../pages/homepage/ImageBad";
 import ProfileMobile from "../components/mobile/ProfileMobile";
+import Admission from "../components/Admission";
 
 export default [
     {
@@ -72,7 +73,7 @@ export default [
             {
                 path: "profile",
                 element: <ProfileMobile/>
-            }
+            },
         ]
     },
     {

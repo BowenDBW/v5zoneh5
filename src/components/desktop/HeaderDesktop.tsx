@@ -43,7 +43,7 @@ const HeaderDesktop = () => {
                 zIndex: 10,
             }}
         >
-            <Toolbar sx={{height: 80,}}>
+            <Toolbar sx={{height: 80}}>
                 <Typography
                     variant="h6"
                     sx={{

@@ -3,6 +3,7 @@ import {Outlet} from "react-router-dom";
 import Global from "../GlobalParams";
 import Footer from "../components/Footer";
 import {Stack} from "@mui/material";
+import GlobalParams from "../GlobalParams";
 
 const Auth = () => {
 
@@ -18,11 +19,11 @@ const Auth = () => {
     }
 
     const DESKTOP_FEATURE = {
-        backgroundImage: "url('https://www.npu5v5.cn:8849/album/download/back_desktop.jpg')",
+        backgroundImage: "url('" + GlobalParams.baseUrl + "/album/download/back_desktop.jpg')",
     }
 
     const MOBILE_FEATURE = {
-        backgroundImage: "url('https://www.npu5v5.cn:8849/album/download/back_mobile.jpg')",
+        backgroundImage: "url('" + GlobalParams.baseUrl + "/album/download/back_mobile.jpg')",
     }
 
     return (

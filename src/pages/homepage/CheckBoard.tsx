@@ -70,7 +70,7 @@ function CheckBoard() {
 
     function init() {
         post("/markdown/publish",
-            localStorage.getItem("v5_id")).then((res:any) => {
+            localStorage.getItem("v5_token")).then((res:any) => {
             console.log(res);
             if (res.status === 200) {
                 let temp = res.data.reverse();
@@ -79,8 +79,6 @@ function CheckBoard() {
                 })
                 setRenderRows(temp);
             }
-        }).catch(() => {
-            navigate("/login/auth")
         })
     }
 

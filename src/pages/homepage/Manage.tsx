@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from 'react';
-import {Box, Divider, Grid, Stack, Typography} from "@mui/material";
+import React from 'react';
+import {Box, Divider, Grid, Stack, Tabs, Typography, Tab} from "@mui/material";
 import {IsDesktop} from "../../components/utils/IsDesktop";
 import {post} from "../../components/utils/Request";
 import Admission from "../../components/Admission";
@@ -9,18 +9,21 @@ import Poi from "../../components/Poi";
 
 const Manage = () => {
     const isDesktop = IsDesktop()
+    const [isVice, setVice] = React.useState(false);
+    const [value, setValue] = React.useState(0);
 
-    const [isVice, setVice] = useState(false);
-
+    const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+        setValue(newValue);
+    };
 
     function init() {
-        post("/auth/is_monitor", localStorage.getItem("v5_id"))
+        post("/auth/is-monitor", localStorage.getItem("v5_token"))
             .then((res: any) => {
                 setVice(res.data === "VICE_CAPTAIN");
             })
     }
 
-    useEffect(() => {
+    React.useEffect(() => {
         init();
     }, [])
 
@@ -36,44 +39,33 @@ const Manage = () => {
                         height: 32,
                         marginTop: 2
                     }}
-                >Zone 设置</Typography>
+                >Zone 管理员界面</Typography>
             }
-            {isDesktop ?
-                <Grid container spacing={2}>
-                    <Grid xs={1}></Grid>
-                    <Grid xs={10}>
-                        {isVice ? <Admission/> : <div/>}
-                    </Grid>
-                    <Grid xs={1}></Grid>
-                    <Grid xs={1}></Grid>
-                    <Grid xs={10}>
-                        <Article/>
-                    </Grid>
-                    <Grid xs={1}></Grid>
-                    <Grid xs={3}></Grid>
-                    <Grid xs={6}>
-                        <Invite></Invite>
-                    </Grid>
-                    <Grid xs={3}></Grid>
-                    <Grid xs={3}></Grid>
-                    <Grid xs={6}>
-                        <Poi/>
-                    </Grid>
-                    <Grid xs={3}></Grid>
-                </Grid>
-                :
-                <Stack>
-                    <Divider/>
-                    {isVice ? <Admission/> : <div/>}
-                    <Divider/>
-                    <Article/>
-                    <Divider/>
-                    <Invite/>
-                    <Divider/>
-                    <Poi/>
-                    <Divider/>
-                </Stack>
-            }
+            <Tabs
+                value={value}
+                onChange={handleChange}
+                aria-label="disabled tabs example"
+                variant="scrollable"
+                scrollButtons="auto"
+                sx={{
+                    flexGrow: 1,
+                    top: 80,
+                    width: "100%",
+                    position: "sticky",
+                    backgroundColor: "#FFF",
+                    zIndex: 10,
+                }}
+            >
+                <Tab label="管理公告栏" />
+                {isVice ? <Tab label="管理经费审批"/> : <div/>}
+                <Tab label="新队员邀请码" />
+                <Tab label="下载数据" />
+            </Tabs>
+            <Divider/>
+            {value === 0 ? <Article/>: <div/>}
+            {value === 1 ? <Admission/>: <div/>}
+            {value === 2 ? <Invite/>: <div/>}
+            {value === 3 ? <Poi/>: <div/>}
         </Box>
     );
 };
