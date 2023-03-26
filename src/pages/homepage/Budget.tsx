@@ -160,10 +160,9 @@ const Budget = () => {
         }
         post('/transaction/apply', data).then((res:any) => {
             if (res.status === 200 && res.data.msg === "success") {
-                alert("申请成功");
                 setOpen(false);
                 handleCloseBackdrop();
-                navigate(0);
+                init();
             }
         })
     };
@@ -368,7 +367,7 @@ const Budget = () => {
                     </TableHead>
                     <TableBody>
                         {renderRows.map((row:any) => (
-                            <BudgetRow key={row.name} row={row}/>
+                            <BudgetRow key={row.name} row={row} init={init}/>
                         ))}
                     </TableBody>
                 </Table>

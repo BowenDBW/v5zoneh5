@@ -27,17 +27,26 @@ import MyStepper from "./MyStepper";
 import {IsDesktop} from "./utils/IsDesktop";
 import GlobalParams from "../GlobalParams";
 import {post} from "./utils/Request";
+import CircularProgress from "@mui/material/CircularProgress";
+import Backdrop from "@mui/material/Backdrop";
 
 export function BudgetRow(props:any) {
     const navigate = useNavigate()
-    const {row} = props;
+    const {row, init} = props;
     const id = row.id;
     const history = row.history;
     const [fileName, setFileName] = React.useState("");
     const [open, setOpen] = React.useState(false);
     const [open2, setOpen2] = React.useState(false);
     const [file, setFile] = useState("null");
+    const [openBackDrop, setOpenBackDrop] = React.useState(false);
 
+    const handleCloseBackdrop = () => {
+        setOpenBackDrop(false);
+    };
+    const handleToggleBackdrop = () => {
+        setOpenBackDrop(true);
+    };
     function clickUpload() {
         setOpen2(true);
     }
@@ -51,25 +60,28 @@ export function BudgetRow(props:any) {
     };
 
     const clickStop = (event:any) => {
+        handleToggleBackdrop();
         post("/transaction/admin", {
             "token": id,
             "message": "canceled",
         }).then((res:any) => {
             if (res.status === 200) {
-                alert("操作成功");
-                navigate(0);
+                init();
+                handleCloseBackdrop();
             }
         });
     }
 
     function upload(formData:FormData) {
+        handleToggleBackdrop();
         fetch(GlobalParams.baseUrl + '/transaction/upload', {
             method: 'post',
             body: formData,
         }).then(response => response.json())
             .then(data => {
                 console.log(data);
-                navigate(0);
+                init();
+                handleCloseBackdrop();
             });
     }
 
@@ -117,6 +129,12 @@ export function BudgetRow(props:any) {
                 open={open2}
                 onClose={handleClose2}
             >
+                <Backdrop
+                    sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                    open={openBackDrop}
+                >
+                    <CircularProgress color="inherit" />
+                </Backdrop>
                 <DialogTitle>新建上传</DialogTitle>
                 <DialogContent>
                     <DialogContentText>
