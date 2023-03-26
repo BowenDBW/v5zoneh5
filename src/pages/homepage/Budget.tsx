@@ -356,8 +356,10 @@ const Budget = () => {
                                 <div/>
                             }
                             <TableCell align="center">申请项</TableCell>
+                            <TableCell align="center">当前阶段</TableCell>
                             <TableCell align="center">类型</TableCell>
                             <TableCell align="center">金额</TableCell>
+                            <TableCell align="center">发票豁免</TableCell>
                             {isDesktop ?
                                 <TableCell align="center">支付宝手机号</TableCell>
                                 :

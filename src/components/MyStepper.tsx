@@ -8,7 +8,7 @@ import {
 import React from "react";
 
 export default function MyStepper(props : any) {
-    const {type, cost, stage} = props;
+    const {type, cost, stage, isInvoiceRequired} = props;
 
     const aboveHundredSteps = [
         '发起预算申请',
@@ -28,7 +28,6 @@ export default function MyStepper(props : any) {
     ];
 
     const isDenied = (stage === 0);
-    const isAboveHundred = (type === "支出" && cost >= 100);
 
     const isStepFailed = (step : number) => {
         return step === 1;
@@ -63,7 +62,7 @@ export default function MyStepper(props : any) {
                 </Stepper>
                 :
                 <Box>
-                    {isAboveHundred ?
+                    {!isInvoiceRequired ?
                         <Stepper activeStep={stage} alternativeLabel>
                             {aboveHundredSteps.map((label) => (
                                 <Step key={label}>

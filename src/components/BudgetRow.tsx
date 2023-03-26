@@ -97,7 +97,7 @@ export function BudgetRow(props:any) {
 
         upload(formData);
 
-        handleClose();
+        handleClose2();
     }
 
     const openInNewTab = (url:any) => {
@@ -123,6 +123,46 @@ export function BudgetRow(props:any) {
     }
 
     const isDesktop = IsDesktop();
+
+    function clickExemption() {
+        handleToggleBackdrop();
+        post("/transaction/exemption", {
+            "token": id,
+        }).then((res:any) => {
+            if (res.status === 200) {
+                init();
+                handleCloseBackdrop();
+            }
+        });
+    }
+
+    function genIsApplied(row:any){
+        if(row.type === "收入"){
+            return "";
+        }else {
+            if(row.isInvoiceRequired){
+                return "已申请";
+            }else {
+                return "未申请";
+            }
+        }
+    }
+
+    function genStage(row:any){
+        const stage:number = row.stage;
+        if(stage === 0){
+            return "交易取消或被拒绝";
+        }else if(stage === 1){
+            return "已发起申请";
+        }else if(stage === 2){
+            return "未上传发票";
+        }else if(stage === 3){
+            return "已上传发票，等待确认";
+        }else if(stage === 4){
+            return "交易完成";
+        }
+    }
+
     return (
         <React.Fragment>
             <Dialog
@@ -192,8 +232,14 @@ export function BudgetRow(props:any) {
                 <TableCell component="th" scope="row" align="center">
                     {row.intention}
                 </TableCell>
+                <TableCell align="center">
+                    {genStage(row)}
+                </TableCell>
                 <TableCell align="center">{row.type}</TableCell>
                 <TableCell align="center">{row.cost}</TableCell>
+                <TableCell align="center">
+                    {genIsApplied(row)}
+                </TableCell>
                 {isDesktop ?
                     <TableCell align="center">{row.alipayTele}</TableCell>
                     :
@@ -201,45 +247,59 @@ export function BudgetRow(props:any) {
                 }
             </TableRow>
             <TableRow>
-                <TableCell style={{paddingBottom: 0, paddingTop: 0}} colSpan={6}>
+                <TableCell style={{paddingBottom: 0, paddingTop: 0}} colSpan={8}>
                     <Collapse in={open} timeout="auto" unmountOnExit>
                         <Box sx={{margin: 1}}>
                             <Typography variant="h6" gutterBottom component="div">
                                 申请项细节
                             </Typography>
                             <Grid container spacing={1} sx={{margin: 1, textAlign: "center"}}>
-                                <Grid xs={4}>
+                                <Grid xs={3}>
                                     <Button
                                         disabled={row.stage !== 1}
-                                        variant="outlined"
+                                        variant="contained"
                                         value={row.id}
                                         onClick={clickStop}
+                                        color={"warning"}
                                         sx={{
-                                            backgroundColor: "#f6d3d3",
                                             marginX: 1,
                                             fontWeight: "bold",
                                         }}
                                     >撤销</Button>
                                 </Grid>
 
-                                <Grid xs={4}>
+                                <Grid xs={3}>
                                     <Button
-                                        disabled={row.stage !== 2 && row.stage !== 3}
-                                        variant="outlined"
-                                        onClick={clickUpload}
+                                        disabled={row.stage === 0 || row.stage === 3 ||
+                                            row.stage === 4 || row.isInvoiceRequired}
+                                        variant="contained"
+                                        onClick={clickExemption}
+                                        color={"secondary"}
                                         sx={{
-                                            backgroundColor: "#d0eac5",
+                                            marginX: 1,
+                                            fontWeight: "bold",
+                                        }}
+                                    >申请发票豁免</Button>
+                                </Grid>
+
+                                <Grid xs={3}>
+                                    <Button
+                                        disabled={(row.stage !== 2 && row.stage !== 3) || row.isInvoiceRequired}
+                                        variant="contained"
+                                        onClick={clickUpload}
+                                        color={"success"}
+                                        sx={{
                                             marginX: 1,
                                             fontWeight: "bold",
                                         }}
                                     >上传发票</Button>
                                 </Grid>
 
-                                <Grid xs={4}>
+                                <Grid xs={3}>
                                     <Button
                                         disabled={!(row.stage > 2
                                             && row.type === "支出" && row.cost >= 100)}
-                                        variant="outlined"
+                                        variant="contained"
                                         value={row.fileName}
                                         onClick={clickDownload}
                                     >
@@ -250,7 +310,8 @@ export function BudgetRow(props:any) {
                             </Grid>
                             <MyStepper cost={row.cost}
                                        type={row.type}
-                                       stage={row.stage}/>
+                                       stage={row.stage}
+                                       isInvoiceRequired={row.isInvoiceRequired}/>
 
                             <Divider/>
                             <Table size="small" aria-label="purchases">

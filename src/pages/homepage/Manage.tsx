@@ -11,6 +11,7 @@ import PublicArticle from "../../components/PublicArticle";
 import MessageManage from "../../components/MessageManage";
 import ImageManage from "../../components/ImageManage";
 import LifeCycle from "../../components/LifeCycle";
+import PrizeManage from "../../components/PrizeManage";
 
 const Manage = () => {
     const navigate = useNavigate();
@@ -68,6 +69,7 @@ const Manage = () => {
                 <Tab label="管理公告栏" />
                 <Tab label="管理公共页面文章" />
                 {isVice ? <Tab label="管理经费审批"/> : <div/>}
+                <Tab label="管理奖状" />
                 <Tab label="管理照片墙" />
                 <Tab label="管理留言板" />
                 <Tab label="新队员邀请码" />
@@ -78,11 +80,12 @@ const Manage = () => {
             {value === 0 ? <Article/>: <div/>}
             {value === 1 ? <PublicArticle/>: <div/>}
             {value === 2 ? <Admission/>: <div/>}
-            {value === 3 ? <ImageManage/>: <div/>}
-            {value === 4 ? <MessageManage/>: <div/>}
-            {value === 5 ? <Invite/>: <div/>}
-            {value === 6 ? <Poi/>: <div/>}
-            {value === 7 ? <LifeCycle/>: <div/>}
+            {value === 3 ? <PrizeManage/>: <div/>}
+            {value === 4 ? <ImageManage/>: <div/>}
+            {value === 5 ? <MessageManage/>: <div/>}
+            {value === 6 ? <Invite/>: <div/>}
+            {value === 7 ? <Poi/>: <div/>}
+            {value === 8 ? <LifeCycle/>: <div/>}
         </Box>
     );
 };

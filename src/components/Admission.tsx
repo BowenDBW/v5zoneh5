@@ -4,16 +4,24 @@ import Paper from "@mui/material/Paper";
 import {useNavigate} from "react-router-dom";
 import {post} from "./utils/Request";
 import GlobalParams from "../GlobalParams";
+import CircularProgress from "@mui/material/CircularProgress";
+import Backdrop from "@mui/material/Backdrop";
 
 export default function Admission() {
 
-    const navigate = useNavigate();
-
     const [renderRows, setRenderRows] = useState([]);
-
     const [isVice, setVice] = useState(false);
+    const [openBackDrop, setOpenBackDrop] = React.useState(false);
+
+    const handleCloseBackdrop = () => {
+        setOpenBackDrop(false);
+    };
+    const handleToggleBackdrop = () => {
+        setOpenBackDrop(true);
+    };
 
     function init() {
+        handleToggleBackdrop();
         post("/auth/is-monitor", localStorage.getItem("v5_token"))
             .then((res: any) => {
                 setVice(res.data === "VICE_CAPTAIN");
@@ -23,6 +31,7 @@ export default function Admission() {
             if (res.status === 200) {
                 if (res.data.records !== "") {
                     setRenderRows(res.data.records);
+                    handleCloseBackdrop();
                 }
             }
         })
@@ -33,28 +42,27 @@ export default function Admission() {
     }, [])
 
     const clickDeny = (event: any) => {
+        handleToggleBackdrop();
         post("/transaction/admin", {
-            "id": event.target.value,
+            "token": event.target.value,
             "message": "interrupted",
         }).then((res: any) => {
             if (res.status === 200) {
-                alert("操作成功");
-                navigate(0);
+                init();
+                handleCloseBackdrop();
             }
         });
 
     }
 
     const clickPass = (event: any) => {
+        handleToggleBackdrop();
         post("/transaction/admin", {
-            "id": event.target.value,
+            "token": event.target.value,
             "message": "forward",
         }).then((res: any) => {
-            if (res.status === 200) {
-                alert("操作成功")
-            }
-            ;
-            navigate(0);
+            init();
+            handleCloseBackdrop();
         });
     }
 
@@ -68,10 +76,31 @@ export default function Admission() {
             + "/transaction/download/"
             + event.target.value;
         openInNewTab(url);
+    };
+
+    const genDescription = (row:any) => {
+        if(row.type === "收入"){
+            return "发起入账申请，等待通过";
+        }else if(row.stage === 1 && row.isInvoiceRequired) {
+            return "发起支出申请和发票豁免，等待通过";
+        }else if(row.isInvoiceRequired){
+            return "发起发票豁免，等待通过";
+        }else if(row.stage === 1){
+            return "发起支出申请，等待通过";
+        }else if(row.stage === 3){
+            return "发票上传，等待确认";
+        }
+        return "";
     }
 
     return (
         <Box>
+            <Backdrop
+                sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                open={openBackDrop}
+            >
+                <CircularProgress color="inherit" />
+            </Backdrop>
             <Box>
                 <Typography
                     sx={{
@@ -93,6 +122,7 @@ export default function Admission() {
                                 <TableCell align="center">申请金额</TableCell>
                                 <TableCell align="center">支付宝手机号</TableCell>
                                 <TableCell align="center">下载发票</TableCell>
+                                <TableCell align="center">当前目的</TableCell>
                                 <TableCell align="center">操作</TableCell>
                             </TableRow>
                         </TableHead>
@@ -122,14 +152,14 @@ export default function Admission() {
                                                 下载发票
                                             </Button>
                                         </TableCell>
+                                        <TableCell sx={{textAlign:"center"}}>
+                                            {genDescription(row)}
+                                        </TableCell>
                                         <TableCell align="center">
                                             <Button
                                                 disabled={!isVice}
                                                 variant="contained"
-                                                sx={{
-                                                    color: "#272727",
-                                                    backgroundColor: "#7bce5a",
-                                                }}
+                                                color={"success"}
                                                 value={row.id}
                                                 onClick={clickPass}
                                             >
@@ -137,11 +167,8 @@ export default function Admission() {
                                             </Button>
                                             <Button
                                                 disabled={!isVice}
-                                                variant="outlined"
-                                                sx={{
-                                                    color: "#ce5a5a",
-                                                    fontWeight: "bold"
-                                                }}
+                                                variant="contained"
+                                                color={"error"}
                                                 value={row.id}
                                                 onClick={clickDeny}
                                             >

@@ -23,11 +23,21 @@ import axios from "axios";
 import DriveFolderUploadIcon from "@mui/icons-material/DriveFolderUpload";
 import {post} from "./utils/Request";
 import {useNavigate} from "react-router-dom";
+import Backdrop from "@mui/material/Backdrop";
+import CircularProgress from "@mui/material/CircularProgress";
 
 function MarkdownTable() {
 
     const navigate = useNavigate()
     const [renderRows, setRenderRows] = useState([]);
+    const [openBackDrop, setOpenBackDrop] = React.useState(false);
+
+    const handleCloseBackdrop = () => {
+        setOpenBackDrop(false);
+    };
+    const handleToggleBackdrop = () => {
+        setOpenBackDrop(true);
+    };
 
     const method = [
         {
@@ -41,34 +51,38 @@ function MarkdownTable() {
     ];
 
     const clickDelete = (event: any) => {
+        handleToggleBackdrop();
         post("/markdown/delete", {
             fileLink: event.target.value,
         }).then((res: any) => {
             console.log(res);
             if (res.status === 200) {
-                alert("操作成功");
-                navigate(0);
+                init();
+                handleCloseBackdrop();
             }
         })
     }
 
     function onMethodChanged(fileLink: string, isPublished: boolean) {
+        handleToggleBackdrop();
         post("/markdown/update", {
             fileLink: fileLink,
             isPublished: !isPublished,
         }).then((res: any) => {
             if (res.status === 200) {
-                alert("操作成功");
-                navigate(0);
+                init();
+                handleCloseBackdrop();
             }
         })
     }
 
     function init() {
+        handleToggleBackdrop();
         post("/markdown/all",
             localStorage.getItem("v5_token")).then((res: any) => {
             if (res.status === 200) {
                 setRenderRows(res.data.reverse());
+                handleCloseBackdrop();
             }
         })
     }
@@ -92,6 +106,12 @@ function MarkdownTable() {
     return (
         <TableContainer component={Paper}>
             <Table aria-label="simple table">
+                <Backdrop
+                    sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                    open={openBackDrop}
+                >
+                    <CircularProgress color="inherit" />
+                </Backdrop>
                 <TableHead>
                     <TableRow>
                         <TableCell align="center">上传时间</TableCell>
@@ -148,10 +168,7 @@ function MarkdownTable() {
                                     </Button>
                                     <Button
                                         variant="outlined"
-                                        sx={{
-                                            color: "#ce5a5a",
-                                            fontWeight: "bold"
-                                        }}
+                                        color={"error"}
                                         value={row.fileLink}
                                         onClick={clickDelete}
                                     >
