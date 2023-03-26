@@ -8,10 +8,11 @@ import React, {useEffect, useState} from 'react';
 import {IsDesktop} from "../../components/utils/IsDesktop";
 import {post} from "../../components/utils/Request";
 import GlobalParams from "../../GlobalParams";
+import {useNavigate} from "react-router-dom/";
 
 const ImageBoard = () => {
     const isDesktop = IsDesktop();
-
+    const navigate = useNavigate();
     const [imageList, setImageList] = useState([]);
 
     function init() {
@@ -28,7 +29,10 @@ const ImageBoard = () => {
                     });
                     setImageList(list);
                 }
-            })
+            }).catch(() => {
+            alert("登录信息过期，请重新登录");
+            navigate("/auth/login");
+        });
     }
 
     useEffect(() => {

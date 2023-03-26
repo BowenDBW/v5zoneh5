@@ -6,9 +6,15 @@ import Admission from "../../components/Admission";
 import Article from "../../components/Article";
 import Invite from "../../components/Invite";
 import Poi from "../../components/Poi";
+import {useNavigate} from "react-router-dom/";
+import PublicArticle from "../../components/PublicArticle";
+import MessageManage from "../../components/MessageManage";
+import ImageManage from "../../components/ImageManage";
+import LifeCycle from "../../components/LifeCycle";
 
 const Manage = () => {
-    const isDesktop = IsDesktop()
+    const navigate = useNavigate();
+    const isDesktop = IsDesktop();
     const [isVice, setVice] = React.useState(false);
     const [value, setValue] = React.useState(0);
 
@@ -19,6 +25,9 @@ const Manage = () => {
     function init() {
         post("/auth/is-monitor", localStorage.getItem("v5_token"))
             .then((res: any) => {
+                if(res.data === "COMMON"){
+                    navigate("/homepage/check-board");
+                }
                 setVice(res.data === "VICE_CAPTAIN");
             })
     }
@@ -57,15 +66,23 @@ const Manage = () => {
                 }}
             >
                 <Tab label="管理公告栏" />
+                <Tab label="管理公共页面文章" />
                 {isVice ? <Tab label="管理经费审批"/> : <div/>}
+                <Tab label="管理照片墙" />
+                <Tab label="管理留言板" />
                 <Tab label="新队员邀请码" />
                 <Tab label="下载数据" />
+                <Tab label="组员生命周期" />
             </Tabs>
             <Divider/>
             {value === 0 ? <Article/>: <div/>}
-            {value === 1 ? <Admission/>: <div/>}
-            {value === 2 ? <Invite/>: <div/>}
-            {value === 3 ? <Poi/>: <div/>}
+            {value === 1 ? <PublicArticle/>: <div/>}
+            {value === 2 ? <Admission/>: <div/>}
+            {value === 3 ? <ImageManage/>: <div/>}
+            {value === 4 ? <MessageManage/>: <div/>}
+            {value === 5 ? <Invite/>: <div/>}
+            {value === 6 ? <Poi/>: <div/>}
+            {value === 7 ? <LifeCycle/>: <div/>}
         </Box>
     );
 };

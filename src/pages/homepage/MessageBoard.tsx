@@ -62,7 +62,10 @@ const MessageBoard = () => {
                     console.log(option.uploader)
                 });
             }
-        });
+        }).catch(() => {
+            alert("登录信息过期，请重新登录");
+            navigate("/auth/login");
+        })
         post("/member/name",
             localStorage.getItem("v5_token")).then((res: any) => {
             console.log(res);
@@ -70,6 +73,9 @@ const MessageBoard = () => {
                 setNameFromId(res.data.msg);
                 console.log(nameFromId);
             }
+        }).catch(() => {
+            alert("登录信息过期，请重新登录");
+            navigate("/auth/login");
         })
         handleCloseBackdrop();
     }

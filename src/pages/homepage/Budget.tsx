@@ -117,6 +117,9 @@ const Budget = () => {
             if (res.status === 200) {
                 setRenderRows(res.data.records.reverse());
             }
+        }).catch(() => {
+            alert("登录信息过期，请重新登录");
+            navigate("/auth/login");
         })
     }
 
@@ -172,8 +175,8 @@ const Budget = () => {
                 setApplyTele(res.data.msg);
             }
         }).catch(() => {
-            alert("登录信息过期，请重新登录")
-            navigate("/login/auth")
+            alert("登录信息过期，请重新登录");
+            navigate("/auth/login");
         })
     }
 

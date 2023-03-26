@@ -79,6 +79,9 @@ function CheckBoard() {
                 })
                 setRenderRows(temp);
             }
+        }).catch(() => {
+            alert("登录信息过期，请重新登录");
+            navigate("/auth/login");
         })
     }
 

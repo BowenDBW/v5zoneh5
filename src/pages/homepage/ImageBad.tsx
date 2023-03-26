@@ -13,7 +13,6 @@ import {
     Typography
 } from '@mui/material';
 import React, {useEffect, useState} from 'react';
-import {useNavigate} from "react-router-dom";
 import {post} from "../../components/utils/Request"
 import GlobalParams from "../../GlobalParams";
 import {IsDesktop} from "../../components/utils/IsDesktop";
@@ -21,11 +20,13 @@ import DriveFolderUploadIcon from '@mui/icons-material/DriveFolderUpload';
 import ImageCard from "../../components/ImageCard";
 import CircularProgress from "@mui/material/CircularProgress";
 import Backdrop from "@mui/material/Backdrop";
+import {useNavigate} from "react-router-dom/";
 
 
 const ImageBad = () => {
-    const [methodState, setMethodState] = useState("公开上墙");
     const isDesktop = IsDesktop();
+    const navigate = useNavigate();
+    const [methodState, setMethodState] = useState("公开上墙");
     const [imageList, setImageList] = useState([]);
     const [open, setOpen] = React.useState(false);
     const [file, setFile] = React.useState(null);
@@ -58,7 +59,10 @@ const ImageBad = () => {
             .then(data => {
                 console.log(data);
                 return true;
-            });
+            }).catch(() => {
+            alert("登录信息过期，请重新登录");
+            navigate("/auth/login");
+        })
 
         return false;
     }
@@ -94,6 +98,9 @@ const ImageBad = () => {
                 setImageList(list);
                 handleCloseBackdrop();
             }
+        }).catch(() => {
+            alert("登录信息过期，请重新登录");
+            navigate("/auth/login");
         })
     }
 
