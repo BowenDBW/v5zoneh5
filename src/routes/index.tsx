@@ -13,9 +13,8 @@ import Contact from "../pages/homepage/Contact";
 import ImageBoard from "../pages/homepage/ImageBoard";
 import ImageBad from "../pages/homepage/ImageBad";
 import ProfileMobile from "../components/mobile/ProfileMobile";
-import Admission from "../components/Admission";
-import MdReader from "../components/MdReader";
-import PublicMdReader from "../components/PublicMdReader";
+import MdReader from "../pages/homepage/MdReader";
+import PublicMdReader from "../pages/auth/PublicMdReader";
 
 export default [
     {

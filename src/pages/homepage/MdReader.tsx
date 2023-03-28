@@ -1,15 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import ReactMarkdown from "react-markdown";
-import gfm from 'remark-gfm'
 import {darcula, vscDarkPlus} from 'react-syntax-highlighter/dist/esm/styles/prism';
-import {
-    Box,
-    Button,
-    Grid
-} from "@mui/material";
+import {Box, Button, Grid, Stack} from "@mui/material";
 import {useNavigate, useSearchParams} from "react-router-dom";
 import axios from "axios";
-import {IsDesktop} from "./utils/IsDesktop";
+import gfm from "remark-gfm";
+import {IsDesktop} from "../../components/utils/IsDesktop";
 
 
 const them = {
@@ -17,11 +13,11 @@ const them = {
     light: darcula
 }
 
-function PublicMdReader() {
+function MdReader() {
 
     const isDesktop = IsDesktop();
 
-    const [search, setSearch] = useSearchParams();
+    const [search, setSearch] = useSearchParams()
 
     const [textContent, setContent] = useState("")
 
@@ -47,15 +43,7 @@ function PublicMdReader() {
     const navigate = useNavigate();
 
     return (
-        <Box
-            sx={{
-                width: 1160,
-                height: window.innerHeight,
-                backgroundColor: '#b7bcc3',
-                opacity: 0.9,
-                borderRadius: 5,
-            }}
-        >
+        <Stack sx={{margin: 2}}>
             <Box>
                 <Button
                     variant={"outlined"}
@@ -89,8 +77,10 @@ function PublicMdReader() {
                     {textContent}
                 </ReactMarkdown>
             }
-        </Box>
+
+        </Stack>
+
     );
 }
 
-export default PublicMdReader;
+export default MdReader;
