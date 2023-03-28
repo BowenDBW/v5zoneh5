@@ -69,12 +69,12 @@ const Manage = () => {
                 <Tab label="管理公告栏" />
                 <Tab label="管理公共页面文章" />
                 {isVice ? <Tab label="管理经费审批"/> : <div/>}
-                <Tab label="管理奖状" />
-                <Tab label="管理照片墙" />
-                <Tab label="管理留言板" />
-                <Tab label="新队员邀请码" />
-                <Tab label="下载数据" />
-                <Tab label="组员生命周期" />
+                <Tab label="管理奖状"/>
+                <Tab label="管理照片墙"/>
+                <Tab label="管理留言板"/>
+                <Tab label="新队员邀请码"/>
+                <Tab label="下载数据"/>
+                <Tab label="组员生命周期"/>
             </Tabs>
             <Divider/>
             {value === 0 ? <Article/>: <div/>}
