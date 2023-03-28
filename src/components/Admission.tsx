@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {Box, Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography} from "@mui/material";
 import Paper from "@mui/material/Paper";
-import {useNavigate} from "react-router-dom";
 import {post} from "./utils/Request";
 import GlobalParams from "../GlobalParams";
 import CircularProgress from "@mui/material/CircularProgress";
