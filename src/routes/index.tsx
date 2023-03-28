@@ -14,12 +14,18 @@ import ImageBoard from "../pages/homepage/ImageBoard";
 import ImageBad from "../pages/homepage/ImageBad";
 import ProfileMobile from "../components/mobile/ProfileMobile";
 import Admission from "../components/Admission";
+import MdReader from "../components/MdReader";
+import PublicMdReader from "../components/PublicMdReader";
 
 export default [
     {
         path: '/auth',
         element: <Auth/>,
         children: [
+            {
+                path: 'md',
+                element:<PublicMdReader/>
+            },
             {
                 path: 'login',
                 element: <Login/>
@@ -38,6 +44,10 @@ export default [
         path: "/homepage",
         element: <Homepage/>,
         children: [
+            {
+                path: 'md',
+                element:<MdReader/>
+            },
             {
                 path: 'manage',
                 element: <Manage/>

@@ -8,7 +8,6 @@ import Backdrop from "@mui/material/Backdrop";
 export default function MessageCard(props: any) {
 
     const {name, message, date, isMine, init} = props;
-    const navigate = useNavigate();
 
     const [openBackDrop, setOpenBackDrop] = React.useState(false);
 

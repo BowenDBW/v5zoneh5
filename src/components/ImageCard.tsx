@@ -49,6 +49,7 @@ export default function ImageCard(props: any) {
             console.log(res);
             if (res.status === 200) {
                 console.log(res.data);
+                init();
                 handleCloseBackdrop();
             }
         })
