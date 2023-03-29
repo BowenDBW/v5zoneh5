@@ -15,10 +15,12 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Backdrop from "@mui/material/Backdrop";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import {useNavigate} from "react-router-dom/";
 import {IsDesktop} from "../../components/utils/IsDesktop";
 import React from "react";
 import {post} from "../../components/utils/Request"
+import AccountBoxIcon from "@mui/icons-material/AccountBox";
 
 
 function Login() {
@@ -83,29 +85,48 @@ function Login() {
             }}
         >
             <Stack>
-                <Box sx={{
-                    marginRight: 2
-                }}>
-                    <Typography
-                        sx={{
-                            margin: 3,
-                            textAlign: "center",
-                            fontFamily: "黑体",
-                            fontWeight: "bold",
-                            fontSize: 24,
-                        }}
-                    >
-                        <img src={require("../../assets/imgs/v5logo.png")}
-                             style={{
-                                 width: 70,
-                                 height: 30,
-                                 marginRight: 10,
-                             }}
-                             alt={'v5logo'}>
-                        </img>
-                        V5 Zone 登录
-                    </Typography>
-                </Box>
+                <Grid
+                    sx={{
+                        marginRight: 2,
+                    }}
+                    container
+                >
+                    <Grid xs={2.8}>
+                        <Button
+                            sx={{
+                                margin: 2,
+                                textAlign: "left",
+                                fontFamily: "font5",
+                                fontSize: 18,
+                            }}
+                            startIcon={<ArrowBackIosIcon/>}
+                            onClick={()=>{navigate("/welcome")}}
+                        >
+                            返回
+                        </Button>
+                    </Grid>
+                    <Grid xs={6.4}>
+                        <Typography
+                            sx={{
+                                margin: 3,
+                                textAlign: "center",
+                                fontFamily: "font5",
+                                fontSize: 26,
+                            }}
+                        >
+                            <img src={require("../../assets/imgs/v5logo-short.png")}
+                                 style={{
+                                     width: 30,
+                                     height: 30,
+                                     marginRight: 10,
+                                 }}
+                                 alt={'v5logo'}>
+                            </img>
+                            V5 Zone 登录
+                        </Typography>
+                    </Grid>
+                    <Grid xs={2.8}/>
+                </Grid>
                 <TextField
                     required
                     id="outlined-required"
@@ -149,28 +170,14 @@ function Login() {
                 </FormControl>
                 <Grid
                     container spacing={2}
-                    sx={{
-                        marginLeft: 4,
-                        justifyContent: "left",
-                    }}
+                    sx={{justifyContent: "center"}}
                 >
-                    <Grid>
-                        <FormControlLabel
-                            control={<Checkbox defaultChecked/>}
-                            label="记住我"
-                            sx={{
-                                marginX: 1,
-                                marginTop: 1,
-                                height: 18,
-                            }}
-                        />
-                    </Grid>
                     {isDesktop ?
                         <Grid>
                             <Button
                                 sx={{
-                                    fontWeight: "bold",
-                                    font: 18,
+                                    fontFamily: "font5",
+                                    fontSize: 16,
                                 }}
                                 variant="text"
                                 onClick={() => {
@@ -183,13 +190,14 @@ function Login() {
                             >是新队员？</Button>
                         </Grid>
                         :
-                        <Grid xs={2}/>
+                        <div/>
                     }
                     <Grid>
                         <Button
                             sx={{
-                                fontWeight: "bold",
-                                font: 18,
+                                fontFamily: "font5",
+                                fontSize: 16,
+                                marginLeft: 6,
                             }}
                             variant="text"
                             onClick={() => {

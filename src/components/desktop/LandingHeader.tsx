@@ -16,18 +16,17 @@ const LandingHeader = () => {
                             margin: 2,
                             marginLeft: 6,
                             textAlign: "left",
-                            fontFamily: "华文行楷",
-                            fontWeight: "bold",
-                            fontSize: 28,
+                            fontFamily: "font5",
+                            fontSize: 32,
                         }}
                     >
                         足球机器人基地 V5++组
                     </Typography>
                 </Grid>
                 <Grid xs={4}/>
-                <Grid xs={3.5} sx={{textAlign:"right",marginY:2, fontSize: 28}}>
+                <Grid xs={3.5} sx={{textAlign:"right",marginY:2}}>
                     <Button
-                        sx={{color:"#000",fontWeight: "bold"}}
+                        sx={{color:"#000",fontFamily: "font5", fontSize: 20}}
                         variant="text"
                         endIcon={<AccountBoxIcon/>}
                         onClick={()=>{navigate("/auth/login")}}

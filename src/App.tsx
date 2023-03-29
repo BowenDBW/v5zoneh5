@@ -1,9 +1,9 @@
 import React from 'react';
 import './App.css';
+import './fonts.css';
 import {useRoutes} from "react-router-dom";
 import routes from "./routes";
 import {Box} from "@mui/material";
-
 
 function App() {
 

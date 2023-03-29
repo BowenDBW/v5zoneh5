@@ -258,9 +258,8 @@ export default function Registry(){
                     sx={{
                         margin: 3,
                         textAlign: "center",
-                        fontFamily: "黑体",
-                        fontWeight: "bold",
-                        fontSize: 24,
+                        fontFamily: "font5",
+                        fontSize: 28,
                     }}
                 >
                     <img src={require("../../assets/imgs/v5logo.png")}

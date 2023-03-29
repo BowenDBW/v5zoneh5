@@ -46,10 +46,11 @@ const HeaderDesktop = () => {
                     variant="h6"
                     sx={{
                         color: "#000000",
-                        fontSize: 25,
+                        fontSize: 36,
                         position: "absolute",
                         marginLeft: 5,
                         left: 20,
+                        fontFamily:"font2",
                     }}
                 >
                     V5++ 无以复加
@@ -69,8 +70,9 @@ const HeaderDesktop = () => {
                     <Typography
                         sx={{
                             marginX: 1,
-                            fontSize: 18,
+                            fontSize: 22,
                             color: "#000000",
+                            fontFamily:"font5"
                         }}
                     >
                         {getTimeState}! {name}
