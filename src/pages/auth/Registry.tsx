@@ -263,7 +263,7 @@ export default function Registry(){
                         fontSize: 24,
                     }}
                 >
-                    <img src={require("../../assets/v5logo.png")}
+                    <img src={require("../../assets/imgs/v5logo.png")}
                          style={{
                              width: 70,
                              height: 30,

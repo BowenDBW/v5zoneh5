@@ -71,7 +71,7 @@ const DrawerDesktop = (props:DrawerProps) => {
                 }}
             >
                 <img
-                    src={require('../../assets/v5logo.png')}
+                    src={require('../../assets/imgs/v5logo.png')}
                     alt={"v5_logo"}
                 />
             </Toolbar>

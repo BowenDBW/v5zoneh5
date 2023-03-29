@@ -19,7 +19,11 @@ import LandingPage from "../pages/LandingPage";
 
 export default [
     {
-        path:'/',
+        path: "/",
+        element: <Navigate to="/welcome"/>
+    },
+    {
+        path:'/welcome',
         element: <LandingPage/>
     },
     {
