@@ -10,8 +10,8 @@ const Footer = () => {
                 position: "absolute",
                 backgroundColor: "#c5c5c5",
                 opacity: 0.6,
-                width: window.innerWidth,
-                bottom: 0,
+                width: "100%",
+                bottom: -20,
                 textAlign: "center",
                 fontSize: 20,
             }}

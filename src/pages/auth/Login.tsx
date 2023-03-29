@@ -20,8 +20,6 @@ import {useNavigate} from "react-router-dom/";
 import {IsDesktop} from "../../components/utils/IsDesktop";
 import React from "react";
 import {post} from "../../components/utils/Request"
-import AccountBoxIcon from "@mui/icons-material/AccountBox";
-
 
 function Login() {
 
