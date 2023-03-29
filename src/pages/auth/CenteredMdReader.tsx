@@ -17,7 +17,7 @@ const them = {
     light: darcula
 }
 
-function PublicMdReader() {
+function CenteredMdReader() {
 
     const isDesktop = IsDesktop();
 
@@ -93,4 +93,4 @@ function PublicMdReader() {
     );
 }
 
-export default PublicMdReader;
+export default CenteredMdReader;

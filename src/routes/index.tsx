@@ -14,16 +14,19 @@ import ImageBoard from "../pages/homepage/ImageBoard";
 import ImageBad from "../pages/homepage/ImageBad";
 import ProfileMobile from "../components/mobile/ProfileMobile";
 import MdReader from "../pages/homepage/MdReader";
-import PublicMdReader from "../pages/auth/PublicMdReader";
+import CenteredMdReader from "../pages/auth/CenteredMdReader";
 
 export default [
+    {
+
+    },
     {
         path: '/auth',
         element: <Auth/>,
         children: [
             {
                 path: 'md',
-                element:<PublicMdReader/>
+                element:<CenteredMdReader/>
             },
             {
                 path: 'login',
