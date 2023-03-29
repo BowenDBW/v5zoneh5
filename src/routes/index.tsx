@@ -15,10 +15,12 @@ import ImageBad from "../pages/homepage/ImageBad";
 import ProfileMobile from "../components/mobile/ProfileMobile";
 import MdReader from "../pages/homepage/MdReader";
 import CenteredMdReader from "../pages/auth/CenteredMdReader";
+import LandingPage from "../pages/LandingPage";
 
 export default [
     {
-
+        path:'/',
+        element: <LandingPage/>
     },
     {
         path: '/auth',
@@ -88,8 +90,4 @@ export default [
             },
         ]
     },
-    {
-        path: "/",
-        element: <Navigate to="/auth/login"/>
-    }
 ]

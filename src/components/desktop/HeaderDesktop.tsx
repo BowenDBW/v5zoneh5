@@ -5,7 +5,6 @@ import {HeaderMenu} from "../HeaderMenu";
 import {GetTimeState} from "../utils/GetTimeState";
 import {post} from "../utils/Request"
 import {useNavigate} from "react-router-dom";
-import ProfileDesktop from "./ProfileDesktop";
 
 const HeaderDesktop = () => {
 
@@ -31,7 +30,6 @@ const HeaderDesktop = () => {
 
     const getTimeState = GetTimeState()
 
-    // @ts-ignore
     return (
         <Box
             sx={{

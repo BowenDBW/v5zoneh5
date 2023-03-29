@@ -2,9 +2,9 @@ import React from 'react';
 
 const LandingPage = () => {
     return (
-        <div>
+        <React.Fragment>
 
-        </div>
+        </React.Fragment>
     );
 };
 
