@@ -3,36 +3,36 @@ import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import ButtonBase from '@mui/material/ButtonBase';
 import Typography from '@mui/material/Typography';
-import {useNavigate} from "react-router-dom/";
+import GlobalParams from "../GlobalParams";
 
 const LandingContent = () => {
     const images = [
         {
-            url: '/static/images/buttons/breakfast.jpg',
-            title: 'Breakfast',
+            url: "url('" + GlobalParams.baseUrl + "/album/download/rm_debug.jpg')",
+            title: '业务合作',
             width: '33%',
             naviLink: '',
         },
         {
-            url: '/static/images/buttons/burgers.jpg',
-            title: '足基学习资料共享下载站',
+            url: "url('" + GlobalParams.baseUrl + "/album/download/back_desktop.jpg')",
+            title: '关于我们',
             width: '34%',
             naviLink: '',
         },
         {
-            url: '/static/images/buttons/camera.jpg',
-            title: 'Camera',
+            url: "url('" + GlobalParams.baseUrl + "/album/download/back_desktop.jpg')",
+            title: 'Github主页',
             width: '33%',
             naviLink: '',
         },
         {
-            url: '/static/images/buttons/breakfast.jpg',
+            url: "url('" + GlobalParams.baseUrl + "/album/download/back_desktop.jpg')",
             title: '足基学习资料共享下载站',
             width: '50%',
             naviLink: 'https://files.npu5v5.cn',
         },
         {
-            url: '/static/images/buttons/burgers.jpg',
+            url: "url('" + GlobalParams.baseUrl + "/album/download/rm_smile.jpg')",
             title: '加入我们',
             width: '50%',
             naviLink: '',
@@ -125,10 +125,11 @@ const LandingContent = () => {
                         width: image.width,
                     }}
                     onClick={()=>{
+                        alert(image.url)
                         openInNewTab(image.naviLink);
                     }}
                 >
-                    <ImageSrc style={{ backgroundImage: `url(${image.url})` }} />
+                    <ImageSrc style={{ backgroundImage: image.url }} />
                     <ImageBackdrop className="MuiImageBackdrop-root" />
                     <Image>
                         <Typography

@@ -19,7 +19,6 @@ import {
     Button,
     Switch,
     FormControlLabel,
-    FormGroup,
 } from "@mui/material";
 import {useNavigate} from "react-router-dom";
 import {post} from "../../components/utils/Request";
@@ -371,7 +370,7 @@ const Budget = () => {
                         {renderRows.map((row:any) => (
                             <BudgetRow key={row.name} row={row} init={init}/>
                         ))}
-                    </TableBody>
+                    </TableBody>2
                 </Table>
             </TableContainer>
         </Box>

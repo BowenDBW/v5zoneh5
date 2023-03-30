@@ -10,8 +10,8 @@ import { Link, Element, scroller } from 'react-scroll';
 import Box from "@mui/material/Box";
 
 const LandingPage = () => {
-    const [renderImage, setRenderImages] = React.useState("v5_all.jpg");
-    const color = "#727272";
+    const [renderImage, setRenderImages] = React.useState("v5_cake.jpg");
+    const color = "#ffffff";
     return (
         <div>
             <img src={require("../assets/imgs/" + renderImage)}
