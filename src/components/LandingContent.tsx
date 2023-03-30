@@ -125,7 +125,6 @@ const LandingContent = () => {
                         width: image.width,
                     }}
                     onClick={()=>{
-                        alert(image.url)
                         openInNewTab(image.naviLink);
                     }}
                 >
