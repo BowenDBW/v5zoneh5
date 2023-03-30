@@ -25,10 +25,11 @@ import {post} from "./utils/Request";
 import {useNavigate} from "react-router-dom";
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
+import GlobalParams from "../GlobalParams";
 
 function MarkdownTable() {
 
-    const navigate = useNavigate()
+    const navigate = useNavigate();
     const [renderRows, setRenderRows] = useState([]);
     const [openBackDrop, setOpenBackDrop] = React.useState(false);
 
@@ -107,10 +108,10 @@ function MarkdownTable() {
         <TableContainer component={Paper}>
             <Table aria-label="simple table">
                 <Backdrop
-                    sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                    sx={{color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1}}
                     open={openBackDrop}
                 >
-                    <CircularProgress color="inherit" />
+                    <CircularProgress color="inherit"/>
                 </Backdrop>
                 <TableHead>
                     <TableRow>
@@ -186,12 +187,12 @@ function MarkdownTable() {
 function Article() {
 
     const navigate = useNavigate();
-    const [file, setFile] = useState("null")
-    const [title, setTitle] = useState("")
-    const [imageLink, setImageLink] = useState("")
+    const [file, setFile] = useState("null");
+    const [title, setTitle] = useState("");
+    const [imageLink, setImageLink] = useState("");
     const [applyType, setApplyType] = useState("暂不发布");
     const [open, setOpen] = React.useState(false);
-    let fileName: string = "";
+    const [fileName, setFileName] = React.useState("");
 
     const type = [
         {
@@ -224,7 +225,7 @@ function Article() {
     };
 
     function upload(formData: FormData) {
-        fetch(axios.defaults.baseURL + '/markdown/upload', {
+        fetch(GlobalParams.baseUrl + '/markdown/upload', {
             method: 'post',
             body: formData,
         }).then(response => response.json())
@@ -264,110 +265,111 @@ function Article() {
         }
 
         setFile(event.target.files[0]);
-        fileName = newFile.name;
+        setFileName(newFile.name);
     }
 
     return (
         <Stack>
-            <Typography
-                sx={{
-                    margin: 3,
-                    fontFamily: "黑体",
-                    fontWeight: "bold",
-                    fontSize: 20,
-                }}
-            >
-                管理公告栏
-            </Typography>
-            <Grid container spacing={1}>
-                <Grid xs={4}></Grid>
-                <Grid xs={4}>
+            <Grid container>
+                <Grid xs={10}>
+                    <Typography
+                        sx={{
+                            margin: 3,
+                            fontFamily: "黑体",
+                            fontWeight: "bold",
+                            fontSize: 20,
+                        }}
+                    >
+                        管理公告栏
+                    </Typography>
+                </Grid>
+                <Grid xs={2}>
                     <Button
+                        sx={{marginTop:3}}
                         onClick={handleOpen}
                         variant={"contained"}
                     >上传新文档</Button>
-                    <Dialog
-                        open={open}
-                        onClose={handleClose}
-                    >
-                        <DialogTitle>新建文章</DialogTitle>
-                        <DialogContent>
-                            <DialogContentText>
-                                注意！文章必须是以 md 的形式上传，并且文件大小不得大于10Mb，
-                                单次最多上传1个文件
-                            </DialogContentText>
-                            <Stack>
-                                <TextField
-                                    id="是否发布"
-                                    select
-                                    label="是否发布"
-                                    size="small"
-                                    sx={{
-                                        margin: 2,
-                                        width: 120,
-                                    }}
-                                    value={applyType}
-                                    onChange={handleTypeChanged}
-                                >
-                                    {type.map((option) => (
-                                        <MenuItem key={option.value} value={option.value}>
-                                            {option.label}
-                                        </MenuItem>
-                                    ))}
-                                </TextField>
-                                <TextField
-                                    autoFocus
-                                    margin="dense"
-                                    label="文章标题（必填）"
-                                    fullWidth
-                                    variant="standard"
-                                    value={title}
-                                    onChange={handleTitleChanged}
-                                />
-                                <TextField
-                                    autoFocus
-                                    margin="dense"
-                                    label="封面图链接（必填）"
-                                    fullWidth
-                                    variant="standard"
-                                    value={imageLink}
-                                    onChange={handleImageLinkChanged}
-                                />
-                                <Button
-                                    variant="outlined"
-                                    component="label"
-                                    sx={{
-                                        margin: 1,
-                                        height: 160,
-                                        fontSize: 24
-                                    }}
-                                >
-                                    点击上传 <DriveFolderUploadIcon/>
-                                    <input
-                                        hidden accept="text/markdown"
-                                        multiple type="file"
-                                        onChange={fileInputChange}
-                                    />
-                                </Button>
-                                <Typography
-                                    sx={{
-                                        fontSize: 18,
-                                        fontWeight: "bold",
-                                    }}
-                                >
-                                    当前接收到的文件：{fileName}
-                                </Typography>
-                            </Stack>
-
-                        </DialogContent>
-                        <DialogActions>
-                            <Button onClick={handleClose} sx={{marginRight: 3, marginBottom: 3}}>取消</Button>
-                            <Button onClick={handleApply} sx={{marginRight: 5, marginBottom: 3}}>上传</Button>
-                        </DialogActions>
-                    </Dialog>
                 </Grid>
-                <Grid xs={4}></Grid>
             </Grid>
+            <Dialog
+                open={open}
+                onClose={handleClose}
+            >
+                <DialogTitle>新建文章</DialogTitle>
+                <DialogContent>
+                    <DialogContentText>
+                        注意！文章必须是以 md 的形式上传，并且文件大小不得大于10Mb，
+                        单次最多上传1个文件
+                    </DialogContentText>
+                    <Stack>
+                        <TextField
+                            id="是否发布"
+                            select
+                            label="是否发布"
+                            size="small"
+                            sx={{
+                                margin: 2,
+                                width: 160,
+                            }}
+                            value={applyType}
+                            onChange={handleTypeChanged}
+                        >
+                            {type.map((option) => (
+                                <MenuItem key={option.value} value={option.value}>
+                                    {option.label}
+                                </MenuItem>
+                            ))}
+                        </TextField>
+                        <TextField
+                            autoFocus
+                            margin="dense"
+                            label="文章标题（必填）"
+                            fullWidth
+                            variant="standard"
+                            value={title}
+                            onChange={handleTitleChanged}
+                        />
+                        <TextField
+                            autoFocus
+                            margin="dense"
+                            label="封面图链接（必填）"
+                            fullWidth
+                            variant="standard"
+                            value={imageLink}
+                            onChange={handleImageLinkChanged}
+                        />
+                        <Button
+                            variant="outlined"
+                            component="label"
+                            sx={{
+                                margin: 1,
+                                height: 160,
+                                fontSize: 24
+                            }}
+                        >
+                            点击上传 <DriveFolderUploadIcon/>
+                            <input
+                                hidden accept="text/markdown"
+                                multiple type="file"
+                                onChange={fileInputChange}
+                            />
+                        </Button>
+                        <Typography
+                            sx={{
+                                fontSize: 18,
+                                fontWeight: "bold",
+                            }}
+                        >
+                            当前接收到的文件：{fileName}
+                        </Typography>
+                    </Stack>
+
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleClose} sx={{marginRight: 3, marginBottom: 3}}>取消</Button>
+                    <Button onClick={handleApply} sx={{marginRight: 5, marginBottom: 3}}>上传</Button>
+                </DialogActions>
+            </Dialog>
             <MarkdownTable></MarkdownTable>
         </Stack>
     );

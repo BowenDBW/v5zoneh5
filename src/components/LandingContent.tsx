@@ -6,12 +6,12 @@ import Typography from '@mui/material/Typography';
 import GlobalParams from "../GlobalParams";
 
 const LandingContent = () => {
-    const images = [
+    const blocks = [
         {
             url: "url('" + GlobalParams.baseUrl + "/album/download/tu.png')",
-            title: '入门指导',
+            title: '入门教程',
             width: '33%',
-            naviLink: 'https://github.com/nwpu-v5-team/soccer-base-tutorials',
+            naviLink: 'https://fishros.com/#/fish_home',
         },
         {
             url: "url('" + GlobalParams.baseUrl + "/album/download/Rm.png')",
@@ -117,7 +117,7 @@ const LandingContent = () => {
                 width: '100%',
             }}
         >
-            {images.map((image) => (
+            {blocks.map((image) => (
                 <ImageButton
                     focusRipple
                     key={image.title}
