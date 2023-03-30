@@ -370,7 +370,7 @@ const Budget = () => {
                         {renderRows.map((row:any) => (
                             <BudgetRow key={row.name} row={row} init={init}/>
                         ))}
-                    </TableBody>2
+                    </TableBody>
                 </Table>
             </TableContainer>
         </Box>

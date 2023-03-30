@@ -35,7 +35,7 @@ const Auth = () => {
                 {...CSS_BASIC, ...MOBILE_FEATURE}}
         >
             <Outlet/>
-            <Footer/>
+            <Footer bottom={-24}/>
         </Stack>
     );
 }

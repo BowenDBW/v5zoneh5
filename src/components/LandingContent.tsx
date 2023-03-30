@@ -8,25 +8,25 @@ import GlobalParams from "../GlobalParams";
 const LandingContent = () => {
     const images = [
         {
-            url: "url('" + GlobalParams.baseUrl + "/album/download/rm_debug.jpg')",
-            title: '业务合作',
+            url: "url('" + GlobalParams.baseUrl + "/album/download/tu.png')",
+            title: '入门指导',
             width: '33%',
-            naviLink: '',
+            naviLink: 'https://github.com/nwpu-v5-team/soccer-base-tutorials',
         },
         {
-            url: "url('" + GlobalParams.baseUrl + "/album/download/back_desktop.jpg')",
+            url: "url('" + GlobalParams.baseUrl + "/album/download/Rm.png')",
             title: '关于我们',
             width: '34%',
             naviLink: '',
         },
         {
-            url: "url('" + GlobalParams.baseUrl + "/album/download/back_desktop.jpg')",
+            url: "url('" + GlobalParams.baseUrl + "/album/download/github.jpg')",
             title: 'Github主页',
             width: '33%',
-            naviLink: '',
+            naviLink: 'https://github.com/nwpu-v5-team',
         },
         {
-            url: "url('" + GlobalParams.baseUrl + "/album/download/back_desktop.jpg')",
+            url: "url('" + GlobalParams.baseUrl + "/album/download/file.jpg')",
             title: '足基学习资料共享下载站',
             width: '50%',
             naviLink: 'https://files.npu5v5.cn',
@@ -41,7 +41,7 @@ const LandingContent = () => {
 
     const ImageButton = styled(ButtonBase)(({ theme }) => ({
         position: 'relative',
-        height: 400,
+        height: 360,
         [theme.breakpoints.down('sm')]: {
             width: '100% !important', // Overrides inline-style
             height: 100,
@@ -137,7 +137,7 @@ const LandingContent = () => {
                             color="inherit"
                             sx={{
                                 position: 'relative',
-                                fontSize: 28,
+                                fontSize: 36,
                                 fontFamily: "font5",
                                 p: 4,
                                 pt: 2,

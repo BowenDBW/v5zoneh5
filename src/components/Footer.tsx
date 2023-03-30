@@ -2,7 +2,9 @@ import React from 'react';
 import Global from "../GlobalParams";
 import {Box, Typography} from "@mui/material";
 
-const Footer = () => {
+const Footer = (props:any) => {
+
+    const {bottom} = props;
 
     return (
         <Box
@@ -11,7 +13,7 @@ const Footer = () => {
                 backgroundColor: "#c5c5c5",
                 opacity: 0.6,
                 width: "100%",
-                bottom: -20,
+                bottom: bottom,
                 textAlign: "center",
                 fontSize: 20,
             }}
