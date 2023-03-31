@@ -22,7 +22,6 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Backdrop from "@mui/material/Backdrop";
 import {useNavigate} from "react-router-dom/";
 
-
 const ImageBad = () => {
     const isDesktop = IsDesktop();
     const navigate = useNavigate();
@@ -50,22 +49,6 @@ const ImageBad = () => {
             label: '私有',
         },
     ];
-
-    function upload(formData: FormData) {
-        fetch(GlobalParams.baseUrl + '/album/upload', {
-            method: 'post',
-            body: formData,
-        }).then(response => response.json())
-            .then(data => {
-                console.log(data);
-                return true;
-            }).catch(() => {
-            alert("登录信息过期，请重新登录");
-            navigate("/auth/login");
-        })
-
-        return false;
-    }
 
     const fileInputChange = (event: any) => {
         handleToggleBackdrop();
@@ -116,6 +99,25 @@ const ImageBad = () => {
         setOpen(true);
     };
 
+    function upload(formData: FormData) {
+        fetch(GlobalParams.baseUrl + '/album/upload', {
+            method: 'post',
+            body: formData,
+        }).then(response => response.json())
+            .then(data => {
+                console.log(data);
+                init();
+                handleCloseBackdrop();
+                return true;
+            }).catch(() => {
+            handleCloseBackdrop();
+            alert("登录信息过期，请重新登录");
+            navigate("/auth/login");
+        })
+
+        return false;
+    }
+
     function handleApply() {
         new Promise(function (resolve, reject){
             handleToggleBackdrop();
@@ -134,8 +136,6 @@ const ImageBad = () => {
             formData.append("file", file);
             resolve(upload(formData));
         }).then(function (){
-            init();
-            handleCloseBackdrop();
             handleClose();
         });
     }

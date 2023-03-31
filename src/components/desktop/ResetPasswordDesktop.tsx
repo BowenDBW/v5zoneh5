@@ -78,9 +78,9 @@ const ResetPasswordDesktop:React.FC<SimpleDialogProps> = (props) => {
                 navigate("/auth/login");
             } else {
                 alert("更新失败，请检查网络");
+                handleCloseBackdrop();
             }
         });
-        handleCloseBackdrop();
     }
 
     return (

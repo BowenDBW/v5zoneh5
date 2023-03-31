@@ -6,6 +6,46 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import Avatar from "@mui/material/Avatar";
+import Box from "@mui/material/Box";
+import Stack from "@mui/material/Stack";
+import {deepOrange} from "@mui/material/colors";
+import React from "react";
+import {post} from "./utils/Request";
+import GlobalParams from "../GlobalParams";
+import Typography from "@mui/material/Typography";
+
+const MemberAvatar = (props:any) => {
+
+    const {name, id} = props;
+    const [avatar, setAvatar] = React.useState("null");
+
+    const init = () => {
+        post("/auth/get-avatar",
+            {token: id})
+            .then((res:any) => {
+                setAvatar(GlobalParams.baseUrl + "/album/download/" + res.data);
+            });
+    }
+
+    React.useEffect(()=>{
+        init();
+    },[])
+
+    return(
+        <Box>
+            {avatar === "null" ?
+                <Avatar sx={{bgcolor: deepOrange[500]}}>{name[0]}</Avatar>
+                :
+                <Avatar
+                    sx={{color:"#000000",borderStyle:"solid", borderWidth:"1px"}}
+                    src={avatar}
+                    sizes={"small"}
+                />
+            }
+        </Box>
+    )
+}
 
 export const ContactRows = (props:any) => {
 
@@ -37,7 +77,12 @@ export const ContactRows = (props:any) => {
                                 sx={{'&:last-child td, &:last-child th': {border: 0}}}
                             >
                                 <TableCell component="th" scope="row" align="center">
-                                    {row.name}
+                                    <Stack direction="row">
+                                        <MemberAvatar name={row.name} id={row.id}/>
+                                        <Typography sx={{margin:1}}>
+                                            {row.name}
+                                        </Typography>
+                                    </Stack>
                                 </TableCell>
                                 <TableCell align="center">{row.session}</TableCell>
                                 {isDesktop ? <TableCell align="center">{row.college}</TableCell> : <div/>}

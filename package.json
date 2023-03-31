@@ -60,6 +60,7 @@
     ]
   },
   "devDependencies": {
+    "@types/jquery": "^3.5.16",
     "@types/react-scroll": "^1.8.6",
     "@types/react-syntax-highlighter": "^15.5.6"
   }

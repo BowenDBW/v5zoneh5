@@ -239,7 +239,7 @@ export default function Registry(){
         <Box
             sx={{
                 width: 1160,
-                height: 580,
+                height: 600,
                 backgroundColor: '#ffffff',
                 opacity: 0.85,
                 borderRadius: 5,

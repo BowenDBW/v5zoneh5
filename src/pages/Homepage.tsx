@@ -8,7 +8,7 @@ import {Outlet} from "react-router-dom";
 
 const Homepage = () => {
 
-    const isDesktop: boolean = IsDesktop()
+    const isDesktop: boolean = IsDesktop();
 
     return (
         <div>

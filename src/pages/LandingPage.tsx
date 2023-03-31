@@ -1,7 +1,7 @@
 import React from 'react';
 import Stack from '@mui/material/Stack';
 import Grid from '@mui/material/Grid';
-import LandingHeader from "../components/desktop/LandingHeader";
+import LandingHeaderDesktop from "../components/desktop/LandingHeaderDesktop";
 import LandingContent from "../components/LandingContent";
 import LandingJoinUs from "../components/LandingJoinUs";
 import Button from "@mui/material/Button";
@@ -12,8 +12,8 @@ import Box from "@mui/material/Box";
 import Footer from "../components/Footer"
 
 const LandingPage = () => {
-    const [renderImage, setRenderImages] = React.useState("v5_cake.jpg");
-    const color = "#ffffff";
+    const [renderImage, setRenderImages] = React.useState("v5_all.png");
+    const [color, setColor] = React.useState("#727272");
     return (
         <div>
             <img src={require("../assets/imgs/" + renderImage)}
@@ -28,7 +28,7 @@ const LandingPage = () => {
             </img>
 
             <Stack sx={{alignItems: "center"}}>
-                <LandingHeader/>
+                <LandingHeaderDesktop/>
                 <Typography
                     sx={{
                         position: "absolute",

@@ -20,6 +20,8 @@ import ProfileMobile from "./mobile/ProfileMobile";
 import {ResetPasswordMobile} from "./mobile/ResetPasswordMobile";
 import ResetPasswordDesktop from "./desktop/ResetPasswordDesktop";
 import {post} from "./utils/Request";
+import {UploadAvatarDesktop} from "./desktop/UploadAvatarDesktop";
+import {UploadAvatarMobile} from "./mobile/UploadAvatarMobile";
 
 interface HeaderProps {
     setAnchorEl: Function,
@@ -31,6 +33,7 @@ export const HeaderMenu: React.FC<HeaderProps> = (props) => {
 
     const [profileDesktop, setProfileDesktop] = React.useState(false);
     const [passwordDesktop, setPasswordDesktop] = React.useState(false);
+    const [uploadAvatar, setUploadAvatarDesktop] = React.useState(false);
     const [isMonitor, setIsMonitor] = React.useState("COMMON");
     const {open, anchorEl, setAnchorEl} = props;
     const navigate = useNavigate();
@@ -60,7 +63,11 @@ export const HeaderMenu: React.FC<HeaderProps> = (props) => {
     }
 
     const onSetAvatar = () => {
-
+        if(isDesktop){
+            setUploadAvatarDesktop(true);
+        }else{
+            navigate("/homepage/set-avatar");
+        }
     }
 
     const onResetPassword = () => {
@@ -152,6 +159,16 @@ export const HeaderMenu: React.FC<HeaderProps> = (props) => {
                     />
                     :
                     <ResetPasswordMobile/>
+            }
+            {
+                isDesktop ?
+                    <UploadAvatarDesktop
+                        open={uploadAvatar}
+                        setOpen={setUploadAvatarDesktop}
+                        setMenuClose={handleClose}
+                    />
+                    :
+                    <UploadAvatarMobile/>
             }
         </Box>
     );

@@ -5,19 +5,20 @@ import {HeaderMenu} from "../HeaderMenu";
 import {GetTimeState} from "../utils/GetTimeState";
 import {post} from "../utils/Request"
 import {useNavigate} from "react-router-dom";
+import GlobalParams from "../../GlobalParams";
 
 const HeaderDesktop = () => {
 
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const [name, setName] = React.useState<string>("");
-    const [avatar, setAvatar] = React.useState<string>("");
+    const [avatar, setAvatar] = React.useState<string>("null");
     const open = Boolean(anchorEl);
     const navigate = useNavigate();
     const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
         setAnchorEl(event.currentTarget);
     };
 
-    useEffect(()=>{
+    const init = () => {
         post("/member/name",
             localStorage.getItem("v5_token")).then((res:any) => {
                 setName(res.data.msg);
@@ -26,6 +27,15 @@ const HeaderDesktop = () => {
             alert("登录信息过期，请重新登录");
             navigate("/auth/login");
         });
+        post("/auth/get-avatar-by-token",
+            {token:localStorage.getItem("v5_token")})
+            .then((res:any) => {
+                setAvatar(GlobalParams.baseUrl + "/album/download/" + res.data);
+            });
+    }
+
+    useEffect(()=>{
+        init();
     },[])
 
     const getTimeState = GetTimeState()
@@ -77,7 +87,7 @@ const HeaderDesktop = () => {
                     >
                         {getTimeState}! {name}
                     </Typography>
-                    {avatar === "" ?
+                    {avatar === "null" ?
                         <Avatar sx={{bgcolor: deepOrange[500]}}>{name[0]}</Avatar>
                         :
                         <Avatar sx={{color:"#000000",borderStyle:"solid", borderWidth:"1px"}} src={avatar}/>

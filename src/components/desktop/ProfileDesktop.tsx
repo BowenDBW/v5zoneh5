@@ -213,9 +213,9 @@ const ProfileDesktop: React.FC<SimpleDialogProps> = (props) => {
                 }
                 setNation(res.data.nation
                     .substring(0, res.data.nation.length - 1));
+                handleCloseBackdrop();
             }
         }))
-        handleCloseBackdrop();
     }
 
     useEffect(() => {
@@ -256,12 +256,13 @@ const ProfileDesktop: React.FC<SimpleDialogProps> = (props) => {
                 if (res.data.msg === "success") {
                     alert("修改成功");
                     handleClose();
+                    handleCloseBackdrop();
                 } else {
                     alert(res.data.msg);
+                    handleCloseBackdrop();
                 }
             }
         }))
-        handleCloseBackdrop();
     }
 
     // @ts-ignore
