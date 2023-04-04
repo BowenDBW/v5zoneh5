@@ -190,6 +190,7 @@ export default function Registry(){
     const register = () => {
         handleToggleBackdrop();
         if (!validate()) {
+            handleCloseBackdrop();
             return;
         }
         localStorage.setItem("v5_token", "undefined");

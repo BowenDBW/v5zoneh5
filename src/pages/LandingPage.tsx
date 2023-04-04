@@ -14,6 +14,7 @@ import Footer from "../components/Footer"
 const LandingPage = () => {
     const [renderImage, setRenderImages] = React.useState("v5_all.png");
     const [color, setColor] = React.useState("#727272");
+
     return (
         <div>
             <img src={require("../assets/imgs/" + renderImage)}
