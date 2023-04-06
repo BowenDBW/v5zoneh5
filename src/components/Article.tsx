@@ -53,7 +53,7 @@ function MarkdownTable() {
 
     const clickDelete = (event: any) => {
         handleToggleBackdrop();
-        post("/markdown/delete", {
+        post("/article/delete", {
             fileLink: event.target.value,
         }).then((res: any) => {
             console.log(res);
@@ -66,7 +66,7 @@ function MarkdownTable() {
 
     function onMethodChanged(fileLink: string, isPublished: boolean) {
         handleToggleBackdrop();
-        post("/markdown/update", {
+        post("/article/update", {
             fileLink: fileLink,
             isPublished: !isPublished,
         }).then((res: any) => {
@@ -79,7 +79,7 @@ function MarkdownTable() {
 
     function init() {
         handleToggleBackdrop();
-        post("/markdown/all",
+        post("/article/all",
             localStorage.getItem("v5_token")).then((res: any) => {
             if (res.status === 200) {
                 setRenderRows(res.data.reverse());
@@ -99,7 +99,7 @@ function MarkdownTable() {
 
     const clickDownload = (event: any) => {
         const url = axios.defaults.baseURL
-            + "/markdown/download/"
+            + "/article/download/"
             + event.target.value;
         openInNewTab(url);
     }
@@ -225,7 +225,7 @@ function Article() {
     };
 
     function upload(formData: FormData) {
-        fetch(GlobalParams.baseUrl + '/markdown/upload', {
+        fetch(GlobalParams.baseUrl + '/article/upload', {
             method: 'post',
             body: formData,
         }).then(response => response.json())
@@ -349,7 +349,7 @@ function Article() {
                         >
                             点击上传 <DriveFolderUploadIcon/>
                             <input
-                                hidden accept="text/markdown"
+                                hidden accept="text/article"
                                 multiple type="file"
                                 onChange={fileInputChange}
                             />

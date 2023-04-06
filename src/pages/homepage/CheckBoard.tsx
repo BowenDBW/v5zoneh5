@@ -3,6 +3,7 @@ import React, {useEffect, useState} from 'react';
 import {useNavigate} from "react-router-dom";
 import {IsDesktop} from "../../components/utils/IsDesktop";
 import {post} from "../../components/utils/Request";
+import Global from "../../GlobalParams";
 
 interface NewsProps{
     imageUrl:string,
@@ -64,12 +65,12 @@ function CheckBoard() {
 
     const navigate = useNavigate();
 
-    const isDesktop = IsDesktop();
+
 
     const [renderRows, setRenderRows] = useState([]);
 
     function init() {
-        post("/markdown/publish",
+        post("/article/publish",
             localStorage.getItem("v5_token")).then((res:any) => {
             console.log(res);
             if (res.status === 200) {
@@ -103,7 +104,7 @@ function CheckBoard() {
             >公告栏</Typography>
 
             <Box sx={{height: 50}}/>
-            {isDesktop ?
+            {Global.isDesktop ?
                 <Box>
                     <Grid container spacing={2}>
                         {renderRows.map((option:any) => (

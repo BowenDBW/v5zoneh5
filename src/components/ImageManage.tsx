@@ -1,26 +1,18 @@
 import React, {useEffect, useState} from 'react';
-import {IsDesktop} from "./utils/IsDesktop";
 import {useNavigate} from "react-router-dom";
 import GlobalParams from "../GlobalParams";
 import {post} from "./utils/Request";
 import {
     Box,
-    Button,
-    Dialog, DialogActions,
-    DialogContent,
-    DialogContentText,
-    DialogTitle, Grid, MenuItem,
+    Grid,
     Stack,
-    TextField,
     Typography
 } from "@mui/material";
-import Backdrop from "@mui/material/Backdrop";
-import CircularProgress from "@mui/material/CircularProgress";
-import DriveFolderUploadIcon from "@mui/icons-material/DriveFolderUpload";
 import ImageCard from "./ImageCard";
+import Global from "../GlobalParams";
 
 const ImageManage = () => {
-    const isDesktop = IsDesktop();
+
     const navigate = useNavigate();
     const [imageList, setImageList] = useState([]);
     const [openBackDrop, setOpenBackDrop] = React.useState(false);
@@ -72,7 +64,7 @@ const ImageManage = () => {
 
     return (
         <Box>
-            {isDesktop ?
+            {Global.isDesktop ?
                 <div/>
                 :
                 <Typography
@@ -87,7 +79,7 @@ const ImageManage = () => {
                 >我的图床</Typography>
             }
             <Box sx={{height: 50}}/>
-            {isDesktop ?
+            {Global.isDesktop ?
                 <Box>
                     <Grid container spacing={2}>
                         {imageList.map((option: any) => (

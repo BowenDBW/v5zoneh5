@@ -6,6 +6,7 @@ import {useNavigate, useSearchParams} from "react-router-dom";
 import axios from "axios";
 import gfm from "remark-gfm";
 import {IsDesktop} from "../../components/utils/IsDesktop";
+import Global from "../../GlobalParams";
 
 
 const them = {
@@ -15,7 +16,7 @@ const them = {
 
 function MdReader() {
 
-    const isDesktop = IsDesktop();
+
 
     const [search, setSearch] = useSearchParams()
 
@@ -25,7 +26,7 @@ function MdReader() {
 
     async function init() {
         const url = axios.defaults.baseURL
-            + "/markdown/download/"
+            + "/article/download/"
             + search.get("fileLink");
         fetch(url)
             .then(res => res.text())
@@ -57,7 +58,7 @@ function MdReader() {
                     }}
                 >返回上一级</Button>
             </Box>
-            {isDesktop ?
+            {Global.isDesktop ?
                 <Grid container>
                     <Grid xs={2}>
                     </Grid>

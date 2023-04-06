@@ -21,9 +21,10 @@ import ImageCard from "../../components/ImageCard";
 import CircularProgress from "@mui/material/CircularProgress";
 import Backdrop from "@mui/material/Backdrop";
 import {useNavigate} from "react-router-dom/";
+import Global from "../../GlobalParams";
 
 const ImageBad = () => {
-    const isDesktop = IsDesktop();
+
     const navigate = useNavigate();
     const [methodState, setMethodState] = useState("公开上墙");
     const [imageList, setImageList] = useState([]);
@@ -146,7 +147,7 @@ const ImageBad = () => {
 
     return (
         <Box>
-            {isDesktop ?
+            {Global.isDesktop ?
                 <div/>
                 :
                 <Typography
@@ -240,7 +241,7 @@ const ImageBad = () => {
                 </DialogActions>
             </Dialog>
             <Box sx={{height: 50}}/>
-            {isDesktop ?
+            {Global.isDesktop ?
                 <Box>
                     <Grid container spacing={2}>
                         {imageList.map((option: any) => (

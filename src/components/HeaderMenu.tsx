@@ -15,13 +15,13 @@ import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import React from "react";
 import {useNavigate} from "react-router-dom";
 import ProfileDesktop from "./desktop/ProfileDesktop";
-import {IsDesktop} from "./utils/IsDesktop";
 import ProfileMobile from "./mobile/ProfileMobile";
 import {ResetPasswordMobile} from "./mobile/ResetPasswordMobile";
 import ResetPasswordDesktop from "./desktop/ResetPasswordDesktop";
 import {post} from "./utils/Request";
 import {UploadAvatarDesktop} from "./desktop/UploadAvatarDesktop";
 import {UploadAvatarMobile} from "./mobile/UploadAvatarMobile";
+import Global from "../GlobalParams";
 
 interface HeaderProps {
     setAnchorEl: Function,
@@ -37,7 +37,7 @@ export const HeaderMenu: React.FC<HeaderProps> = (props) => {
     const [isMonitor, setIsMonitor] = React.useState("COMMON");
     const {open, anchorEl, setAnchorEl} = props;
     const navigate = useNavigate();
-    const isDesktop = IsDesktop();
+
 
     const init = () => {
         post("/auth/is-monitor", localStorage.getItem("v5_token"))
@@ -55,7 +55,7 @@ export const HeaderMenu: React.FC<HeaderProps> = (props) => {
     }
 
     const onViewProfile = () => {
-        if(isDesktop){
+        if(Global.isDesktop){
             setProfileDesktop(true);
         }else{
             navigate("/homepage/profile");
@@ -63,7 +63,7 @@ export const HeaderMenu: React.FC<HeaderProps> = (props) => {
     }
 
     const onSetAvatar = () => {
-        if(isDesktop){
+        if(Global.isDesktop){
             setUploadAvatarDesktop(true);
         }else{
             navigate("/homepage/set-avatar");
@@ -71,7 +71,7 @@ export const HeaderMenu: React.FC<HeaderProps> = (props) => {
     }
 
     const onResetPassword = () => {
-        if(isDesktop){
+        if(Global.isDesktop){
             setPasswordDesktop(true);
         }else{
             navigate("/homepage/reset-password");
@@ -141,7 +141,7 @@ export const HeaderMenu: React.FC<HeaderProps> = (props) => {
                 </MenuList>
             </Menu>
             {
-                isDesktop ?
+                Global.isDesktop ?
                     <ProfileDesktop
                         open={profileDesktop}
                         setOpen={setProfileDesktop}
@@ -151,7 +151,7 @@ export const HeaderMenu: React.FC<HeaderProps> = (props) => {
                     <ProfileMobile/>
             }
             {
-                isDesktop ?
+                Global.isDesktop ?
                     <ResetPasswordDesktop
                         open={passwordDesktop}
                         setOpen={setPasswordDesktop}
@@ -161,7 +161,7 @@ export const HeaderMenu: React.FC<HeaderProps> = (props) => {
                     <ResetPasswordMobile/>
             }
             {
-                isDesktop ?
+                Global.isDesktop ?
                     <UploadAvatarDesktop
                         open={uploadAvatar}
                         setOpen={setUploadAvatarDesktop}

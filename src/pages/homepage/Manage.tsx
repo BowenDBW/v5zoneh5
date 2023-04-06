@@ -12,10 +12,11 @@ import MessageManage from "../../components/MessageManage";
 import ImageManage from "../../components/ImageManage";
 import LifeCycle from "../../components/LifeCycle";
 import PrizeManage from "../../components/PrizeManage";
+import Global from "../../GlobalParams";
 
 const Manage = () => {
     const navigate = useNavigate();
-    const isDesktop = IsDesktop();
+
     const [isVice, setVice] = React.useState(false);
     const [value, setValue] = React.useState(0);
 
@@ -39,7 +40,7 @@ const Manage = () => {
 
     return (
         <Box>
-            {isDesktop ? <div/> :
+            {Global.isDesktop ? <div/> :
                 <Typography
                     align="center"
                     sx={{

@@ -8,9 +8,7 @@ import {
     Grid
 } from "@mui/material";
 import {useNavigate, useSearchParams} from "react-router-dom";
-import axios from "axios";
-import {IsDesktop} from "../../components/utils/IsDesktop";
-
+import Global from "../../GlobalParams";
 
 const them = {
     dark: vscDarkPlus,
@@ -19,8 +17,6 @@ const them = {
 
 function CenteredMdReader() {
 
-    const isDesktop = IsDesktop();
-
     const [search, setSearch] = useSearchParams();
 
     const [textContent, setContent] = useState("")
@@ -28,8 +24,8 @@ function CenteredMdReader() {
     const [darkMode, setDarkMode] = useState(false)
 
     async function init() {
-        const url = axios.defaults.baseURL
-            + "/markdown/download/"
+        const url = Global.baseUrl
+            + "/article/download/"
             + search.get("fileLink");
         fetch(url)
             .then(res => res.text())
@@ -69,7 +65,7 @@ function CenteredMdReader() {
                     }}
                 >返回上一级</Button>
             </Box>
-            {isDesktop ?
+            {Global.isDesktop ?
                 <Grid container>
                     <Grid xs={2}>
                     </Grid>

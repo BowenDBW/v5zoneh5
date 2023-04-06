@@ -1,8 +1,6 @@
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import Checkbox from "@mui/material/Checkbox";
 import FormControl from "@mui/material/FormControl";
-import FormControlLabel from "@mui/material/FormControlLabel";
 import Grid from "@mui/material/Grid";
 import IconButton from "@mui/material/IconButton";
 import InputAdornment from "@mui/material/InputAdornment";
@@ -17,14 +15,13 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import {useNavigate} from "react-router-dom/";
-import {IsDesktop} from "../../components/utils/IsDesktop";
 import React from "react";
 import {post} from "../../components/utils/Request"
+import Global from "../../GlobalParams";
 
 function Login() {
 
     const navigate = useNavigate();
-    const isDesktop = IsDesktop();
 
     const [showPassword, setShowPassword] = React.useState(false);
     const [username, setUsername] = React.useState("");
@@ -170,7 +167,7 @@ function Login() {
                     container spacing={2}
                     sx={{justifyContent: "center"}}
                 >
-                    {isDesktop ?
+                    {Global.isDesktop ?
                         <Grid>
                             <Button
                                 sx={{
@@ -179,7 +176,7 @@ function Login() {
                                 }}
                                 variant="text"
                                 onClick={() => {
-                                    if (isDesktop) {
+                                    if (Global.isDesktop) {
                                         navigate('../registry')
                                     } else return (
                                         alert("该功能仅限桌面端")
@@ -211,7 +208,7 @@ function Login() {
                         sx={{
                             margin: 3,
                             textAlign: "center",
-                            width: isDesktop ? 120 : 100,
+                            width: Global.isDesktop ? 120 : 100,
                         }}
                         variant="contained"
                         onClick={onClickLogin}
@@ -220,7 +217,7 @@ function Login() {
                         sx={{
                             margin: 3,
                             textAlign: "center",
-                            width: isDesktop ? 120 : 100,
+                            width: Global.isDesktop ? 120 : 100,
                             fontWeight: "bold",
                         }}
                         disabled={true}

@@ -12,10 +12,11 @@ import {useNavigate} from "react-router-dom";
 import {Button, Typography} from "@mui/material";
 import GlobalParams from "../../GlobalParams";
 import {IsDesktop} from "../../components/utils/IsDesktop";
+import Global from "../../GlobalParams";
 
 const Prize = () => {
 
-    const isDesktop = IsDesktop();
+
     const navigate = useNavigate();
     const [rows, setRows] = React.useState([]);
 
@@ -72,7 +73,7 @@ const Prize = () => {
 
     return (
         <Box>
-            {isDesktop ? <div/> :
+            {Global.isDesktop ? <div/> :
                 <Typography
                     align="center"
                     sx={{

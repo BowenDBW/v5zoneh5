@@ -27,11 +27,12 @@ import Paper from "@mui/material/Paper";
 import {BudgetRow} from "../../components/BudgetRow";
 import CircularProgress from "@mui/material/CircularProgress";
 import Backdrop from "@mui/material/Backdrop";
+import Global from "../../GlobalParams";
 
 const Budget = () => {
 
     const navigate = useNavigate();
-    const isDesktop = IsDesktop();
+
     const [renderRows, setRenderRows] = useState([]);
     const [applyType, setApplyType] = useState("");
     const [applyDescription, setApplyDescription] = useState("");
@@ -180,7 +181,7 @@ const Budget = () => {
 
     return (
         <Box>
-            {isDesktop ? <div/> :
+            {Global.isDesktop ? <div/> :
                 <Typography
                     align="center"
                     sx={{
@@ -349,7 +350,7 @@ const Budget = () => {
                     <TableHead>
                         <TableRow>
                             <TableCell/>
-                            {isDesktop ?
+                            {Global.isDesktop ?
                                 <TableCell align="center">交易编号</TableCell>
                                 :
                                 <div/>
@@ -359,7 +360,7 @@ const Budget = () => {
                             <TableCell align="center">类型</TableCell>
                             <TableCell align="center">金额</TableCell>
                             <TableCell align="center">发票豁免</TableCell>
-                            {isDesktop ?
+                            {Global.isDesktop ?
                                 <TableCell align="center">支付宝手机号</TableCell>
                                 :
                                 <div/>

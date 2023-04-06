@@ -24,11 +24,11 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import DriveFolderUploadIcon from "@mui/icons-material/DriveFolderUpload";
 import {useNavigate} from "react-router-dom";
 import MyStepper from "./MyStepper";
-import {IsDesktop} from "./utils/IsDesktop";
 import GlobalParams from "../GlobalParams";
 import {post} from "./utils/Request";
 import CircularProgress from "@mui/material/CircularProgress";
 import Backdrop from "@mui/material/Backdrop";
+import Global from "../GlobalParams";
 
 export function BudgetRow(props:any) {
     const navigate = useNavigate()
@@ -122,7 +122,7 @@ export function BudgetRow(props:any) {
         setFileName(newFile.name);
     }
 
-    const isDesktop = IsDesktop();
+
 
     function clickExemption() {
         handleToggleBackdrop();
@@ -224,7 +224,7 @@ export function BudgetRow(props:any) {
                         {open ? <KeyboardArrowUpIcon/> : <KeyboardArrowDownIcon/>}
                     </IconButton>
                 </TableCell>
-                {isDesktop ?
+                {Global.isDesktop ?
                     <TableCell align="center">{row.id}</TableCell>
                     :
                     <div/>
@@ -240,7 +240,7 @@ export function BudgetRow(props:any) {
                 <TableCell align="center">
                     {genIsApplied(row)}
                 </TableCell>
-                {isDesktop ?
+                {Global.isDesktop ?
                     <TableCell align="center">{row.alipayTele}</TableCell>
                     :
                     <div/>

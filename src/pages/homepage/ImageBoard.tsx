@@ -5,13 +5,13 @@ import {
     Typography
 } from '@mui/material';
 import React, {useEffect, useState} from 'react';
-import {IsDesktop} from "../../components/utils/IsDesktop";
 import {post} from "../../components/utils/Request";
 import GlobalParams from "../../GlobalParams";
 import {useNavigate} from "react-router-dom/";
+import Global from "../../GlobalParams";
 
 const ImageBoard = () => {
-    const isDesktop = IsDesktop();
+
     const navigate = useNavigate();
     const [imageList, setImageList] = useState([]);
 
@@ -41,7 +41,7 @@ const ImageBoard = () => {
 
     return (
         <Box>
-            {isDesktop ?
+            {Global.isDesktop ?
                 <div/>
                 :
                 <Typography

@@ -1,4 +1,3 @@
-import {IsDesktop} from "./utils/IsDesktop";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -14,6 +13,7 @@ import React from "react";
 import {post} from "./utils/Request";
 import GlobalParams from "../GlobalParams";
 import Typography from "@mui/material/Typography";
+import Global from "../GlobalParams";
 
 const MemberAvatar = (props:any) => {
 
@@ -50,7 +50,7 @@ const MemberAvatar = (props:any) => {
 export const ContactRows = (props:any) => {
 
     const {renderRows} = props;
-    const isDesktop = IsDesktop();
+
 
     return (
         <TableContainer component={Paper}>
@@ -59,11 +59,11 @@ export const ContactRows = (props:any) => {
                     <TableRow>
                         <TableCell align="center">姓名</TableCell>
                         <TableCell align="center">届次</TableCell>
-                        {isDesktop ? <TableCell align="center">学院</TableCell> : <div/>}
-                        {isDesktop ? <TableCell align="center">技术组别</TableCell> : <div/>}
-                        {isDesktop ? <TableCell align="center">常住地</TableCell> : <div/>}
+                        {Global.isDesktop ? <TableCell align="center">学院</TableCell> : <div/>}
+                        {Global.isDesktop ? <TableCell align="center">技术组别</TableCell> : <div/>}
+                        {Global.isDesktop ? <TableCell align="center">常住地</TableCell> : <div/>}
                         <TableCell align="center">电话</TableCell>
-                        {isDesktop ?
+                        {Global.isDesktop ?
                             <TableCell align="center">邮箱</TableCell>
                             : <div/>}
                         <TableCell align="center">QQ</TableCell>
@@ -85,11 +85,11 @@ export const ContactRows = (props:any) => {
                                     </Stack>
                                 </TableCell>
                                 <TableCell align="center">{row.session}</TableCell>
-                                {isDesktop ? <TableCell align="center">{row.college}</TableCell> : <div/>}
-                                {isDesktop ? <TableCell align="center">{row.techTeam}</TableCell> : <div/>}
-                                {isDesktop ? <TableCell align="center">{row.home}</TableCell> : <div/>}
+                                {Global.isDesktop ? <TableCell align="center">{row.college}</TableCell> : <div/>}
+                                {Global.isDesktop ? <TableCell align="center">{row.techTeam}</TableCell> : <div/>}
+                                {Global.isDesktop ? <TableCell align="center">{row.home}</TableCell> : <div/>}
                                 <TableCell align="center">{row.telephone}</TableCell>
-                                {isDesktop ? <TableCell align="center">{row.email}</TableCell> : <div/>}
+                                {Global.isDesktop ? <TableCell align="center">{row.email}</TableCell> : <div/>}
                                 <TableCell align="center">{row.qq}</TableCell>
                             </TableRow>
                         ))}

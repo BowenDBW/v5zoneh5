@@ -11,16 +11,16 @@ import {
     Typography,
 } from '@mui/material';
 import React, {useEffect, useState} from 'react';
-import {IsDesktop} from "../../components/utils/IsDesktop";
 import {useNavigate} from "react-router-dom";
 import {post} from "../../components/utils/Request"
 import MessageCard from "../../components/MessageCard";
 import CircularProgress from "@mui/material/CircularProgress";
 import Backdrop from "@mui/material/Backdrop";
+import Global from "../../GlobalParams";
 
 const MessageBoard = () => {
 
-    const isDesktop = IsDesktop()
+
     const [open, setOpen] = useState(false);
     const [msg, setMsg] = useState("");
     const navigate = useNavigate()
@@ -97,7 +97,7 @@ const MessageBoard = () => {
 
     return (
         <Box>
-            {isDesktop ? <div/> :
+            {Global.isDesktop ? <div/> :
                 <Typography
                     align="center"
                     sx={{
@@ -148,7 +148,7 @@ const MessageBoard = () => {
                 </DialogActions>
             </Dialog>
             <Box sx={{height: 50}}/>
-            {isDesktop ?
+            {Global.isDesktop ?
                 <Box>
                     <Grid container spacing={2}>
                         {messages.map((option: any) => (

@@ -2,13 +2,13 @@ import React, {useState} from 'react';
 import {post} from "./utils/Request";
 import {Box, Grid, Stack} from "@mui/material";
 import MessageCard from "./MessageCard";
-import {IsDesktop} from "./utils/IsDesktop";
 import CircularProgress from "@mui/material/CircularProgress";
 import Backdrop from "@mui/material/Backdrop";
 import {useNavigate} from "react-router-dom";
+import Global from "../GlobalParams";
 
 const MessageManage = () => {
-    const isDesktop = IsDesktop();
+
     const navigate = useNavigate();
     const [messages, setMessages] = useState([]);
     const [nameFromId, setNameFromId] = useState("");
@@ -61,7 +61,7 @@ const MessageManage = () => {
             >
                 <CircularProgress color="inherit" />
             </Backdrop>
-            {isDesktop ?
+            {Global.isDesktop ?
                 <Box>
                     <Grid container spacing={2}>
                         {messages.map((option: any) => (

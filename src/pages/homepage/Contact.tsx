@@ -10,10 +10,11 @@ import {useNavigate} from "react-router-dom";
 import {IsDesktop} from "../../components/utils/IsDesktop";
 import {ContactRows} from "../../components/ContactRows";
 import {post} from "../../components/utils/Request";
+import Global from "../../GlobalParams";
 
 const Contact = () => {
 
-    const isDesktop = IsDesktop();
+
     const navigate = useNavigate();
     const [renderRows, setRenderRows] = React.useState([]);
 
@@ -127,7 +128,7 @@ const Contact = () => {
     return (
         <Box>
             <Box>
-                {isDesktop ? <div/> :
+                {Global.isDesktop ? <div/> :
                     <Typography
                         align="center"
                         sx={{
