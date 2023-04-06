@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { Document, Page } from 'react-pdf';
+import {useSearchParams} from "react-router-dom";
 
-function PdfReader() {
+const PdfReader = () => {
+    const [search, setSearch] = useSearchParams();
     const [numPages, setNumPages] = useState(null);
     const [pageNumber, setPageNumber] = useState(1);
 
@@ -17,3 +19,5 @@ function PdfReader() {
         </div>
     );
 }
+
+export default PdfReader;

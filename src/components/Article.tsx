@@ -19,15 +19,14 @@ import {
     Typography
 } from "@mui/material";
 import Paper from "@mui/material/Paper";
-import axios from "axios";
 import DriveFolderUploadIcon from "@mui/icons-material/DriveFolderUpload";
 import {post} from "./utils/Request";
 import {useNavigate} from "react-router-dom";
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
-import GlobalParams from "../GlobalParams";
+import Global from "../GlobalParams";
 
-function MarkdownTable() {
+const MarkdownTable = () => {
 
     const navigate = useNavigate();
     const [renderRows, setRenderRows] = useState([]);
@@ -98,7 +97,7 @@ function MarkdownTable() {
     };
 
     const clickDownload = (event: any) => {
-        const url = axios.defaults.baseURL
+        const url = Global.baseUrl
             + "/article/download/"
             + event.target.value;
         openInNewTab(url);
@@ -184,7 +183,7 @@ function MarkdownTable() {
     );
 }
 
-function Article() {
+const Article = () => {
 
     const navigate = useNavigate();
     const [file, setFile] = useState("null");
@@ -225,7 +224,7 @@ function Article() {
     };
 
     function upload(formData: FormData) {
-        fetch(GlobalParams.baseUrl + '/article/upload', {
+        fetch(Global.baseUrl + '/article/upload', {
             method: 'post',
             body: formData,
         }).then(response => response.json())
@@ -259,8 +258,10 @@ function Article() {
             alert("文件不能大于 10M ");
             return;
         }
-        if (newFile.name.split('.').pop().toLowerCase() !== "md") {
-            alert("上传的文件不是 markdown 形式，系统拒收");
+        if (newFile.name.split('.').pop().toLowerCase() !== "md" &&
+            newFile.name.split('.').pop().toLowerCase() !== "pdf" &&
+            newFile.name.split('.').pop().toLowerCase() !== "html") {
+            alert("上传的文件不是 md|pdf|html 形式，系统拒收");
             return;
         }
 
@@ -298,7 +299,7 @@ function Article() {
                 <DialogTitle>新建文章</DialogTitle>
                 <DialogContent>
                     <DialogContentText>
-                        注意！文章必须是以 md 的形式上传，并且文件大小不得大于10Mb，
+                        注意！文章必须是以 md|pdf|html 的形式上传，并且文件大小不得大于10Mb，
                         单次最多上传1个文件
                     </DialogContentText>
                     <Stack>
@@ -366,8 +367,24 @@ function Article() {
 
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleClose} sx={{marginRight: 3, marginBottom: 3}}>取消</Button>
-                    <Button onClick={handleApply} sx={{marginRight: 5, marginBottom: 3}}>上传</Button>
+                    <Button
+                        onClick={handleClose}
+                        sx={{
+                            marginRight: 3,
+                            marginBottom: 3,
+                        }}
+                    >
+                        取消
+                    </Button>
+                    <Button
+                        onClick={handleApply}
+                        sx={{
+                            marginRight: 5,
+                            marginBottom: 3,
+                        }}
+                    >
+                        上传
+                    </Button>
                 </DialogActions>
             </Dialog>
             <MarkdownTable></MarkdownTable>

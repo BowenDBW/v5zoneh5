@@ -3,9 +3,7 @@ import ReactMarkdown from "react-markdown";
 import {darcula, vscDarkPlus} from 'react-syntax-highlighter/dist/esm/styles/prism';
 import {Box, Button, Grid, Stack} from "@mui/material";
 import {useNavigate, useSearchParams} from "react-router-dom";
-import axios from "axios";
 import gfm from "remark-gfm";
-import {IsDesktop} from "../../components/utils/IsDesktop";
 import Global from "../../GlobalParams";
 
 
@@ -14,18 +12,16 @@ const them = {
     light: darcula
 }
 
-function MdReader() {
+const MdReader = () => {
 
+    const [search, setSearch] = useSearchParams();
 
+    const [textContent, setContent] = useState("");
 
-    const [search, setSearch] = useSearchParams()
-
-    const [textContent, setContent] = useState("")
-
-    const [darkMode, setDarkMode] = useState(false)
+    const [darkMode, setDarkMode] = useState(false);
 
     async function init() {
-        const url = axios.defaults.baseURL
+        const url = Global.baseUrl
             + "/article/download/"
             + search.get("fileLink");
         fetch(url)
