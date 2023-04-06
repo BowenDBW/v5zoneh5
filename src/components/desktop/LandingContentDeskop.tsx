@@ -3,9 +3,9 @@ import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import ButtonBase from '@mui/material/ButtonBase';
 import Typography from '@mui/material/Typography';
-import GlobalParams from "../GlobalParams";
+import GlobalParams from "../../GlobalParams";
 
-const LandingContent = () => {
+const LandingContentDeskop = () => {
     const blocks = [
         {
             url: "url('" + GlobalParams.baseUrl + "/album/download/tu.png')",
@@ -154,4 +154,4 @@ const LandingContent = () => {
     );
 };
 
-export default LandingContent;
+export default LandingContentDeskop;

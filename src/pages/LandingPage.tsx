@@ -2,8 +2,7 @@ import React from 'react';
 import Stack from '@mui/material/Stack';
 import Grid from '@mui/material/Grid';
 import LandingHeaderDesktop from "../components/desktop/LandingHeaderDesktop";
-import LandingContent from "../components/LandingContent";
-import LandingJoinUs from "../components/LandingJoinUs";
+import LandingContentDeskop from "../components/desktop/LandingContentDeskop";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import KeyboardDoubleArrowDownIcon from '@mui/icons-material/KeyboardDoubleArrowDown';
@@ -80,10 +79,9 @@ const LandingPage = () => {
                 </Grid>
                 <Box sx={{position: "absolute", bottom: -720}}>
                     <Element name="scroll-to-element" className="element">
-                        <LandingContent/>
+                        <LandingContentDeskop/>
                     </Element>
                 </Box>
-                <LandingJoinUs/>
                 <Footer bottom={-750}/>
             </Stack>
         </div>
