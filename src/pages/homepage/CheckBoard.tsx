@@ -48,8 +48,9 @@ function News(props: NewsProps) {
             <CardActionArea>
                 <CardMedia
                     component="img"
-                    height="300"
-                    width="300"
+                    sx={{
+                        height:"30vh",
+                    }}
                     image={imageUrl}
                 />
             </CardActionArea>

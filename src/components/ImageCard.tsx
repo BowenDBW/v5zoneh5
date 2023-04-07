@@ -71,7 +71,6 @@ export default function ImageCard(props: any) {
     return (
         <Card sx={{
             margin: 3,
-            height: 400,
         }}>
             <Backdrop
                 sx={{
@@ -84,9 +83,10 @@ export default function ImageCard(props: any) {
             </Backdrop>
             <CardActionArea>
                 <CardMedia
+                    sx={{
+                        height:"30vh",
+                    }}
                     component="img"
-                    height="300"
-                    width="300"
                     image={imageUrl}
                 />
             </CardActionArea>

@@ -8,7 +8,7 @@ import Global from "../../GlobalParams";
 
 const LandingContentDeskop = (props:any) => {
 
-    const unitHeight = 360;
+    const unitHeight = 300;
     const {setContentHeight} = props;
     const [blocks, setBlocks] = React.useState<any>([]);
 

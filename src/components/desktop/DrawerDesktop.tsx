@@ -37,7 +37,7 @@ interface DrawerProps{
 }
 
 const DrawerDesktop = (props:DrawerProps) => {
-    const width = props;
+    const widthProp = props;
 
     const [openDialog, setOpenDialog] = React.useState(false);
 
@@ -55,10 +55,10 @@ const DrawerDesktop = (props:DrawerProps) => {
         <Drawer
             variant="permanent"
             sx={{
-                width: width,
+                width: widthProp,
                 flexShrink: 0,
                 '& .MuiDrawer-paper': {
-                    width: width,
+                    width: widthProp,
                     boxSizing: 'border-box',
                 },
             }}
@@ -72,6 +72,7 @@ const DrawerDesktop = (props:DrawerProps) => {
             >
                 <img
                     src={require('../../assets/imgs/v5logo.png')}
+                    style={{maxWidth: "100%"}}
                     alt={"v5_logo"}
                 />
             </Toolbar>

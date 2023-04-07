@@ -15,7 +15,7 @@ const Homepage = () => {
             {isDesktop ?
                 <div>
                     <Stack direction="row">
-                        <DrawerDesktop width="15%"/>
+                        <DrawerDesktop width="16%"/>
                         <Box sx={{width : "85%"}}>
                             <HeaderDesktop/>
                             <Outlet/>
