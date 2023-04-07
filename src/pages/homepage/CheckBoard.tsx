@@ -15,10 +15,27 @@ interface NewsProps{
 function News(props: NewsProps) {
     const {imageUrl, title, fileLink, pubDate} = props;
 
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+
+    const getFileType = (fileName:string) => {
+        const suffix = fileName.substring(fileName.lastIndexOf('.') + 1).toLowerCase();
+        if(suffix === "md"){
+            return "md";
+        }else if(suffix === "pdf"){
+            return "pdf";
+        }else if(suffix === "html"){
+            return "html";
+        }else {
+            return "";
+        }
+    }
 
     function handleRead() {
-        navigate("/homepage/md?fileLink=" + fileLink + "&darkMode=false");
+        navigate("/homepage/"
+            + getFileType(fileLink)
+            +"?fileLink=" 
+            + fileLink
+            + "&isOutside=false");
     }
 
     return (

@@ -69,20 +69,6 @@ export const UploadAvatarDesktop = (props:any) => {
         });
     }
 
-    const onClickReset = () => {
-        handleToggleBackdrop();
-        post("/auth/internal-reset-password", {
-            "id": localStorage.getItem("v5_token"),
-
-        }).then((res:any) => {
-            if (res.status === 200) {
-                handleCloseBackdrop();
-            } else {
-                handleCloseBackdrop();
-            }
-        });
-    }
-
     const fileInputChange = (event: any) => {
         const newFile = event.target.files[0];
         if (newFile.size >= 1048576 * 10) {

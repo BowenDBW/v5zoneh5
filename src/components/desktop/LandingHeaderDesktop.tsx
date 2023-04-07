@@ -27,7 +27,7 @@ const LandingHeaderDesktop = () => {
             }}
         >
             <Grid container>
-                <Grid xs={9.7}>
+                <Grid xs={6}>
                     <Typography
                         sx={{
                             margin: 2,
@@ -41,12 +41,13 @@ const LandingHeaderDesktop = () => {
                         足球机器人基地 V5++组
                     </Typography>
                 </Grid>
-                <Grid xs={1} sx={{textAlign:"right",marginY:2}}>
+                <Grid xs={6} sx={{textAlign:"right",marginY:2}}>
                     <Button
                         sx={{
                             color:"#000",
                             fontFamily: "font5",
                             fontSize: 20,
+                            marginRight: 4
                         }}
                         variant="text"
                         endIcon={<CloudDownloadIcon/>}
@@ -56,13 +57,12 @@ const LandingHeaderDesktop = () => {
                     >
                         共享资料
                     </Button>
-                </Grid>
-                <Grid xs={1} sx={{textAlign:"right",marginY:2}}>
                     <Button
                         sx={{
                             color:"#000",
                             fontFamily: "font5",
                             fontSize: 20,
+                            marginRight: 4
                         }}
                         variant="text"
                         endIcon={<AccountBoxIcon/>}

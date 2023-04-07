@@ -18,11 +18,14 @@ const MdReader = () => {
 
     const [textContent, setContent] = useState("");
 
-    const [darkMode, setDarkMode] = useState(false);
+    const [isOutside, setIsOutside] = useState(search.get("isOutside") === "true");
 
     async function init() {
+        const temp = isOutside ? "public-article" : "article";
         const url = Global.baseUrl
-            + "/article/download/"
+            + "/"
+            + temp
+            + "/download/"
             + search.get("fileLink");
         fetch(url)
             .then(res => res.text())
@@ -42,17 +45,23 @@ const MdReader = () => {
     return (
         <Stack sx={{margin: 2}}>
             <Box>
-                <Button
-                    variant={"outlined"}
-                    onClick={() => {
-                        navigate(-1);
-                    }}
-                    sx={{
-                        width: 140,
-                        margin: 2,
-                        fontWeight: "bold",
-                    }}
-                >返回上一级</Button>
+                {isOutside ?
+                    <div/>
+                    :
+                    <Button
+                        variant={"outlined"}
+                        onClick={() => {
+                            navigate(-1);
+                        }}
+                        sx={{
+                            position: "fixed",
+                            width: 140,
+                            marginX: 2,
+                            fontWeight: "bold",
+                            fontSize: 20,
+                        }}
+                    >返回上一级</Button>
+                }
             </Box>
             {Global.isDesktop ?
                 <Grid container>

@@ -115,6 +115,7 @@ const MarkdownTable = () => {
                 <TableHead>
                     <TableRow>
                         <TableCell align="center">上传时间</TableCell>
+                        <TableCell align="center">文章文件名</TableCell>
                         <TableCell align="center">标题</TableCell>
                         <TableCell align="center">图片链接</TableCell>
                         <TableCell align="center">状态</TableCell>
@@ -132,10 +133,14 @@ const MarkdownTable = () => {
                                     {row.pubDate}
                                 </TableCell>
                                 <TableCell align="center">
-                                    {row.title}</TableCell>
-                                <TableCell
-                                    align="center"
-                                >{row.imageLink}</TableCell>
+                                    {row.fileLink}
+                                </TableCell>
+                                <TableCell align="center">
+                                    {row.title}
+                                </TableCell>
+                                <TableCell align="center">
+                                    {row.imageLink}
+                                </TableCell>
                                 <TableCell align="center">
                                     <TextField
                                         id="是否发布"

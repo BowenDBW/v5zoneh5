@@ -14,8 +14,10 @@ import ImageBoard from "../pages/homepage/ImageBoard";
 import ImageBad from "../pages/homepage/ImageBad";
 import ProfileMobile from "../components/mobile/ProfileMobile";
 import MdReader from "../pages/homepage/MdReader";
-import CenteredMdReader from "../pages/auth/CenteredMdReader";
+import CenteredReader from "../pages/auth/CenteredReader";
 import LandingPage from "../pages/LandingPage";
+import PdfReader from "../pages/homepage/PdfReader";
+import Htmleader from "../pages/homepage/Htmleader";
 
 export default [
     {
@@ -27,12 +29,32 @@ export default [
         element: <LandingPage/>
     },
     {
+        path: '/md',
+        element:<MdReader/>
+    },
+    {
+        path: '/pdf',
+        element:<PdfReader/>
+    },
+    {
+        path: '/html',
+        element:<Htmleader/>
+    },
+    {
         path: '/auth',
         element: <Auth/>,
         children: [
             {
                 path: 'md',
-                element:<CenteredMdReader/>
+                element:<CenteredReader/>
+            },
+            {
+                path: 'pdf',
+                element:<CenteredReader/>
+            },
+            {
+                path: 'html',
+                element:<CenteredReader/>
             },
             {
                 path: 'login',
@@ -55,6 +77,14 @@ export default [
             {
                 path: 'md',
                 element:<MdReader/>
+            },
+            {
+                path: 'pdf',
+                element:<PdfReader/>
+            },
+            {
+                path: 'html',
+                element:<Htmleader/>
             },
             {
                 path: 'manage',

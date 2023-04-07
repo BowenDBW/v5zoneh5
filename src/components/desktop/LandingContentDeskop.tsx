@@ -3,45 +3,96 @@ import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import ButtonBase from '@mui/material/ButtonBase';
 import Typography from '@mui/material/Typography';
-import GlobalParams from "../../GlobalParams";
+import {get} from "../utils/Request";
+import Global from "../../GlobalParams";
 
-const LandingContentDeskop = () => {
-    const blocks = [
-        {
-            url: "url('" + GlobalParams.baseUrl + "/album/download/tu.png')",
-            title: '入门教程',
-            width: '33%',
-            naviLink: 'https://fishros.com/#/fish_home',
-        },
-        {
-            url: "url('" + GlobalParams.baseUrl + "/album/download/Rm.png')",
-            title: '关于我们',
-            width: '34%',
-            naviLink: '',
-        },
-        {
-            url: "url('" + GlobalParams.baseUrl + "/album/download/github.jpg')",
-            title: 'Github主页',
-            width: '33%',
-            naviLink: 'https://github.com/nwpu-v5-team',
-        },
-        {
-            url: "url('" + GlobalParams.baseUrl + "/album/download/file.jpg')",
-            title: '足基学习资料共享下载站',
-            width: '50%',
-            naviLink: 'https://files.npu5v5.cn',
-        },
-        {
-            url: "url('" + GlobalParams.baseUrl + "/album/download/rm_smile.jpg')",
-            title: '加入我们',
-            width: '50%',
-            naviLink: '',
-        },
-    ];
+const LandingContentDeskop = (props:any) => {
+
+    const unitHeight = 360;
+    const {setContentHeight} = props;
+    const [blocks, setBlocks] = React.useState<any>([]);
+
+    const getFileType = (fileName:string) => {
+        const suffix = fileName.substring(fileName.lastIndexOf('.') + 1).toLowerCase();
+        if(suffix === "md"){
+            return "md";
+        }else if(suffix === "pdf"){
+            return "pdf";
+        }else if(suffix === "html"){
+            return "html";
+        }else {
+            return "";
+        }
+    }
+
+    const calHeight = (count: number) => {
+        if(count === 0){
+            return 0;
+        }else if(count % 3 === 0){
+            return -count / 3 * unitHeight;
+        }else {
+            return -((count - count % 3) / 3 + 1) * unitHeight;
+        }
+    }
+
+    const calWidth = (serial: number, count: number) => {
+        if(count % 3 === 0){
+            if(serial % 3  === 1){
+                return "34%";
+            }else {
+                return "33%";
+            }
+        }else if(count % 3 === 1){
+            if((count - count % 3 - 3) <= serial){
+                return "50%";
+            }else {
+                if(serial % 3 === 1){
+                    return "34%";
+                }else {
+                    return "33%";
+                }
+            }
+        }else {
+            if((count - count % 3) <= serial){
+                return "50%";
+            }else {
+                if(serial % 3 === 1){
+                    return "34%";
+                }else {
+                    return "33%";
+                }
+            }
+        }
+    }
+
+    const init = () => {
+        get("/public-article/all").then((res: any) => {
+            if (res.status === 200) {
+                const count:number = res.data.length;
+                setContentHeight(calHeight(count));
+                const list = res.data.reverse();
+                list.map((item: any, index:number) => {
+                    item.url = "url('" + item.imageLink + "')";
+                    item.naviLink = window.location.origin
+                        + "/#/"
+                        + getFileType(item.fileLink)
+                        + "?fileLink="
+                        + item.fileLink
+                        + "&isOutside=true";
+                    item.width = calWidth(index, count);
+                });
+                setBlocks(list);
+            }
+        })
+    }
+
+    React.useEffect(()=>{
+        init();
+    },[])
 
     const ImageButton = styled(ButtonBase)(({ theme }) => ({
         position: 'relative',
-        height: 360,
+        height: unitHeight,
         [theme.breakpoints.down('sm')]: {
             width: '100% !important', // Overrides inline-style
             height: 100,
@@ -105,19 +156,12 @@ const LandingContentDeskop = () => {
 
     const openInNewTab = (url: string) => {
         // 👇️ setting target to _blank with window.open
-        window.open(url, '_blank', 'noopener,noreferrer');
+        window.open(url);
     };
 
     return (
-        <Box
-            sx={{
-                display: 'flex',
-                flexWrap: 'wrap',
-                minWidth: window.innerWidth - 18,
-                width: '100%',
-            }}
-        >
-            {blocks.map((image) => (
+        <Box>
+            {blocks.map((image:any) => (
                 <ImageButton
                     focusRipple
                     key={image.title}

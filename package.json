@@ -21,6 +21,7 @@
     "copy-to-clipboard": "^3.3.3",
     "dayjs": "^1.11.7",
     "fetch": "^1.1.0",
+    "pdfjs-dist": "^3.4.120",
     "rc-slider-captcha": "^1.1.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

@@ -13,6 +13,7 @@ import ImageManage from "../../components/ImageManage";
 import LifeCycle from "../../components/LifeCycle";
 import PrizeManage from "../../components/PrizeManage";
 import Global from "../../GlobalParams";
+import Settings from "../../components/Settings";
 
 const Manage = () => {
     const navigate = useNavigate();
@@ -76,6 +77,7 @@ const Manage = () => {
                 <Tab label="新队员邀请码"/>
                 <Tab label="下载数据"/>
                 <Tab label="组员生命周期"/>
+                <Tab label="主题背景设置"/>
             </Tabs>
             <Divider/>
             {value === 0 ? <Article/>: <div/>}
@@ -87,6 +89,7 @@ const Manage = () => {
             {value === 6 ? <Invite/>: <div/>}
             {value === 7 ? <Poi/>: <div/>}
             {value === 8 ? <LifeCycle/>: <div/>}
+            {value === 9 ? <Settings/>: <div/>}
         </Box>
     );
 };

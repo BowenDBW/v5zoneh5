@@ -9,18 +9,43 @@ import KeyboardDoubleArrowDownIcon from '@mui/icons-material/KeyboardDoubleArrow
 import {Link, Element, scroller} from 'react-scroll';
 import Box from "@mui/material/Box";
 import Footer from "../components/Footer"
+import Global from "../GlobalParams";
+import {post} from "../components/utils/Request";
 
 const LandingPage = () => {
-    const [renderImage, setRenderImages] = React.useState("v5_all.png");
+    const [renderImage, setRenderImages] = React.useState("");
     const [color, setColor] = React.useState("#727272");
+    const [contentHeight, setContentHeight] = React.useState(0);
+    const init = () => {
+        const label1 = Global.isDesktop ? "landing_page_img_desktop" : "landing_page_img_mobile";
+        post("/config/get", {
+            token: label1,
+        }).then((res: any) => {
+            if (res.status === 200) {
+                setRenderImages(res.data.msg);
+            }
+        })
+        const label2 = Global.isDesktop ? "landing_page_font_color_desktop" : "landing_page_font_color_mobile";
+        post("/config/get", {
+            token: label2,
+        }).then((res: any) => {
+            if (res.status === 200) {
+                setColor(res.data.msg);
+            }
+        })
+    }
+
+    React.useEffect(()=>{
+        init();
+    },[])
 
     return (
         <div>
-            <img src={require("../assets/imgs/" + renderImage)}
+            <img src={renderImage}
                  style={{
                      zIndex: -10,
                      width: "100%",
-                     height: window.innerHeight,
+                     height: "100vh",
                      position: "absolute",
                      opacity: 0.9,
                  }}
@@ -77,12 +102,12 @@ const LandingPage = () => {
                     </Grid>
                     <Grid xs={1.2}></Grid>
                 </Grid>
-                <Box sx={{position: "absolute", bottom: -720}}>
+                <Box sx={{position: "absolute", bottom: contentHeight, width:"100%"}}>
                     <Element name="scroll-to-element" className="element">
-                        <LandingContentDeskop/>
+                        <LandingContentDeskop setContentHeight={setContentHeight}/>
                     </Element>
                 </Box>
-                <Footer bottom={-750}/>
+                <Footer bottom={contentHeight - 26}/>
             </Stack>
         </div>
     );

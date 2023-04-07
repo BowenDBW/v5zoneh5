@@ -3,13 +3,14 @@ import {Outlet} from "react-router-dom";
 import Global from "../GlobalParams";
 import Footer from "../components/Footer";
 import {Stack} from "@mui/material";
+import {post} from "../components/utils/Request";
 
 const Auth = () => {
 
     const [desktopImage, setDesktopImage]
-        = React.useState("back_desktop.jpg");
+        = React.useState("");
     const [mobileImage, setMobileImage]
-        = React.useState("back_mobile.jpg");
+        = React.useState("");
 
     const CSS_BASIC = {
         display: "flex",
@@ -24,19 +25,31 @@ const Auth = () => {
     }
 
     const DESKTOP_FEATURE = {
-        backgroundImage: "url('" + Global.baseUrl + "/album/download/')" + desktopImage,
+        backgroundImage: desktopImage,
     }
 
     const MOBILE_FEATURE = {
-        backgroundImage: "url('" + Global.baseUrl + "/album/download/')" + mobileImage,
+        backgroundImage: mobileImage,
     }
 
     const init = () => {
-
+        const label = Global.isDesktop ? "login_img_desktop" : "login_img_mobile";
+        post("/config/get", {
+            token: label,
+        }).then((res: any) => {
+            console.log(res);
+            if (res.status === 200) {
+                if(Global.isDesktop){
+                    setDesktopImage("url('" + res.data.msg + "')");
+                }else {
+                    setDesktopImage("url('" + res.data.msg + "')");
+                }
+            }
+        })
     }
 
     React.useEffect(()=>{
-
+        init();
     },[])
 
     return (

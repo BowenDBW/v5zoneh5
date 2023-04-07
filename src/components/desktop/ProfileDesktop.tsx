@@ -227,6 +227,19 @@ const ProfileDesktop: React.FC<SimpleDialogProps> = (props) => {
         setOpen(false);
     }
 
+    const getFileType = (fileName:string) => {
+        const suffix = fileName.substring(fileName.lastIndexOf('.') + 1).toLowerCase();
+        if(suffix === "md"){
+            return "md";
+        }else if(suffix === "pdf"){
+            return "pdf";
+        }else if(suffix === "html"){
+            return "html";
+        }else {
+            return "";
+        }
+    }
+
     function handleSetProfile() {
         handleToggleBackdrop();
         if (!validate()) {
@@ -310,7 +323,15 @@ const ProfileDesktop: React.FC<SimpleDialogProps> = (props) => {
                                 }}
                                 variant="outlined"
                                 onClick={() => {
-                                    navigate("/homepage/md?fileLink=Privacy.md&darkMode=false");
+                                    post("/config/get", "privacy_rules_path")
+                                        .then((res:any)=>{
+                                            navigate("/homepage/"
+                                                + getFileType(res.data.msg)
+                                                + "?fileLink="
+                                                + res.data.msg
+                                                + "&isOutside=false");
+                                            handleClose();
+                                        });
                                 }}
                             > V5 隐私政策
                             </Button>

@@ -1,10 +1,16 @@
 import React, {useEffect, useState} from 'react';
 import {useNavigate} from "react-router-dom";
-import {post} from "./utils/Request";
+import {post, get} from "./utils/Request";
 import Global from "../GlobalParams";
 import {
-    Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Grid,
-    MenuItem, Stack,
+    Button,
+    Dialog,
+    DialogActions,
+    DialogContent,
+    DialogContentText,
+    DialogTitle,
+    Grid,
+    Stack,
     Table,
     TableBody,
     TableCell,
@@ -45,8 +51,7 @@ const MarkdownTable = () => {
 
     function init() {
         handleToggleBackdrop();
-        post("/public-article/all",
-            localStorage.getItem("v5_token")).then((res: any) => {
+        get("/public-article/all").then((res: any) => {
             if (res.status === 200) {
                 setRenderRows(res.data.reverse());
                 handleCloseBackdrop();

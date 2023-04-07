@@ -179,6 +179,19 @@ const Budget = () => {
         })
     }
 
+    const getFileType = (fileName:string) => {
+        const suffix = fileName.substring(fileName.lastIndexOf('.') + 1).toLowerCase();
+        if(suffix === "md"){
+            return "md";
+        }else if(suffix === "pdf"){
+            return "pdf";
+        }else if(suffix === "html"){
+            return "html";
+        }else {
+            return "";
+        }
+    }
+
     return (
         <Box>
             {Global.isDesktop ? <div/> :
@@ -234,7 +247,14 @@ const Budget = () => {
                         }}
                         variant="outlined"
                         onClick={() => {
-                            navigate("/homepage/md?fileLink=Application.md&darkMode=false");
+                            post("/config/get", "fund_rules_path")
+                                .then((res:any)=>{
+                                    navigate("/homepage/"
+                                        + getFileType(res.data.msg)
+                                        + "?fileLink="
+                                        + res.data.msg
+                                        + "&isOutside=false");
+                                });
                         }}
                     >申请流程与要求
                     </Button>

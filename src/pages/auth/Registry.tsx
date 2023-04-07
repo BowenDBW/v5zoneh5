@@ -99,7 +99,20 @@ export default function Registry(){
         event.preventDefault();
     };
 
-    function validate() {
+    const getFileType = (fileName:string) => {
+        const suffix = fileName.substring(fileName.lastIndexOf('.') + 1).toLowerCase();
+        if(suffix === "md"){
+            return "md";
+        }else if(suffix === "pdf"){
+            return "pdf";
+        }else if(suffix === "html"){
+            return "html";
+        }else {
+            return "";
+        }
+    }
+
+    const validate = () => {
         if (!/^[\u4E00-\u9FA5\uf900-\ufa2d·s]{2,20}$/.test(name)) {
             alert("姓名格式有问题， 应为2-20位汉字或包含英文标点：·");
             return false;
@@ -706,7 +719,14 @@ export default function Registry(){
                         }}
                         variant="outlined"
                         onClick={() => {
-                            navigate("/auth/md?fileLink=Privacy.md&darkMode=false")
+                            post("/config/get", "privacy_rules_path")
+                                .then((res:any)=>{
+                                    navigate("/auth/"
+                                        + getFileType(res.data.msg)
+                                        + "?fileLink="
+                                        + res.data.msg
+                                        + "&isOutside=false");
+                                });
                         }}
                     > V5 隐私政策
                     </Button>
