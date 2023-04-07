@@ -25,12 +25,12 @@ import DriveFolderUploadIcon from "@mui/icons-material/DriveFolderUpload";
 import {useNavigate} from "react-router-dom";
 import MyStepper from "./MyStepper";
 import GlobalParams from "../GlobalParams";
+import Global from "../GlobalParams";
 import {post} from "./utils/Request";
 import CircularProgress from "@mui/material/CircularProgress";
 import Backdrop from "@mui/material/Backdrop";
-import Global from "../GlobalParams";
 
-export function BudgetRow(props:any) {
+export function BudgetRow(props: any) {
     const navigate = useNavigate()
     const {row, init} = props;
     const id = row.id;
@@ -47,6 +47,7 @@ export function BudgetRow(props:any) {
     const handleToggleBackdrop = () => {
         setOpenBackDrop(true);
     };
+
     function clickUpload() {
         setOpen2(true);
     }
@@ -59,12 +60,12 @@ export function BudgetRow(props:any) {
         setOpen2(false);
     };
 
-    const clickStop = (event:any) => {
+    const clickStop = (event: any) => {
         handleToggleBackdrop();
         post("/transaction/admin", {
             "token": id,
             "message": "canceled",
-        }).then((res:any) => {
+        }).then((res: any) => {
             if (res.status === 200) {
                 init();
                 handleCloseBackdrop();
@@ -72,7 +73,7 @@ export function BudgetRow(props:any) {
         });
     }
 
-    function upload(formData:FormData) {
+    function upload(formData: FormData) {
         handleToggleBackdrop();
         fetch(GlobalParams.baseUrl + '/transaction/upload', {
             method: 'post',
@@ -100,19 +101,19 @@ export function BudgetRow(props:any) {
         handleClose2();
     }
 
-    const openInNewTab = (url:any) => {
+    const openInNewTab = (url: any) => {
         // 👇️ setting target to _blank with window.open
         window.open(url, '_blank', 'noopener,noreferrer');
     };
 
-    const clickDownload = (event:any) => {
+    const clickDownload = (event: any) => {
         const url = GlobalParams.baseUrl
             + "/transaction/download/"
             + event.target.value;
         openInNewTab(url);
     }
 
-    const fileInputChange = (event:any) => {
+    const fileInputChange = (event: any) => {
         const newFile = event.target.files[0];
         if (newFile.size >= 1048576 * 10) {
             alert("文件不能大于 10M ");
@@ -123,12 +124,11 @@ export function BudgetRow(props:any) {
     }
 
 
-
     function clickExemption() {
         handleToggleBackdrop();
         post("/transaction/exemption", {
             "token": id,
-        }).then((res:any) => {
+        }).then((res: any) => {
             if (res.status === 200) {
                 init();
                 handleCloseBackdrop();
@@ -136,29 +136,29 @@ export function BudgetRow(props:any) {
         });
     }
 
-    function genIsApplied(row:any){
-        if(row.type === "收入"){
+    function genIsApplied(row: any) {
+        if (row.type === "收入") {
             return "";
-        }else {
-            if(row.isInvoiceRequired){
+        } else {
+            if (row.isInvoiceRequired) {
                 return "已申请";
-            }else {
+            } else {
                 return "未申请";
             }
         }
     }
 
-    function genStage(row:any){
-        const stage:number = row.stage;
-        if(stage === 0){
+    function genStage(row: any) {
+        const stage: number = row.stage;
+        if (stage === 0) {
             return "交易取消或被拒绝";
-        }else if(stage === 1){
+        } else if (stage === 1) {
             return "已发起申请";
-        }else if(stage === 2){
+        } else if (stage === 2) {
             return "未上传发票";
-        }else if(stage === 3){
+        } else if (stage === 3) {
             return "已上传发票，等待确认";
-        }else if(stage === 4){
+        } else if (stage === 4) {
             return "交易完成";
         }
     }
@@ -170,10 +170,10 @@ export function BudgetRow(props:any) {
                 onClose={handleClose2}
             >
                 <Backdrop
-                    sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                    sx={{color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1}}
                     open={openBackDrop}
                 >
-                    <CircularProgress color="inherit" />
+                    <CircularProgress color="inherit"/>
                 </Backdrop>
                 <DialogTitle>新建上传</DialogTitle>
                 <DialogContent>
@@ -322,7 +322,7 @@ export function BudgetRow(props:any) {
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
-                                    {history.map((historyRow:any) => (
+                                    {history.map((historyRow: any) => (
                                         <TableRow key={historyRow.date}>
                                             <TableCell component="th" scope="row" align="center">
                                                 {historyRow.date}

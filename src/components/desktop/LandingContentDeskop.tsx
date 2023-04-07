@@ -1,64 +1,63 @@
 import * as React from 'react';
-import { styled } from '@mui/material/styles';
+import {styled} from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import ButtonBase from '@mui/material/ButtonBase';
 import Typography from '@mui/material/Typography';
 import {get} from "../utils/Request";
-import Global from "../../GlobalParams";
 
-const LandingContentDeskop = (props:any) => {
+const LandingContentDesktop = (props: any) => {
 
     const unitHeight = 300;
     const {setContentHeight} = props;
     const [blocks, setBlocks] = React.useState<any>([]);
 
-    const getFileType = (fileName:string) => {
+    const getFileType = (fileName: string) => {
         const suffix = fileName.substring(fileName.lastIndexOf('.') + 1).toLowerCase();
-        if(suffix === "md"){
+        if (suffix === "md") {
             return "md";
-        }else if(suffix === "pdf"){
+        } else if (suffix === "pdf") {
             return "pdf";
-        }else if(suffix === "html"){
+        } else if (suffix === "html") {
             return "html";
-        }else {
+        } else {
             return "";
         }
     }
 
     const calHeight = (count: number) => {
-        if(count === 0){
+        if (count === 0) {
             return 0;
-        }else if(count % 3 === 0){
+        } else if (count % 3 === 0) {
             return -count / 3 * unitHeight;
-        }else {
+        } else {
             return -((count - count % 3) / 3 + 1) * unitHeight;
         }
     }
 
     const calWidth = (serial: number, count: number) => {
-        if(count % 3 === 0){
-            if(serial % 3  === 1){
+        if (count % 3 === 0) {
+            if (serial % 3 === 1) {
                 return "34%";
-            }else {
+            } else {
                 return "33%";
             }
-        }else if(count % 3 === 1){
-            if((count - count % 3 - 3) <= serial){
+        } else if (count % 3 === 1) {
+            if ((count - count % 3 - 3) <= serial) {
                 return "50%";
-            }else {
-                if(serial % 3 === 1){
+            } else {
+                if (serial % 3 === 1) {
                     return "34%";
-                }else {
+                } else {
                     return "33%";
                 }
             }
-        }else {
-            if((count - count % 3) <= serial){
+        } else {
+            if ((count - count % 3) <= serial) {
                 return "50%";
-            }else {
-                if(serial % 3 === 1){
+            } else {
+                if (serial % 3 === 1) {
                     return "34%";
-                }else {
+                } else {
                     return "33%";
                 }
             }
@@ -68,10 +67,10 @@ const LandingContentDeskop = (props:any) => {
     const init = () => {
         get("/public-article/all").then((res: any) => {
             if (res.status === 200) {
-                const count:number = res.data.length;
+                const count: number = res.data.length;
                 setContentHeight(calHeight(count));
                 const list = res.data.reverse();
-                list.map((item: any, index:number) => {
+                list.map((item: any, index: number) => {
                     item.url = "url('" + item.imageLink + "')";
                     item.naviLink = window.location.origin
                         + "/#/"
@@ -86,11 +85,11 @@ const LandingContentDeskop = (props:any) => {
         })
     }
 
-    React.useEffect(()=>{
+    React.useEffect(() => {
         init();
-    },[])
+    }, [])
 
-    const ImageButton = styled(ButtonBase)(({ theme }) => ({
+    const ImageButton = styled(ButtonBase)(({theme}) => ({
         position: 'relative',
         height: unitHeight,
         [theme.breakpoints.down('sm')]: {
@@ -121,7 +120,7 @@ const LandingContentDeskop = (props:any) => {
         backgroundPosition: 'center 40%',
     });
 
-    const Image = styled('span')(({ theme }) => ({
+    const Image = styled('span')(({theme}) => ({
         position: 'absolute',
         left: 0,
         right: 0,
@@ -133,7 +132,7 @@ const LandingContentDeskop = (props:any) => {
         color: theme.palette.common.white,
     }));
 
-    const ImageBackdrop = styled('span')(({ theme }) => ({
+    const ImageBackdrop = styled('span')(({theme}) => ({
         position: 'absolute',
         left: 0,
         right: 0,
@@ -144,7 +143,7 @@ const LandingContentDeskop = (props:any) => {
         transition: theme.transitions.create('opacity'),
     }));
 
-    const ImageMarked = styled('span')(({ theme }) => ({
+    const ImageMarked = styled('span')(({theme}) => ({
         height: 3,
         width: 18,
         backgroundColor: theme.palette.common.white,
@@ -161,19 +160,19 @@ const LandingContentDeskop = (props:any) => {
 
     return (
         <Box>
-            {blocks.map((image:any) => (
+            {blocks.map((image: any) => (
                 <ImageButton
                     focusRipple
                     key={image.title}
                     style={{
                         width: image.width,
                     }}
-                    onClick={()=>{
+                    onClick={() => {
                         openInNewTab(image.naviLink);
                     }}
                 >
-                    <ImageSrc style={{ backgroundImage: image.url }} />
-                    <ImageBackdrop className="MuiImageBackdrop-root" />
+                    <ImageSrc style={{backgroundImage: image.url}}/>
+                    <ImageBackdrop className="MuiImageBackdrop-root"/>
                     <Image>
                         <Typography
                             component="span"
@@ -189,7 +188,7 @@ const LandingContentDeskop = (props:any) => {
                             }}
                         >
                             {image.title}
-                            <ImageMarked className="MuiImageMarked-root" />
+                            <ImageMarked className="MuiImageMarked-root"/>
                         </Typography>
                     </Image>
                 </ImageButton>
@@ -198,4 +197,4 @@ const LandingContentDeskop = (props:any) => {
     );
 };
 
-export default LandingContentDeskop;
+export default LandingContentDesktop;

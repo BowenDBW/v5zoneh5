@@ -39,18 +39,18 @@ const Auth = () => {
         }).then((res: any) => {
             console.log(res);
             if (res.status === 200) {
-                if(Global.isDesktop){
+                if (Global.isDesktop) {
                     setDesktopImage("url('" + res.data.msg + "')");
-                }else {
+                } else {
                     setDesktopImage("url('" + res.data.msg + "')");
                 }
             }
         })
     }
 
-    React.useEffect(()=>{
+    React.useEffect(() => {
         init();
-    },[])
+    }, [])
 
     return (
         <Stack

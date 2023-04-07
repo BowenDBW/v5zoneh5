@@ -1,15 +1,6 @@
-import {useNavigate} from "react-router-dom";
 import React, {useState} from "react";
 import {post} from "./utils/Request";
-import {
-    Button,
-    Card,
-    CardActionArea,
-    CardActions,
-    CardMedia,
-    MenuItem,
-    TextField
-} from "@mui/material";
+import {Button, Card, CardActionArea, CardActions, CardMedia, MenuItem, TextField} from "@mui/material";
 import copy from "copy-to-clipboard";
 import CircularProgress from "@mui/material/CircularProgress";
 import Backdrop from "@mui/material/Backdrop";
@@ -79,12 +70,12 @@ export default function ImageCard(props: any) {
                 }}
                 open={openBackDrop}
             >
-                <CircularProgress color="inherit" />
+                <CircularProgress color="inherit"/>
             </Backdrop>
             <CardActionArea>
                 <CardMedia
                     sx={{
-                        height:"30vh",
+                        height: "30vh",
                     }}
                     component="img"
                     image={imageUrl}
@@ -119,7 +110,7 @@ export default function ImageCard(props: any) {
                     onClick={() => {
                         copy(imageUrl);
                     }}
-                    sx={{marginX:3}}
+                    sx={{marginX: 3}}
                 >
                     复制链接
                 </Button>

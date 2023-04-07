@@ -15,13 +15,12 @@ import {
 import React, {useEffect, useState} from 'react';
 import {post} from "../../components/utils/Request"
 import GlobalParams from "../../GlobalParams";
-import {IsDesktop} from "../../components/utils/IsDesktop";
+import Global from "../../GlobalParams";
 import DriveFolderUploadIcon from '@mui/icons-material/DriveFolderUpload';
 import ImageCard from "../../components/ImageCard";
 import CircularProgress from "@mui/material/CircularProgress";
 import Backdrop from "@mui/material/Backdrop";
 import {useNavigate} from "react-router-dom/";
-import Global from "../../GlobalParams";
 
 const ImageBad = () => {
 
@@ -120,7 +119,7 @@ const ImageBad = () => {
     }
 
     function handleApply() {
-        new Promise(function (resolve, reject){
+        new Promise(function (resolve, reject) {
             handleToggleBackdrop();
             if (file === null) {
                 alert("请选择一个文件，再上传！");
@@ -136,7 +135,7 @@ const ImageBad = () => {
             formData.append("isPublic", isPublic);
             formData.append("file", file);
             resolve(upload(formData));
-        }).then(function (){
+        }).then(function () {
             handleClose();
         });
     }
@@ -178,10 +177,10 @@ const ImageBad = () => {
                 onClose={handleClose}
             >
                 <Backdrop
-                    sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                    sx={{color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1}}
                     open={openBackDrop}
                 >
-                    <CircularProgress color="inherit" />
+                    <CircularProgress color="inherit"/>
                 </Backdrop>
                 <DialogTitle>新建上传</DialogTitle>
                 <DialogContent>

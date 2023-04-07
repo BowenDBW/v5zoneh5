@@ -11,7 +11,6 @@ import {post} from "../../components/utils/Request";
 import {useNavigate} from "react-router-dom";
 import {Button, Typography} from "@mui/material";
 import GlobalParams from "../../GlobalParams";
-import {IsDesktop} from "../../components/utils/IsDesktop";
 import Global from "../../GlobalParams";
 
 const Prize = () => {
@@ -25,7 +24,7 @@ const Prize = () => {
         window.open(url, '_blank', 'noopener,noreferrer');
     };
 
-    const handleDownload = (filePath:string) => {
+    const handleDownload = (filePath: string) => {
         const url = GlobalParams.baseUrl
             + "/certificate/download/" + filePath
         openInNewTab(url);
@@ -33,7 +32,7 @@ const Prize = () => {
 
     function init() {
         post("/certificate/select-by-id",
-            localStorage.getItem("v5_token")).then((res:any) => {
+            localStorage.getItem("v5_token")).then((res: any) => {
             if (res.status === 200) {
                 setRows(res.data);
             }
@@ -43,33 +42,33 @@ const Prize = () => {
         })
     }
 
-    const handleLevel = (level:string) => {
-        if(level === "NATION_FIRST"){
+    const handleLevel = (level: string) => {
+        if (level === "NATION_FIRST") {
             return "国家级一等奖";
-        }else if(level === "NATION_SECOND"){
+        } else if (level === "NATION_SECOND") {
             return "国家级二等奖";
-        }else if(level === "NATION_THIRD"){
+        } else if (level === "NATION_THIRD") {
             return "国家级三等奖";
-        }else if(level === "PROVINCE_FIRST"){
+        } else if (level === "PROVINCE_FIRST") {
             return "省级一等奖";
-        }else if(level === "PROVINCE_SECOND"){
+        } else if (level === "PROVINCE_SECOND") {
             return "省级二等奖";
-        }else if(level === "PROVINCE_THIRD"){
+        } else if (level === "PROVINCE_THIRD") {
             return "省级三等奖";
-        }else if(level === "CAMPUS_FIRST"){
+        } else if (level === "CAMPUS_FIRST") {
             return "校级一等奖";
-        }else if(level === "CAMPUS_SECOND"){
+        } else if (level === "CAMPUS_SECOND") {
             return "校级二等奖";
-        }else if(level === "CAMPUS_THIRD"){
+        } else if (level === "CAMPUS_THIRD") {
             return "校级三等奖";
-        }else if(level === "OTHERS"){
+        } else if (level === "OTHERS") {
             return "其它";
         }
     }
 
-    React.useEffect(()=>{
+    React.useEffect(() => {
         init();
-    },[])
+    }, [])
 
     return (
         <Box>
@@ -98,10 +97,10 @@ const Prize = () => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {rows.map((row:any) => (
+                        {rows.map((row: any) => (
                             <TableRow
                                 key={row.name}
-                                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                sx={{'&:last-child td, &:last-child th': {border: 0}}}
                             >
                                 <TableCell component="th" scope="row" align={"center"}>
                                     {row.name}
@@ -110,7 +109,7 @@ const Prize = () => {
                                 <TableCell align={"center"}>{row.date}</TableCell>
                                 <TableCell align={"center"}>
                                     <Button
-                                        onClick={()=>{
+                                        onClick={() => {
                                             handleDownload(row.filePath);
                                         }}
                                     >

@@ -1,15 +1,14 @@
 import {Box, Card, CardActionArea, CardActions, CardMedia, Grid, Stack, Typography} from '@mui/material';
 import React, {useEffect, useState} from 'react';
 import {useNavigate} from "react-router-dom";
-import {IsDesktop} from "../../components/utils/IsDesktop";
 import {post} from "../../components/utils/Request";
 import Global from "../../GlobalParams";
 
-interface NewsProps{
-    imageUrl:string,
-    title:string,
-    fileLink:string,
-    pubDate:string,
+interface NewsProps {
+    imageUrl: string,
+    title: string,
+    fileLink: string,
+    pubDate: string,
 }
 
 function News(props: NewsProps) {
@@ -17,15 +16,15 @@ function News(props: NewsProps) {
 
     const navigate = useNavigate();
 
-    const getFileType = (fileName:string) => {
+    const getFileType = (fileName: string) => {
         const suffix = fileName.substring(fileName.lastIndexOf('.') + 1).toLowerCase();
-        if(suffix === "md"){
+        if (suffix === "md") {
             return "md";
-        }else if(suffix === "pdf"){
+        } else if (suffix === "pdf") {
             return "pdf";
-        }else if(suffix === "html"){
+        } else if (suffix === "html") {
             return "html";
-        }else {
+        } else {
             return "";
         }
     }
@@ -33,7 +32,7 @@ function News(props: NewsProps) {
     function handleRead() {
         navigate("/homepage/"
             + getFileType(fileLink)
-            +"?fileLink=" 
+            + "?fileLink="
             + fileLink
             + "&isOutside=false");
     }
@@ -49,7 +48,7 @@ function News(props: NewsProps) {
                 <CardMedia
                     component="img"
                     sx={{
-                        height:"30vh",
+                        height: "30vh",
                     }}
                     image={imageUrl}
                 />
@@ -84,16 +83,15 @@ function CheckBoard() {
     const navigate = useNavigate();
 
 
-
     const [renderRows, setRenderRows] = useState([]);
 
     function init() {
         post("/article/publish",
-            localStorage.getItem("v5_token")).then((res:any) => {
+            localStorage.getItem("v5_token")).then((res: any) => {
             console.log(res);
             if (res.status === 200) {
                 let temp = res.data.reverse();
-                temp.map((option:any) => {
+                temp.map((option: any) => {
                     option.pubDate = option.pubDate.split("T")[0];
                 })
                 setRenderRows(temp);
@@ -125,7 +123,7 @@ function CheckBoard() {
             {Global.isDesktop ?
                 <Box>
                     <Grid container spacing={2}>
-                        {renderRows.map((option:any) => (
+                        {renderRows.map((option: any) => (
                             <Grid xs={4}>
                                 <News imageUrl={option.imageLink}
                                       fileLink={option.fileLink}
@@ -138,7 +136,7 @@ function CheckBoard() {
                 </Box>
                 :
                 <Stack>
-                    {renderRows.map((option:any) => (
+                    {renderRows.map((option: any) => (
                         <News imageUrl={option.imageLink}
                               fileLink={option.fileLink}
                               title={option.title}

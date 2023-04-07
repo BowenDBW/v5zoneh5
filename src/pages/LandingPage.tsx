@@ -6,7 +6,7 @@ import LandingContentDeskop from "../components/desktop/LandingContentDeskop";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import KeyboardDoubleArrowDownIcon from '@mui/icons-material/KeyboardDoubleArrowDown';
-import {Link, Element, scroller} from 'react-scroll';
+import {Element, Link} from 'react-scroll';
 import Box from "@mui/material/Box";
 import Footer from "../components/Footer"
 import Global from "../GlobalParams";
@@ -35,9 +35,9 @@ const LandingPage = () => {
         })
     }
 
-    React.useEffect(()=>{
+    React.useEffect(() => {
         init();
-    },[])
+    }, [])
 
     return (
         <div>
@@ -79,30 +79,30 @@ const LandingPage = () => {
                             offset={400}
                             duration={500}
                         >
-                        <Button
-                            variant="outlined"
-                            sx={{
-                                position: "absolute",
-                                zIndex: 10,
-                                width: "20%",
-                                display: "flex",
-                                alignItems: "center",
-                                bottom: "7%",
-                                borderRadius: 5,
-                                fontSize: 20,
-                                fontFamily: "font5",
-                                borderColor: color,
-                                color: color,
-                            }}
-                            endIcon={<KeyboardDoubleArrowDownIcon/>}
-                        >
+                            <Button
+                                variant="outlined"
+                                sx={{
+                                    position: "absolute",
+                                    zIndex: 10,
+                                    width: "20%",
+                                    display: "flex",
+                                    alignItems: "center",
+                                    bottom: "7%",
+                                    borderRadius: 5,
+                                    fontSize: 20,
+                                    fontFamily: "font5",
+                                    borderColor: color,
+                                    color: color,
+                                }}
+                                endIcon={<KeyboardDoubleArrowDownIcon/>}
+                            >
 
                                 了解更多
-                        </Button></Link>
+                            </Button></Link>
                     </Grid>
                     <Grid xs={1.2}></Grid>
                 </Grid>
-                <Box sx={{position: "absolute", bottom: contentHeight, width:"100%"}}>
+                <Box sx={{position: "absolute", bottom: contentHeight, width: "100%"}}>
                     <Element name="scroll-to-element" className="element">
                         <LandingContentDeskop setContentHeight={setContentHeight}/>
                     </Element>

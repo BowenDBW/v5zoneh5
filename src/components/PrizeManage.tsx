@@ -13,10 +13,13 @@ import TableBody from "@mui/material/TableBody";
 import Autocomplete from "@mui/material/Autocomplete";
 import {
     Button,
-    Dialog, DialogActions,
+    Dialog,
+    DialogActions,
     DialogContent,
     DialogContentText,
-    DialogTitle, Grid, MenuItem,
+    DialogTitle,
+    Grid,
+    MenuItem,
     Stack,
     TextField,
     Typography
@@ -75,7 +78,6 @@ const PrizeManage = () => {
     }
 
 
-
     function handleApply() {
         if (file === "none") {
             alert("请选择一个文件，再上传！");
@@ -85,7 +87,7 @@ const PrizeManage = () => {
             alert("获奖级别不能为空！");
             return;
         }
-        if(ownerIds.size === 0){
+        if (ownerIds.size === 0) {
             alert("获奖人员不能为空！");
             return;
         }
@@ -108,7 +110,7 @@ const PrizeManage = () => {
             newFile.name.split('.').pop().toLowerCase() !== "jpg" &&
             newFile.name.split('.').pop().toLowerCase() !== "png" &&
             newFile.name.split('.').pop().toLowerCase() !== "jpeg" &&
-            newFile.name.split('.').pop().toLowerCase() !== "bmp"){
+            newFile.name.split('.').pop().toLowerCase() !== "bmp") {
             alert("上传的文件不是 pdf|jpg|png|jpeg|bmp 形式，系统拒收");
             return;
         }
@@ -122,7 +124,7 @@ const PrizeManage = () => {
         window.open(url, '_blank', 'noopener,noreferrer');
     };
 
-    const handleDownload = (filePath:string) => {
+    const handleDownload = (filePath: string) => {
         const url = GlobalParams.baseUrl
             + "/certificate/download/" + filePath
         openInNewTab(url);
@@ -141,37 +143,37 @@ const PrizeManage = () => {
         })
     }
 
-    const handleLevel = (level:string) => {
-        if(level === "NATION_FIRST"){
+    const handleLevel = (level: string) => {
+        if (level === "NATION_FIRST") {
             return "国家级一等奖";
-        }else if(level === "NATION_SECOND"){
+        } else if (level === "NATION_SECOND") {
             return "国家级二等奖";
-        }else if(level === "NATION_THIRD"){
+        } else if (level === "NATION_THIRD") {
             return "国家级三等奖";
-        }else if(level === "PROVINCE_FIRST"){
+        } else if (level === "PROVINCE_FIRST") {
             return "省级一等奖";
-        }else if(level === "PROVINCE_SECOND"){
+        } else if (level === "PROVINCE_SECOND") {
             return "省级二等奖";
-        }else if(level === "PROVINCE_THIRD"){
+        } else if (level === "PROVINCE_THIRD") {
             return "省级三等奖";
-        }else if(level === "CAMPUS_FIRST"){
+        } else if (level === "CAMPUS_FIRST") {
             return "校级一等奖";
-        }else if(level === "CAMPUS_SECOND"){
+        } else if (level === "CAMPUS_SECOND") {
             return "校级二等奖";
-        }else if(level === "CAMPUS_THIRD"){
+        } else if (level === "CAMPUS_THIRD") {
             return "校级三等奖";
-        }else if(level === "OTHERS"){
+        } else if (level === "OTHERS") {
             return "其它";
         }
     }
 
     function init() {
         post("/member/contact", {
-                token: localStorage.getItem("v5_token"),
-                sessionSelect: "onServe",
-                techSelect: "all",
-                collegeSelect: "all"
-        }).then((res:any) => {
+            token: localStorage.getItem("v5_token"),
+            sessionSelect: "onServe",
+            techSelect: "all",
+            collegeSelect: "all"
+        }).then((res: any) => {
             if (res.status === 200) {
                 setMemberList(res.data.contactInfo);
             }
@@ -180,7 +182,7 @@ const PrizeManage = () => {
             navigate("/auth/login");
         })
         post("/certificate/select-all",
-            localStorage.getItem("v5_token")).then((res:any) => {
+            localStorage.getItem("v5_token")).then((res: any) => {
             if (res.status === 200) {
                 setRows(res.data);
             }
@@ -190,9 +192,9 @@ const PrizeManage = () => {
         })
     }
 
-    React.useEffect(()=>{
+    React.useEffect(() => {
         init();
-    },[])
+    }, [])
 
     const level = [
         {
@@ -254,7 +256,7 @@ const PrizeManage = () => {
                 </Grid>
                 <Grid xs={2}>
                     <Button
-                        sx={{marginTop:3}}
+                        sx={{marginTop: 3}}
                         onClick={handleOpen}
                         variant={"contained"}
                     >添加奖状</Button>
@@ -278,7 +280,7 @@ const PrizeManage = () => {
                             fullWidth
                             variant="standard"
                             value={name}
-                            onChange={(event)=>{
+                            onChange={(event) => {
                                 setName(event.target.value);
                             }}
                         />
@@ -291,7 +293,7 @@ const PrizeManage = () => {
                                 width: 200,
                             }}
                             value={type}
-                            onChange={(event)=>{
+                            onChange={(event) => {
                                 setType(event.target.value);
                             }}
                         >
@@ -311,7 +313,7 @@ const PrizeManage = () => {
                             onChange={(event, newValue) => {
                                 setOwners(newValue);
                                 let ids = "";
-                                newValue.map((option:Member) => {
+                                newValue.map((option: Member) => {
                                     ids += option.id + ",";
                                 })
                                 setOwnerIds(ids);
@@ -367,10 +369,10 @@ const PrizeManage = () => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {rows.map((row:any) => (
+                        {rows.map((row: any) => (
                             <TableRow
                                 key={row.name}
-                                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                sx={{'&:last-child td, &:last-child th': {border: 0}}}
                             >
                                 <TableCell component="th" scope="row" align={"center"}>
                                     {row.name}
@@ -380,7 +382,7 @@ const PrizeManage = () => {
                                 <TableCell align={"center"}>{row.nameList}</TableCell>
                                 <TableCell align={"center"}>
                                     <Button
-                                        onClick={()=>{
+                                        onClick={() => {
                                             handleDownload(row.filePath);
                                         }}
                                     >
@@ -388,7 +390,7 @@ const PrizeManage = () => {
                                     </Button>
                                     <Button
                                         color="error"
-                                        onClick={()=>{
+                                        onClick={() => {
                                             handleDel(row.id);
                                         }}
                                     >

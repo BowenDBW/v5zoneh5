@@ -32,11 +32,11 @@ import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
 import Global from "../../GlobalParams";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 
-interface DrawerProps{
+interface DrawerProps {
     width: string,
 }
 
-const DrawerDesktop = (props:DrawerProps) => {
+const DrawerDesktop = (props: DrawerProps) => {
     const widthProp = props;
 
     const [openDialog, setOpenDialog] = React.useState(false);

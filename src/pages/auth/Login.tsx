@@ -52,7 +52,7 @@ function Login() {
         handleToggleBackdrop();
 
         localStorage.setItem("v5_token", "undefined");
-        post("/auth/authenticate", {"id": username,"password": password}).then(((res:any) => {
+        post("/auth/authenticate", {"id": username, "password": password}).then(((res: any) => {
             if (res.status === 200) {
                 localStorage.setItem('v5_token', res.data.token);
                 console.log(res.data.token);
@@ -95,7 +95,9 @@ function Login() {
                                 fontSize: 18,
                             }}
                             startIcon={<ArrowBackIosIcon/>}
-                            onClick={()=>{navigate("/welcome")}}
+                            onClick={() => {
+                                navigate("/welcome")
+                            }}
                         >
                             返回
                         </Button>
@@ -228,10 +230,10 @@ function Login() {
             </Stack>
 
             <Backdrop
-                sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                sx={{color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1}}
                 open={openBackDrop}
             >
-                <CircularProgress color="inherit" />
+                <CircularProgress color="inherit"/>
             </Backdrop>
         </Box>
     );

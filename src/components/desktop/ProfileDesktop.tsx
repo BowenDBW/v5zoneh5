@@ -30,7 +30,7 @@ interface SimpleDialogProps {
     open: boolean,
     setOpen: Function,
 
-    setMenuClose:Function,
+    setMenuClose: Function,
 }
 
 const ProfileDesktop: React.FC<SimpleDialogProps> = (props) => {
@@ -227,15 +227,15 @@ const ProfileDesktop: React.FC<SimpleDialogProps> = (props) => {
         setOpen(false);
     }
 
-    const getFileType = (fileName:string) => {
+    const getFileType = (fileName: string) => {
         const suffix = fileName.substring(fileName.lastIndexOf('.') + 1).toLowerCase();
-        if(suffix === "md"){
+        if (suffix === "md") {
             return "md";
-        }else if(suffix === "pdf"){
+        } else if (suffix === "pdf") {
             return "pdf";
-        }else if(suffix === "html"){
+        } else if (suffix === "html") {
             return "html";
-        }else {
+        } else {
             return "";
         }
     }
@@ -264,7 +264,7 @@ const ProfileDesktop: React.FC<SimpleDialogProps> = (props) => {
             techGroup: techGroup,
             sex: sex,
             nation: nation,
-        }).then(((res:any) => {
+        }).then(((res: any) => {
             if (res.status === 200) {
                 if (res.data.msg === "success") {
                     alert("修改成功");
@@ -287,12 +287,12 @@ const ProfileDesktop: React.FC<SimpleDialogProps> = (props) => {
             aria-describedby="alert-dialog-description"
         >
             <Backdrop
-                sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                sx={{color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1}}
                 open={openBackDrop}
             >
-                <CircularProgress color="inherit" />
+                <CircularProgress color="inherit"/>
             </Backdrop>
-            <DialogTitle id="alert-dialog-title" sx={{fontWeight:"bold", textAlign:"center"}}>
+            <DialogTitle id="alert-dialog-title" sx={{fontWeight: "bold", textAlign: "center"}}>
                 我的个人信息
             </DialogTitle>
             <DialogContent>
@@ -324,7 +324,7 @@ const ProfileDesktop: React.FC<SimpleDialogProps> = (props) => {
                                 variant="outlined"
                                 onClick={() => {
                                     post("/config/get", "privacy_rules_path")
-                                        .then((res:any)=>{
+                                        .then((res: any) => {
                                             navigate("/homepage/"
                                                 + getFileType(res.data.msg)
                                                 + "?fileLink="
@@ -561,7 +561,8 @@ const ProfileDesktop: React.FC<SimpleDialogProps> = (props) => {
                                 sx={{
                                     marginBottom: 3,
                                     marginX: 3,
-                                    height: 30}}
+                                    height: 30
+                                }}
                             >
                                 <InputLabel htmlFor="outlined-adornment-password">民族</InputLabel>
                                 <OutlinedInput
@@ -663,7 +664,7 @@ const ProfileDesktop: React.FC<SimpleDialogProps> = (props) => {
                     </Grid>
                 </Box>
             </DialogContent>
-            <DialogActions sx={{justifyContent:"center"}}>
+            <DialogActions sx={{justifyContent: "center"}}>
                 <Button
                     variant="contained"
                     onClick={handleSetProfile}

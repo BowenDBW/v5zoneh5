@@ -1,14 +1,7 @@
-import React, {useEffect, useState} from 'react';
-import ReactMarkdown from "react-markdown";
-import gfm from 'remark-gfm'
+import React from 'react';
 import {darcula, vscDarkPlus} from 'react-syntax-highlighter/dist/esm/styles/prism';
-import {
-    Box,
-    Button,
-    Grid
-} from "@mui/material";
+import {Box} from "@mui/material";
 import {useNavigate, useSearchParams} from "react-router-dom";
-import Global from "../../GlobalParams";
 import MdReader from "../homepage/MdReader";
 import PdfReader from "../homepage/PdfReader";
 import Htmleader from "../homepage/Htmleader";
@@ -24,16 +17,16 @@ function CenteredReader() {
 
     const navigate = useNavigate();
 
-    const getFileType = (fileName:string | null) => {
+    const getFileType = (fileName: string | null) => {
         // @ts-ignore
         const suffix = fileName.substring(fileName.lastIndexOf('.') + 1).toLowerCase();
-        if(suffix === "md"){
+        if (suffix === "md") {
             return <MdReader/>;
-        }else if(suffix === "pdf"){
+        } else if (suffix === "pdf") {
             return <PdfReader/>;
-        }else if(suffix === "html"){
+        } else if (suffix === "html") {
             return <Htmleader/>;
-        }else {
+        } else {
             return "";
         }
     }

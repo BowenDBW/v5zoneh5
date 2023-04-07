@@ -12,10 +12,10 @@ import {deepOrange} from "@mui/material/colors";
 import React from "react";
 import {post} from "./utils/Request";
 import GlobalParams from "../GlobalParams";
-import Typography from "@mui/material/Typography";
 import Global from "../GlobalParams";
+import Typography from "@mui/material/Typography";
 
-const MemberAvatar = (props:any) => {
+const MemberAvatar = (props: any) => {
 
     const {name, id} = props;
     const [avatar, setAvatar] = React.useState("null");
@@ -23,22 +23,22 @@ const MemberAvatar = (props:any) => {
     const init = () => {
         post("/auth/get-avatar",
             {token: id})
-            .then((res:any) => {
+            .then((res: any) => {
                 setAvatar(GlobalParams.baseUrl + "/album/download/" + res.data);
             });
     }
 
-    React.useEffect(()=>{
+    React.useEffect(() => {
         init();
-    },[])
+    }, [])
 
-    return(
+    return (
         <Box>
             {avatar === "null" ?
                 <Avatar sx={{bgcolor: deepOrange[500]}}>{name[0]}</Avatar>
                 :
                 <Avatar
-                    sx={{color:"#000000",borderStyle:"solid", borderWidth:"1px"}}
+                    sx={{color: "#000000", borderStyle: "solid", borderWidth: "1px"}}
                     src={avatar}
                     sizes={"small"}
                 />
@@ -47,7 +47,7 @@ const MemberAvatar = (props:any) => {
     )
 }
 
-export const ContactRows = (props:any) => {
+export const ContactRows = (props: any) => {
 
     const {renderRows} = props;
 
@@ -79,7 +79,7 @@ export const ContactRows = (props:any) => {
                                 <TableCell component="th" scope="row" align="center">
                                     <Stack direction="row">
                                         <MemberAvatar name={row.name} id={row.id}/>
-                                        <Typography sx={{margin:1}}>
+                                        <Typography sx={{margin: 1}}>
                                             {row.name}
                                         </Typography>
                                     </Stack>

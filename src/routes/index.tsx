@@ -25,20 +25,20 @@ export default [
         element: <Navigate to="/welcome"/>
     },
     {
-        path:'/welcome',
+        path: '/welcome',
         element: <LandingPage/>
     },
     {
         path: '/md',
-        element:<MdReader/>
+        element: <MdReader/>
     },
     {
         path: '/pdf',
-        element:<PdfReader/>
+        element: <PdfReader/>
     },
     {
         path: '/html',
-        element:<Htmleader/>
+        element: <Htmleader/>
     },
     {
         path: '/auth',
@@ -46,15 +46,15 @@ export default [
         children: [
             {
                 path: 'md',
-                element:<CenteredReader/>
+                element: <CenteredReader/>
             },
             {
                 path: 'pdf',
-                element:<CenteredReader/>
+                element: <CenteredReader/>
             },
             {
                 path: 'html',
-                element:<CenteredReader/>
+                element: <CenteredReader/>
             },
             {
                 path: 'login',
@@ -76,15 +76,15 @@ export default [
         children: [
             {
                 path: 'md',
-                element:<MdReader/>
+                element: <MdReader/>
             },
             {
                 path: 'pdf',
-                element:<PdfReader/>
+                element: <PdfReader/>
             },
             {
                 path: 'html',
-                element:<Htmleader/>
+                element: <Htmleader/>
             },
             {
                 path: 'manage',

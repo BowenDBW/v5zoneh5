@@ -1,13 +1,16 @@
 import React, {useEffect, useState} from 'react';
 import {
     Box,
+    Button,
     Dialog,
     DialogActions,
     DialogContent,
     DialogContentText,
     DialogTitle,
+    FormControlLabel,
     Grid,
     MenuItem,
+    Switch,
     Table,
     TableBody,
     TableCell,
@@ -16,13 +19,9 @@ import {
     TableRow,
     TextField,
     Typography,
-    Button,
-    Switch,
-    FormControlLabel,
 } from "@mui/material";
 import {useNavigate} from "react-router-dom";
 import {post} from "../../components/utils/Request";
-import {IsDesktop} from "../../components/utils/IsDesktop";
 import Paper from "@mui/material/Paper";
 import {BudgetRow} from "../../components/BudgetRow";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -87,15 +86,15 @@ const Budget = () => {
         setOpenBackDrop(true);
     };
 
-    const handleDescriptionChanged = (event:any) => {
+    const handleDescriptionChanged = (event: any) => {
         setApplyDescription(event.target.value);
     }
 
-    const handleTypeChanged = (event:any) => {
+    const handleTypeChanged = (event: any) => {
         setApplyType(event.target.value);
     }
 
-    const handleAmountChanged = (event:any) => {
+    const handleAmountChanged = (event: any) => {
         setApplyAmount(event.target.value);
     }
 
@@ -107,13 +106,13 @@ const Budget = () => {
         setOpen(false);
     };
 
-    function handleTeleChanged(event:any) {
+    function handleTeleChanged(event: any) {
         setApplyTele(event.target.value);
     }
 
     function init() {
         post("/transaction/get-application-list",
-            localStorage.getItem("v5_token")).then((res:any) => {
+            localStorage.getItem("v5_token")).then((res: any) => {
             if (res.status === 200) {
                 setRenderRows(res.data.records.reverse());
             }
@@ -130,22 +129,22 @@ const Budget = () => {
 
     const handleApply = () => {
         handleToggleBackdrop();
-        if(applyType === ""){
+        if (applyType === "") {
             alert("申请类别不得为空");
             handleCloseBackdrop();
             return;
         }
-        if(applyAmount === "" || 0){
+        if (applyAmount === "" || 0) {
             alert("申请金额不得为空或0");
             handleCloseBackdrop();
             return;
         }
-        if(applyTele === ""){
+        if (applyTele === "") {
             alert("申请人手机号不得为空");
             handleCloseBackdrop();
             return;
         }
-        if(applyDescription === ""){
+        if (applyDescription === "") {
             alert("申请项说明不得为空");
             handleCloseBackdrop();
             return;
@@ -158,7 +157,7 @@ const Budget = () => {
             alipayTelephone: applyTele,
             isInvoiceRequired: invoiceRequired,
         }
-        post('/transaction/apply', data).then((res:any) => {
+        post('/transaction/apply', data).then((res: any) => {
             if (res.status === 200 && res.data.msg === "success") {
                 setOpen(false);
                 handleCloseBackdrop();
@@ -169,7 +168,7 @@ const Budget = () => {
 
     function getTele() {
         post("/member/tele",
-            localStorage.getItem("v5_token")).then((res:any) => {
+            localStorage.getItem("v5_token")).then((res: any) => {
             if (res.status === 200) {
                 setApplyTele(res.data.msg);
             }
@@ -179,15 +178,15 @@ const Budget = () => {
         })
     }
 
-    const getFileType = (fileName:string) => {
+    const getFileType = (fileName: string) => {
         const suffix = fileName.substring(fileName.lastIndexOf('.') + 1).toLowerCase();
-        if(suffix === "md"){
+        if (suffix === "md") {
             return "md";
-        }else if(suffix === "pdf"){
+        } else if (suffix === "pdf") {
             return "pdf";
-        }else if(suffix === "html"){
+        } else if (suffix === "html") {
             return "html";
-        }else {
+        } else {
             return "";
         }
     }
@@ -211,10 +210,10 @@ const Budget = () => {
                 onClose={handleClose}
             >
                 <Backdrop
-                    sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                    sx={{color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1}}
                     open={openBackDrop}
                 >
-                    <CircularProgress color="inherit" />
+                    <CircularProgress color="inherit"/>
                 </Backdrop>
                 <DialogTitle>新建申请</DialogTitle>
                 <DialogContent>
@@ -248,7 +247,7 @@ const Budget = () => {
                         variant="outlined"
                         onClick={() => {
                             post("/config/get", "fund_rules_path")
-                                .then((res:any)=>{
+                                .then((res: any) => {
                                     navigate("/homepage/"
                                         + getFileType(res.data.msg)
                                         + "?fileLink="
@@ -261,10 +260,10 @@ const Budget = () => {
                     <FormControlLabel
                         control={<Switch/>}
                         label="申请发票豁免"
-                        sx={{marginX:3}}
-                        onChange={()=>{
+                        sx={{marginX: 3}}
+                        onChange={() => {
                             setInvoiceRequired(!invoiceRequired);
-                            if(!invoiceRequired){
+                            if (!invoiceRequired) {
                                 alert("发票豁免条件请仔细阅读申请流程与要求文档！");
                             }
                         }}
@@ -308,7 +307,7 @@ const Budget = () => {
                             marginRight: 3,
                             marginBottom: 3,
                             fontSize: 18
-                    }}>
+                        }}>
                         取消
                     </Button>
                     <Button
@@ -318,7 +317,7 @@ const Budget = () => {
                             marginRight: 5,
                             marginBottom: 3,
                             fontSize: 18
-                    }}>
+                        }}>
                         确认申请
                     </Button>
                 </DialogActions>
@@ -388,7 +387,7 @@ const Budget = () => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {renderRows.map((row:any) => (
+                        {renderRows.map((row: any) => (
                             <BudgetRow key={row.name} row={row} init={init}/>
                         ))}
                     </TableBody>

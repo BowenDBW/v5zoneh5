@@ -77,16 +77,16 @@ export default function Admission() {
         openInNewTab(url);
     };
 
-    const genDescription = (row:any) => {
-        if(row.type === "收入"){
+    const genDescription = (row: any) => {
+        if (row.type === "收入") {
             return "发起入账申请，等待通过";
-        }else if(row.stage === 1 && row.isInvoiceRequired) {
+        } else if (row.stage === 1 && row.isInvoiceRequired) {
             return "发起支出申请和发票豁免，等待通过";
-        }else if(row.isInvoiceRequired){
+        } else if (row.isInvoiceRequired) {
             return "发起发票豁免，等待通过";
-        }else if(row.stage === 1){
+        } else if (row.stage === 1) {
             return "发起支出申请，等待通过";
-        }else if(row.stage === 3){
+        } else if (row.stage === 3) {
             return "发票上传，等待确认";
         }
         return "";
@@ -95,10 +95,10 @@ export default function Admission() {
     return (
         <Box>
             <Backdrop
-                sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                sx={{color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1}}
                 open={openBackDrop}
             >
-                <CircularProgress color="inherit" />
+                <CircularProgress color="inherit"/>
             </Backdrop>
             <Box>
                 <Typography
@@ -151,7 +151,7 @@ export default function Admission() {
                                                 下载发票
                                             </Button>
                                         </TableCell>
-                                        <TableCell sx={{textAlign:"center"}}>
+                                        <TableCell sx={{textAlign: "center"}}>
                                             {genDescription(row)}
                                         </TableCell>
                                         <TableCell align="center">

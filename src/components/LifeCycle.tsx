@@ -1,14 +1,5 @@
 import React from 'react';
-import {
-    Box,
-    Button,
-    FormControl,
-    InputLabel,
-    MenuItem,
-    OutlinedInput,
-    Select,
-    Stack,
-} from "@mui/material";
+import {Box, Button, FormControl, InputLabel, MenuItem, OutlinedInput, Select, Stack,} from "@mui/material";
 import {post} from "./utils/Request";
 import {useNavigate} from "react-router-dom/";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -42,12 +33,12 @@ const LifeCycle = () => {
     const handleRetired = () => {
         handleToggleBackdrop();
         post("/member/force-session-retired", {
-            token:localStorage.getItem("v5_token")
+            token: localStorage.getItem("v5_token")
         }).then((res: any) => {
             if (res.status === 200) {
-                if(res.data.msg === "true"){
+                if (res.data.msg === "true") {
                     alert("操作成功");
-                }else {
+                } else {
                     alert("操作失败");
                 }
                 handleCloseBackdrop();
@@ -58,14 +49,14 @@ const LifeCycle = () => {
     const alterCaptain = () => {
         handleToggleBackdrop();
         post("/auth/set-new-cap", {
-                token:localStorage.getItem("v5_token"),
-                message: newMonitorId
-            }).then((res: any) => {
+            token: localStorage.getItem("v5_token"),
+            message: newMonitorId
+        }).then((res: any) => {
             if (res.status === 200) {
-                if(res.data.msg === "true"){
+                if (res.data.msg === "true") {
                     alert("操作成功，您已移交队长称号，请重新登录");
                     navigate("/auth/login");
-                }else {
+                } else {
                     alert("操作失败");
                 }
                 handleCloseBackdrop();
@@ -76,13 +67,13 @@ const LifeCycle = () => {
     const alterViceCaptain = () => {
         handleToggleBackdrop();
         post("/auth/set-new-vice", {
-            token:localStorage.getItem("v5_token"),
+            token: localStorage.getItem("v5_token"),
             message: newMonitorId
         }).then((res: any) => {
-            if(res.data.msg === "true"){
+            if (res.data.msg === "true") {
                 alert("操作成功，您已移交副队长称号，请重新登录");
                 navigate("/auth/login");
-            }else {
+            } else {
                 alert("操作失败");
             }
             handleCloseBackdrop();
@@ -108,26 +99,26 @@ const LifeCycle = () => {
         });
         post("/auth/is-monitor", localStorage.getItem("v5_token"))
             .then((res: any) => {
-                if(res.data === "VICE_CAPTAIN"){
+                if (res.data === "VICE_CAPTAIN") {
                     setIsVice(true);
-                }else {
+                } else {
                     setIsVice(false);
                 }
                 handleCloseBackdrop();
             });
     }
 
-    React.useEffect(()=>{
+    React.useEffect(() => {
         init();
-    },[]);
+    }, []);
 
     return (
-        <Box sx={{margin:3}}>
+        <Box sx={{margin: 3}}>
             <Backdrop
-                sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                sx={{color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1}}
                 open={openBackDrop}
             >
-                <CircularProgress color="inherit" />
+                <CircularProgress color="inherit"/>
             </Backdrop>
             <Stack>
                 <Button
@@ -154,7 +145,7 @@ const LifeCycle = () => {
                         <Select
                             id="队长转让"
                             value={newMonitorName}
-                            onChange={(event:any)=>{
+                            onChange={(event: any) => {
                                 setNewMonitorName(event.target.value);
                                 members.map((option: any) => {
                                     if (option.name === event.target.value) {
@@ -165,7 +156,7 @@ const LifeCycle = () => {
                             input={<OutlinedInput label={isVice ? "副队长转让" : "队长转让"}/>}
                             MenuProps={MenuProps}
                         >
-                            {members.map((option:any) => (
+                            {members.map((option: any) => (
                                 <MenuItem
                                     key={option.name}
                                     value={option.name}
@@ -177,10 +168,10 @@ const LifeCycle = () => {
                     </FormControl>
                     <Button
                         variant={"contained"}
-                        onClick={()=>{
-                            if(isVice){
+                        onClick={() => {
+                            if (isVice) {
                                 alterViceCaptain();
-                            }else {
+                            } else {
                                 alterCaptain();
                             }
                         }}

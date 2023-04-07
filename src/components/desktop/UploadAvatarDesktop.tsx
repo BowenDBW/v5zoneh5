@@ -14,7 +14,7 @@ import Grid from "@mui/material/Grid";
 import DriveFolderUploadIcon from "@mui/icons-material/DriveFolderUpload";
 import GlobalParams from "../../GlobalParams";
 
-export const UploadAvatarDesktop = (props:any) => {
+export const UploadAvatarDesktop = (props: any) => {
 
     const {open, setOpen, setMenuClose} = props;
     const navigate = useNavigate();
@@ -93,13 +93,13 @@ export const UploadAvatarDesktop = (props:any) => {
                 }}
                 open={openBackDrop}
             >
-                <CircularProgress color="inherit" />
+                <CircularProgress color="inherit"/>
             </Backdrop>
             <DialogTitle
                 id="alert-dialog-title"
                 sx={{
-                    fontWeight:"bold",
-                    textAlign:"center",
+                    fontWeight: "bold",
+                    textAlign: "center",
                 }}
             >
                 上传新头像
@@ -124,7 +124,7 @@ export const UploadAvatarDesktop = (props:any) => {
                                 id="preview"
                                 width="200"
                                 height="200"
-                                style={{borderRadius:100}}
+                                style={{borderRadius: 100}}
                                 alt="图片"
                                 src={fileLink}
                             />
@@ -132,7 +132,7 @@ export const UploadAvatarDesktop = (props:any) => {
                     </Grid>
                 </Grid>
             </DialogContent>
-            <DialogActions sx={{justifyContent:"center"}}>
+            <DialogActions sx={{justifyContent: "center"}}>
                 <Button
                     variant="outlined"
                     onClick={handleResetAvatar}

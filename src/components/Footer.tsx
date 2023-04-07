@@ -2,7 +2,7 @@ import React from 'react';
 import Global from "../GlobalParams";
 import {Box, Typography} from "@mui/material";
 
-const Footer = (props:any) => {
+const Footer = (props: any) => {
 
     const {bottom} = props;
 

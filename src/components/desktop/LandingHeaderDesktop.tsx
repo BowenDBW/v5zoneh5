@@ -1,5 +1,5 @@
 import React from 'react';
-import {Grid, Box, Button} from "@mui/material";
+import {Box, Button, Grid} from "@mui/material";
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import Typography from "@mui/material/Typography";
 import CloudDownloadIcon from '@mui/icons-material/CloudDownload';
@@ -20,10 +20,10 @@ const LandingHeaderDesktop = () => {
         <Box
             sx={{
                 background: `linear-gradient(${color1}, ${color2})`,
-                position:"fixed",
-                width:"100%",
-                height:"50%",
-                opacity:0.7,
+                position: "fixed",
+                width: "100%",
+                height: "50%",
+                opacity: 0.7,
             }}
         >
             <Grid container>
@@ -41,17 +41,17 @@ const LandingHeaderDesktop = () => {
                         足球机器人基地 V5++组
                     </Typography>
                 </Grid>
-                <Grid xs={6} sx={{textAlign:"right",marginY:2}}>
+                <Grid xs={6} sx={{textAlign: "right", marginY: 2}}>
                     <Button
                         sx={{
-                            color:"#000",
+                            color: "#000",
                             fontFamily: "font5",
                             fontSize: 20,
                             marginRight: 4
                         }}
                         variant="text"
                         endIcon={<CloudDownloadIcon/>}
-                        onClick={()=>{
+                        onClick={() => {
                             openInNewTab("https://files.npu5v5.cn/");
                         }}
                     >
@@ -59,14 +59,16 @@ const LandingHeaderDesktop = () => {
                     </Button>
                     <Button
                         sx={{
-                            color:"#000",
+                            color: "#000",
                             fontFamily: "font5",
                             fontSize: 20,
                             marginRight: 4
                         }}
                         variant="text"
                         endIcon={<AccountBoxIcon/>}
-                        onClick={()=>{navigate("/auth/login")}}
+                        onClick={() => {
+                            navigate("/auth/login")
+                        }}
                     >
                         队员登录
                     </Button>

@@ -18,16 +18,16 @@ const HeaderMobile = () => {
         setAnchorEl(event.currentTarget);
     };
 
-    useEffect(()=>{
+    useEffect(() => {
         post("/member/name",
-            localStorage.getItem("v5_token")).then((res:any) => {
+            localStorage.getItem("v5_token")).then((res: any) => {
                 setName(res.data.msg);
             }
         ).catch(() => {
             alert("登录信息过期，请重新登录");
             navigate("/auth/login");
         });
-    },[])
+    }, [])
 
     return (
         <Box sx={{flexGrow: 1, zIndex: 10,}}>
@@ -83,7 +83,7 @@ const HeaderMobile = () => {
                     {avatar === "" ?
                         <Avatar sx={{bgcolor: deepOrange[500]}}>{name[0]}</Avatar>
                         :
-                        <Avatar sx={{color:"#000000",borderStyle:"solid", borderWidth:"1px"}} src={avatar}/>
+                        <Avatar sx={{color: "#000000", borderStyle: "solid", borderWidth: "1px"}} src={avatar}/>
                     }
                 </Button>
             </AppBar>

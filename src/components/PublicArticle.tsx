@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {useNavigate} from "react-router-dom";
-import {post, get} from "./utils/Request";
+import {get, post} from "./utils/Request";
 import Global from "../GlobalParams";
 import {
     Button,
@@ -17,7 +17,8 @@ import {
     TableContainer,
     TableHead,
     TableRow,
-    TextField, Typography
+    TextField,
+    Typography
 } from "@mui/material";
 import Paper from "@mui/material/Paper";
 import Backdrop from "@mui/material/Backdrop";
@@ -223,7 +224,7 @@ const PublicArticle = () => {
                 </Grid>
                 <Grid xs={2}>
                     <Button
-                        sx={{marginTop:3}}
+                        sx={{marginTop: 3}}
                         onClick={handleOpen}
                         variant={"contained"}
                     >上传新文档</Button>

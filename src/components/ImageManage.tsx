@@ -1,15 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import {useNavigate} from "react-router-dom";
 import GlobalParams from "../GlobalParams";
-import {post} from "./utils/Request";
-import {
-    Box,
-    Grid,
-    Stack,
-    Typography
-} from "@mui/material";
-import ImageCard from "./ImageCard";
 import Global from "../GlobalParams";
+import {post} from "./utils/Request";
+import {Box, Grid, Stack, Typography} from "@mui/material";
+import ImageCard from "./ImageCard";
 
 const ImageManage = () => {
 

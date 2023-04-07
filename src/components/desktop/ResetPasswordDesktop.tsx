@@ -20,10 +20,10 @@ interface SimpleDialogProps {
     open: boolean,
     setOpen: Function,
 
-    setMenuClose:Function,
+    setMenuClose: Function,
 }
 
-const ResetPasswordDesktop:React.FC<SimpleDialogProps> = (props) => {
+const ResetPasswordDesktop: React.FC<SimpleDialogProps> = (props) => {
 
     const {open, setOpen, setMenuClose} = props;
     const navigate = useNavigate();
@@ -43,16 +43,17 @@ const ResetPasswordDesktop:React.FC<SimpleDialogProps> = (props) => {
         setMenuClose();
         setOpen(false);
     }
+
     const handleClickShowPassword = () => setShowPassword((show) => !show);
 
-    const handleMouseDownPassword = (event:any) => {
+    const handleMouseDownPassword = (event: any) => {
         event.preventDefault();
     };
 
     const handleClickShowPasswordAgain = () =>
         setShowPasswordAgain((show) => !show);
 
-    const handleMouseDownPasswordAgain = (event:any) => {
+    const handleMouseDownPasswordAgain = (event: any) => {
         event.preventDefault();
     };
     const onClickReset = () => {
@@ -70,7 +71,7 @@ const ResetPasswordDesktop:React.FC<SimpleDialogProps> = (props) => {
         post("/auth/internal-reset-password", {
             "id": localStorage.getItem("v5_token"),
             "password": password
-        }).then((res:any) => {
+        }).then((res: any) => {
             if (res.status === 200) {
                 localStorage.setItem('v5_token', "")
                 localStorage.setItem('v5_id', "")
@@ -97,18 +98,18 @@ const ResetPasswordDesktop:React.FC<SimpleDialogProps> = (props) => {
                 }}
                 open={openBackDrop}
             >
-                <CircularProgress color="inherit" />
+                <CircularProgress color="inherit"/>
             </Backdrop>
             <DialogTitle
                 id="alert-dialog-title"
                 sx={{
-                    fontWeight:"bold",
-                    textAlign:"center",
+                    fontWeight: "bold",
+                    textAlign: "center",
                 }}
             >
                 重置密码
             </DialogTitle>
-            <DialogContent sx={{textAlign:"center"}}>
+            <DialogContent sx={{textAlign: "center"}}>
                 <FormControl
                     required={true}
                     sx={{
@@ -172,7 +173,7 @@ const ResetPasswordDesktop:React.FC<SimpleDialogProps> = (props) => {
                     />
                 </FormControl>
             </DialogContent>
-            <DialogActions sx={{justifyContent:"center"}}>
+            <DialogActions sx={{justifyContent: "center"}}>
                 <Button
                     variant="contained"
                     onClick={onClickReset}

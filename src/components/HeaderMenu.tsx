@@ -1,12 +1,4 @@
-import {
-    Divider,
-    Box,
-    ListItemIcon,
-    ListItemText,
-    Menu,
-    MenuItem,
-    MenuList
-} from "@mui/material";
+import {Box, Divider, ListItemIcon, ListItemText, Menu, MenuItem, MenuList} from "@mui/material";
 import CenterFocusWeakIcon from "@mui/icons-material/CenterFocusWeak";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import LockResetIcon from "@mui/icons-material/LockReset";
@@ -41,7 +33,7 @@ export const HeaderMenu: React.FC<HeaderProps> = (props) => {
 
     const init = () => {
         post("/auth/is-monitor", localStorage.getItem("v5_token"))
-            .then((res:any) => {
+            .then((res: any) => {
                 setIsMonitor(res.data);
             })
     }
@@ -55,25 +47,25 @@ export const HeaderMenu: React.FC<HeaderProps> = (props) => {
     }
 
     const onViewProfile = () => {
-        if(Global.isDesktop){
+        if (Global.isDesktop) {
             setProfileDesktop(true);
-        }else{
+        } else {
             navigate("/homepage/profile");
         }
     }
 
     const onSetAvatar = () => {
-        if(Global.isDesktop){
+        if (Global.isDesktop) {
             setUploadAvatarDesktop(true);
-        }else{
+        } else {
             navigate("/homepage/set-avatar");
         }
     }
 
     const onResetPassword = () => {
-        if(Global.isDesktop){
+        if (Global.isDesktop) {
             setPasswordDesktop(true);
-        }else{
+        } else {
             navigate("/homepage/reset-password");
         }
     }
@@ -85,7 +77,7 @@ export const HeaderMenu: React.FC<HeaderProps> = (props) => {
 
     React.useEffect(() => {
         init();
-    },[])
+    }, [])
 
     return (
         <Box>

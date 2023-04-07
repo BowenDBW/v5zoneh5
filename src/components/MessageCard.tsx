@@ -1,4 +1,3 @@
-import {useNavigate} from "react-router-dom";
 import {post} from "./utils/Request";
 import {Box, Button, CardContent, Divider, Typography} from "@mui/material";
 import React from "react";
@@ -64,10 +63,10 @@ export default function MessageCard(props: any) {
             </React.Fragment>
             <Divider/>
             <Backdrop
-                sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                sx={{color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1}}
                 open={openBackDrop}
             >
-                <CircularProgress color="inherit" />
+                <CircularProgress color="inherit"/>
             </Backdrop>
         </Box>
 

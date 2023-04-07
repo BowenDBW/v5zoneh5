@@ -4,13 +4,13 @@ import {useNavigate} from "react-router-dom";
 import {Box, Button, Divider, Stack} from "@mui/material";
 import TextField from "@mui/material/TextField";
 
-const SettingRow = (props:any) => {
+const SettingRow = (props: any) => {
 
     const {configKey, configValue, description, init} = props;
 
     const [itemValue, setItemValue] = React.useState(configValue);
 
-    return(
+    return (
         <Box alignItems={"center"}>
             <TextField
                 id="outlined-required"
@@ -22,7 +22,7 @@ const SettingRow = (props:any) => {
                     height: 40,
                     width: 400,
                 }}
-                onChange={(event)=>{
+                onChange={(event) => {
                     setItemValue(event.target.value);
                 }}
             />
@@ -30,13 +30,13 @@ const SettingRow = (props:any) => {
                 variant={"contained"}
                 sx={{
                     marginTop: 4,
-                    fontSize:16
+                    fontSize: 16
                 }}
-                onClick={()=>{
-                    post("/config/set-setting",{
+                onClick={() => {
+                    post("/config/set-setting", {
                         token: configKey,
                         message: itemValue,
-                    }).then((res:any) => {
+                    }).then((res: any) => {
                         if (res.status === 200) {
                             init();
                             alert("更新成功");
@@ -56,7 +56,7 @@ const Settings = () => {
     const [settings, setSettings] = React.useState([]);
 
     const init = () => {
-        get("/config/get-all-settings").then((res:any) => {
+        get("/config/get-all-settings").then((res: any) => {
             if (res.status === 200) {
                 setSettings(res.data);
             }
@@ -66,14 +66,14 @@ const Settings = () => {
         })
     }
 
-    React.useEffect(()=>{
+    React.useEffect(() => {
         init();
-    },[])
+    }, [])
 
     return (
         <Stack alignItems={"center"}>
             {
-                settings.map((option:any)=> (
+                settings.map((option: any) => (
                         <Box>
                             <SettingRow
                                 configKey={option.configKey}

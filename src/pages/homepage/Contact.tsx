@@ -1,13 +1,6 @@
-import {
-    Box,
-    Grid,
-    MenuItem,
-    TextField,
-    Typography,
-} from '@mui/material';
+import {Box, Grid, MenuItem, TextField, Typography,} from '@mui/material';
 import React from 'react';
 import {useNavigate} from "react-router-dom";
-import {IsDesktop} from "../../components/utils/IsDesktop";
 import {ContactRows} from "../../components/ContactRows";
 import {post} from "../../components/utils/Request";
 import Global from "../../GlobalParams";

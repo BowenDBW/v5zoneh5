@@ -25,7 +25,7 @@ import dayjs from "dayjs";
 import CircularProgress from "@mui/material/CircularProgress";
 import Backdrop from "@mui/material/Backdrop";
 
-export default function Registry(){
+export default function Registry() {
     const sexItem = [
         {
             label: "男",
@@ -91,23 +91,23 @@ export default function Registry(){
         setShowPassword((show) => !show);
     const handleClickShowPasswordAgain = () =>
         setShowPasswordAgain((show) => !show);
-    const handleMouseDownPassword = (event:any) => {
+    const handleMouseDownPassword = (event: any) => {
         event.preventDefault();
     };
 
-    const handleMouseDownPasswordAgain = (event:any) => {
+    const handleMouseDownPasswordAgain = (event: any) => {
         event.preventDefault();
     };
 
-    const getFileType = (fileName:string) => {
+    const getFileType = (fileName: string) => {
         const suffix = fileName.substring(fileName.lastIndexOf('.') + 1).toLowerCase();
-        if(suffix === "md"){
+        if (suffix === "md") {
             return "md";
-        }else if(suffix === "pdf"){
+        } else if (suffix === "pdf") {
             return "pdf";
-        }else if(suffix === "html"){
+        } else if (suffix === "html") {
             return "html";
-        }else {
+        } else {
             return "";
         }
     }
@@ -227,7 +227,7 @@ export default function Registry(){
             techGroup: techGroup,
             sex: sex,
             nation: nation,
-        }).then(((res:any) => {
+        }).then(((res: any) => {
             if (res.status === 200) {
                 if (res.data.msg === "success") {
                     alert("注册成功，点击确认返回登录页");
@@ -260,10 +260,10 @@ export default function Registry(){
             }}
         >
             <Backdrop
-                sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                sx={{color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1}}
                 open={openBackDrop}
             >
-                <CircularProgress color="inherit" />
+                <CircularProgress color="inherit"/>
             </Backdrop>
             <Box sx={{
                 marginRight: 2
@@ -720,7 +720,7 @@ export default function Registry(){
                         variant="outlined"
                         onClick={() => {
                             post("/config/get", "privacy_rules_path")
-                                .then((res:any)=>{
+                                .then((res: any) => {
                                     navigate("/auth/"
                                         + getFileType(res.data.msg)
                                         + "?fileLink="

@@ -15,7 +15,7 @@ import {Visibility, VisibilityOff} from "@mui/icons-material";
 import {useNavigate} from "react-router-dom";
 import {post} from "../../components/utils/Request";
 
-function CountDown(props:any) {
+function CountDown(props: any) {
     const {mss} = props;
 
     const [time, setTime] = useState(mss);
@@ -64,7 +64,7 @@ function ForgetPasswordForm() {
         post("/auth/send_code", {
             id: email,
             message: "重置密码验证码",
-        }).then(((res:any) => {
+        }).then(((res: any) => {
             if (res.status === 200) {
                 alert("发送成功，请注意查收");
             }
@@ -82,14 +82,14 @@ function ForgetPasswordForm() {
     const handleClickShowPassword = () =>
         setShowPassword((show) => !show);
 
-    const handleMouseDownPassword = (event:any) => {
+    const handleMouseDownPassword = (event: any) => {
         event.preventDefault();
     };
 
     const handleClickShowPasswordAgain = () =>
         setShowPasswordAgain((show) => !show);
 
-    const handleMouseDownPasswordAgain = (event:any) => {
+    const handleMouseDownPasswordAgain = (event: any) => {
         event.preventDefault();
     };
 
@@ -99,7 +99,7 @@ function ForgetPasswordForm() {
             id: email,
             password: password,
             code: code,
-        }).then(((res:any) => {
+        }).then(((res: any) => {
             if (res.status === 200) {
                 alert("修改成功");
                 navigate('../auth');

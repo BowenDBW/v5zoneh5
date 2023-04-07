@@ -49,17 +49,17 @@ const MessageManage = () => {
         handleCloseBackdrop();
     }
 
-    React.useEffect(()=>{
+    React.useEffect(() => {
         init();
-    },[]);
+    }, []);
 
     return (
         <div>
             <Backdrop
-                sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                sx={{color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1}}
                 open={openBackDrop}
             >
-                <CircularProgress color="inherit" />
+                <CircularProgress color="inherit"/>
             </Backdrop>
             {Global.isDesktop ?
                 <Box>

@@ -124,12 +124,12 @@ const MessageBoard = () => {
                 onClose={handleClose}
             >
                 <Backdrop
-                    sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                    sx={{color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1}}
                     open={openBackDrop}
                 >
-                    <CircularProgress color="inherit" />
+                    <CircularProgress color="inherit"/>
                 </Backdrop>
-                <DialogTitle sx={{width:500}}>新建留言</DialogTitle>
+                <DialogTitle sx={{width: 500}}>新建留言</DialogTitle>
                 <DialogContent>
                     <TextField
                         autoFocus

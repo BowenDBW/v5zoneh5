@@ -1,13 +1,7 @@
-import {
-    Box,
-    Step,
-    StepLabel,
-    Stepper,
-    Typography
-} from "@mui/material";
+import {Box, Step, StepLabel, Stepper, Typography} from "@mui/material";
 import React from "react";
 
-export default function MyStepper(props : any) {
+export default function MyStepper(props: any) {
     const {type, cost, stage, isInvoiceRequired} = props;
 
     const aboveHundredSteps = [
@@ -29,7 +23,7 @@ export default function MyStepper(props : any) {
 
     const isDenied = (stage === 0);
 
-    const isStepFailed = (step : number) => {
+    const isStepFailed = (step: number) => {
         return step === 1;
     };
 

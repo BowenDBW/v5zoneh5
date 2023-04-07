@@ -1,14 +1,9 @@
-import {
-    Box,
-    ImageList,
-    ImageListItem,
-    Typography
-} from '@mui/material';
+import {Box, ImageList, ImageListItem, Typography} from '@mui/material';
 import React, {useEffect, useState} from 'react';
 import {post} from "../../components/utils/Request";
 import GlobalParams from "../../GlobalParams";
-import {useNavigate} from "react-router-dom/";
 import Global from "../../GlobalParams";
+import {useNavigate} from "react-router-dom/";
 
 const ImageBoard = () => {
 

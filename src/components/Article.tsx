@@ -291,7 +291,7 @@ const Article = () => {
                 </Grid>
                 <Grid xs={2}>
                     <Button
-                        sx={{marginTop:3}}
+                        sx={{marginTop: 3}}
                         onClick={handleOpen}
                         variant={"contained"}
                     >上传新文档</Button>

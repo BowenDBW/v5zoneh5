@@ -20,7 +20,7 @@ const HeaderDesktop = () => {
 
     const init = () => {
         post("/member/name",
-            localStorage.getItem("v5_token")).then((res:any) => {
+            localStorage.getItem("v5_token")).then((res: any) => {
                 setName(res.data.msg);
             }
         ).catch(() => {
@@ -28,15 +28,15 @@ const HeaderDesktop = () => {
             navigate("/auth/login");
         });
         post("/auth/get-avatar-by-token",
-            {token:localStorage.getItem("v5_token")})
-            .then((res:any) => {
+            {token: localStorage.getItem("v5_token")})
+            .then((res: any) => {
                 setAvatar(GlobalParams.baseUrl + "/album/download/" + res.data);
             });
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         init();
-    },[])
+    }, [])
 
     const getTimeState = GetTimeState()
 
@@ -60,7 +60,7 @@ const HeaderDesktop = () => {
                         position: "absolute",
                         marginLeft: 5,
                         left: 20,
-                        fontFamily:"font2",
+                        fontFamily: "font2",
                     }}
                 >
                     V5++ 无以复加
@@ -82,7 +82,7 @@ const HeaderDesktop = () => {
                             marginX: 1,
                             fontSize: 22,
                             color: "#000000",
-                            fontFamily:"font5"
+                            fontFamily: "font5"
                         }}
                     >
                         {getTimeState}! {name}
@@ -90,7 +90,7 @@ const HeaderDesktop = () => {
                     {avatar === "null" ?
                         <Avatar sx={{bgcolor: deepOrange[500]}}>{name[0]}</Avatar>
                         :
-                        <Avatar sx={{color:"#000000",borderStyle:"solid", borderWidth:"1px"}} src={avatar}/>
+                        <Avatar sx={{color: "#000000", borderStyle: "solid", borderWidth: "1px"}} src={avatar}/>
                     }
                 </Button>
             </Toolbar>
