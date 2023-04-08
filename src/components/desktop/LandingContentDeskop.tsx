@@ -3,7 +3,7 @@ import {styled} from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import ButtonBase from '@mui/material/ButtonBase';
 import Typography from '@mui/material/Typography';
-import {get} from "../utils/Request";
+import {getWithoutToken} from "../utils/Request";
 
 const LandingContentDesktop = (props: any) => {
 
@@ -65,7 +65,7 @@ const LandingContentDesktop = (props: any) => {
     }
 
     const init = () => {
-        get("/public-article/all").then((res: any) => {
+        getWithoutToken("/public-article/all").then((res: any) => {
             if (res.status === 200) {
                 const count: number = res.data.length;
                 setContentHeight(calHeight(count));

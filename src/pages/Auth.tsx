@@ -3,7 +3,7 @@ import {Outlet} from "react-router-dom";
 import Global from "../GlobalParams";
 import Footer from "../components/Footer";
 import {Stack} from "@mui/material";
-import {post} from "../components/utils/Request";
+import {postWithoutToken} from "../components/utils/Request";
 
 const Auth = () => {
 
@@ -34,7 +34,7 @@ const Auth = () => {
 
     const init = () => {
         const label = Global.isDesktop ? "login_img_desktop" : "login_img_mobile";
-        post("/config/get", {
+        postWithoutToken("/config/get", {
             token: label,
         }).then((res: any) => {
             console.log(res);

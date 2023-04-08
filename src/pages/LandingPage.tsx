@@ -10,7 +10,7 @@ import {Element, Link} from 'react-scroll';
 import Box from "@mui/material/Box";
 import Footer from "../components/Footer"
 import Global from "../GlobalParams";
-import {post} from "../components/utils/Request";
+import {postWithoutToken} from "../components/utils/Request";
 
 const LandingPage = () => {
     const [renderImage, setRenderImages] = React.useState("");
@@ -18,7 +18,7 @@ const LandingPage = () => {
     const [contentHeight, setContentHeight] = React.useState(0);
     const init = () => {
         const label1 = Global.isDesktop ? "landing_page_img_desktop" : "landing_page_img_mobile";
-        post("/config/get", {
+        postWithoutToken("/config/get", {
             token: label1,
         }).then((res: any) => {
             if (res.status === 200) {
@@ -26,7 +26,7 @@ const LandingPage = () => {
             }
         })
         const label2 = Global.isDesktop ? "landing_page_font_color_desktop" : "landing_page_font_color_mobile";
-        post("/config/get", {
+        postWithoutToken("/config/get", {
             token: label2,
         }).then((res: any) => {
             if (res.status === 200) {
