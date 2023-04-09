@@ -15,7 +15,7 @@ const Htmleader = () => {
 
     const init = () => {
         const temp = isOutside ? "public-article" : "article";
-        const url = Global.baseUrl
+        const url = Global.backendUrl
             + "/"
             + temp
             + "/download/"
@@ -43,12 +43,11 @@ const Htmleader = () => {
                             }}
                             sx={{
                                 position: "fixed",
-                                width: 140,
                                 marginX: 2,
                                 fontWeight: "bold",
-                                fontSize: 20,
+                                fontSize: 16,
                             }}
-                        >返回</Button>
+                        >返回上一级</Button>
                     </Grid>
                     <Grid xs={8}>
                         <div dangerouslySetInnerHTML={{__html: html}}/>

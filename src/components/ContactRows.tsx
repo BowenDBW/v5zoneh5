@@ -24,7 +24,7 @@ const MemberAvatar = (props: any) => {
         post("/auth/get-avatar",
             {token: id})
             .then((res: any) => {
-                setAvatar(GlobalParams.baseUrl + "/album/download/" + res.data);
+                setAvatar(GlobalParams.backendUrl + "/album/download/" + res.data);
             });
     }
 

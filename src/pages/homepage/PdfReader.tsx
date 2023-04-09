@@ -15,7 +15,7 @@ const PdfReader = () => {
             <Grid xs={2}/>
             <Grid xs={8}>
                 <Document
-                    file={Global.baseUrl + "/public-article/download/" + search.get("fileLink")}
+                    file={Global.backendUrl + "/public-article/download/" + search.get("fileLink")}
                     onLoadSuccess={({numPages}) => setNumPages(numPages)}
                 >
                     {Array.apply(null, Array(numPages))

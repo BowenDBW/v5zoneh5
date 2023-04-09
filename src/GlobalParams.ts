@@ -1,9 +1,17 @@
 import {IsDesktop} from "./components/utils/IsDesktop";
 
-export default {
-    //baseUrl: "https://www.npu5v5.cn:8849",
+//const baseUrl = "http://127.0.0.1";
+const baseUrl = "https://www.npu5v5.cn:8849";
 
-    baseUrl: "http://127.0.0.1:8849",
+export default {
+
+    backendUrl: baseUrl + ":8849",
+
+    oauthUrl: "https://git.npu5v5.cn",
+
+    oauthRedirectUrl: baseUrl + ":3000",
+
+    oauthId: "fb1eb7e31e1f92890d1dcec85ea7dd3f3311f4be1c4224dc4c323761928ee0d4",
 
     isDesktop: IsDesktop(),
 

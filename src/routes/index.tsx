@@ -18,6 +18,8 @@ import CenteredReader from "../pages/auth/CenteredReader";
 import LandingPage from "../pages/LandingPage";
 import PdfReader from "../pages/homepage/PdfReader";
 import Htmleader from "../pages/homepage/Htmleader";
+import OauthCallback from "../components/utils/OauthCallback";
+import InitOauthCallback from "../components/utils/InitOauthCallback";
 
 export default [
     {
@@ -68,6 +70,10 @@ export default [
                 path: 'registry',
                 element: <Registry/>
             },
+            {
+                path: 'callback',
+                element: <OauthCallback/>
+            }
         ]
     },
     {
@@ -121,6 +127,10 @@ export default [
             {
                 path: "profile",
                 element: <ProfileMobile/>
+            },
+            {
+                path: "callback",
+                element: <InitOauthCallback/>
             },
         ]
     },

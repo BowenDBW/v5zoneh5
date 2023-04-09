@@ -35,7 +35,7 @@ export const UploadAvatarDesktop = (props: any) => {
     }
 
     function upload(formData: FormData) {
-        fetch(GlobalParams.baseUrl + '/album/upload-avatar', {
+        fetch(GlobalParams.backendUrl + '/album/upload-avatar', {
             method: 'post',
             body: formData,
         }).then(response => response.json())

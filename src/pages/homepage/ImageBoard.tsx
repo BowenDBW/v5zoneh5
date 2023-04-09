@@ -26,7 +26,7 @@ const ImageBoard = () => {
                 const list = res.data.reverse();
                 list.map((item: any) => {
                     item.title = item.resourceLink;
-                    item.resourceLink = GlobalParams.baseUrl
+                    item.resourceLink = GlobalParams.backendUrl
                         + "/album/download/"
                         + item.resourceLink
                 });
@@ -74,7 +74,7 @@ const ImageBoard = () => {
                     Zone 照片墙
                 </Typography>
             }
-            <ImageList variant="masonry" cols={3} gap={8}>
+            <ImageList variant="masonry" cols={3} gap={1}>
                 {imageList.map((item: any) => (
                     <ImageListItem key={item.img}>
                         <img
@@ -89,19 +89,30 @@ const ImageBoard = () => {
             <Box
                 sx={{
                     position:"fixed",
-                    bottom:0,
+                    top: "8vh",
                     width:"100%",
                     height:"5vh",
                     background:"#ffffff",
                     zIndex:20,
-                    display:"flex",
-                    justifyContent:"center",
+                    display:"-flex",
                 }}
             >
                 <Grid container>
-                    <Grid xs={2.5}/>
+                    <Grid xs={2}>
+                        <Typography
+                            sx={{
+                                marginTop:1,
+                                fontFamily:"font5",
+                                fontSize:18,
+                                marginLeft: 2,
+                            }}
+                        >
+                            当前第 {pageNumber} 页，共 {pageCount} 页
+                        </Typography>
+                    </Grid>
                     <Grid xs={8}>
                         <Pagination
+                            sx={{marginTop:0.5}}
                             count={pageCount}
                             boundaryCount={2}
                             siblingCount={2}
@@ -116,7 +127,6 @@ const ImageBoard = () => {
                             }}
                         />
                     </Grid>
-                    <Grid xs={1.5}/>
                 </Grid>
             </Box>
         </Box>

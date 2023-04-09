@@ -25,7 +25,7 @@ const Prize = () => {
     };
 
     const handleDownload = (filePath: string) => {
-        const url = GlobalParams.baseUrl
+        const url = GlobalParams.backendUrl
             + "/certificate/download/" + filePath
         openInNewTab(url);
     }

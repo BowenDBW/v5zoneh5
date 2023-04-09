@@ -56,7 +56,7 @@ export default function MyStepper(props: any) {
                 </Stepper>
                 :
                 <Box>
-                    {!isInvoiceRequired ?
+                    {((type === "支出") && (isInvoiceRequired === false)) ?
                         <Stepper activeStep={stage} alternativeLabel>
                             {aboveHundredSteps.map((label) => (
                                 <Step key={label}>

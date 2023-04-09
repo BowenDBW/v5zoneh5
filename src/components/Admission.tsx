@@ -71,7 +71,7 @@ export default function Admission() {
     };
 
     const clickDownload = (event: any) => {
-        const url = GlobalParams.baseUrl
+        const url = GlobalParams.backendUrl
             + "/transaction/download/"
             + event.target.value;
         openInNewTab(url);

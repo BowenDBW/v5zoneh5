@@ -2,7 +2,7 @@ import GlobalParams from "../../GlobalParams";
 import axios from "axios";
 
 axios.defaults.timeout = 10000;
-axios.defaults.baseURL = GlobalParams.baseUrl;
+axios.defaults.baseURL = GlobalParams.backendUrl;
 
 /**
  * http request 拦截器
@@ -127,7 +127,7 @@ export function postWithoutToken(url: string, data: any) {
 
 //统一接口处理，返回数据
 export function postForm(path: string, formBody: FormData) {
-    fetch(GlobalParams.baseUrl + path, {
+    fetch(GlobalParams.backendUrl + path, {
         method: 'post',
         body: formBody,
     }).then(response => response.json())

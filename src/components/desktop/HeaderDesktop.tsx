@@ -30,7 +30,7 @@ const HeaderDesktop = () => {
         post("/auth/get-avatar-by-token",
             {token: localStorage.getItem("v5_token")})
             .then((res: any) => {
-                setAvatar(GlobalParams.baseUrl + "/album/download/" + res.data);
+                setAvatar(GlobalParams.backendUrl + "/album/download/" + res.data);
             });
     }
 
@@ -51,7 +51,7 @@ const HeaderDesktop = () => {
                 zIndex: 10,
             }}
         >
-            <Toolbar sx={{height: 80}}>
+            <Toolbar sx={{height: "8vh"}}>
                 <Typography
                     variant="h6"
                     sx={{

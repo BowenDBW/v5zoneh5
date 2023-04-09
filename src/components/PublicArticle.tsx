@@ -70,7 +70,7 @@ const MarkdownTable = () => {
     };
 
     const clickDownload = (event: any) => {
-        const url = Global.baseUrl
+        const url = Global.backendUrl
             + "/public-article/download/"
             + event.target.value;
         openInNewTab(url);
@@ -160,7 +160,7 @@ const PublicArticle = () => {
     };
 
     function upload(formData: FormData) {
-        fetch(Global.baseUrl + '/public-article/upload', {
+        fetch(Global.backendUrl + '/public-article/upload', {
             method: 'post',
             body: formData,
         }).then(response => response.json())

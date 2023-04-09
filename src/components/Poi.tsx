@@ -10,19 +10,19 @@ export default function Poi() {
     };
 
     function handleMembersDownload() {
-        const url = GlobalParams.baseUrl
+        const url = GlobalParams.backendUrl
             + "/poi/members/members.xlsx"
         openInNewTab(url);
     }
 
     function handleBillsDownload() {
-        const url = GlobalParams.baseUrl
+        const url = GlobalParams.backendUrl
             + "/poi/bills/bills.xlsx"
         openInNewTab(url);
     }
 
     const handleInvoiceDownload = (event: any) => {
-        const url = GlobalParams.baseUrl
+        const url = GlobalParams.backendUrl
             + "/poi/invoice/" + event.target.value + ".zip"
         openInNewTab(url);
     }

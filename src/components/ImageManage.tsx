@@ -36,11 +36,11 @@ const ImageManage = () => {
             localStorage.getItem("v5_token")).then((res: any) => {
             if (res.status === 200) {
                 const list = res.data.reverse();
-                console.log("test_base_url: " + GlobalParams.baseUrl);
+                console.log("test_base_url: " + GlobalParams.backendUrl);
                 list.map((item: any) => {
                     item.title = item.resourceLink;
                     item.resourceLink =
-                        GlobalParams.baseUrl
+                        GlobalParams.backendUrl
                         + "/album/download/"
                         + item.resourceLink;
                 });

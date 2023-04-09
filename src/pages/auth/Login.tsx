@@ -48,16 +48,29 @@ function Login() {
         event.preventDefault();
     };
 
+    const onOauth = () => {
+        window.location.href = Global.oauthUrl +
+            "/oauth/authorize?client_id=" +
+            Global.oauthId +
+            "&redirect_uri=" +
+            Global.oauthRedirectUrl +
+            "/auth/callback" +
+            "&response_type=" +
+            "code" +
+            "&scope=" +
+            "read_user+openid" +
+            "&code_challenge_method=" +
+            "S256";
+    }
+
     const onClickLogin = () => {
         handleToggleBackdrop();
-
         localStorage.setItem("v5_token", "undefined");
-        post("/auth/authenticate", {"id": username, "password": password}).then(((res: any) => {
+        post("/auth/authenticate", {"id": username, "password": password})
+            .then(((res: any) => {
             if (res.status === 200) {
                 localStorage.setItem('v5_token', res.data.token);
-                console.log(res.data.token);
                 localStorage.setItem('v5_id', res.data.id);
-                console.log(res.data.id);
                 localStorage.setItem('v5_contact_tech', "全部");
                 localStorage.setItem('v5_contact_college', "全部");
                 localStorage.setItem('v5_contact_session', "现役");
@@ -222,9 +235,9 @@ function Login() {
                             width: Global.isDesktop ? 120 : 100,
                             fontWeight: "bold",
                         }}
-                        disabled={true}
+                        color={"secondary"}
                         variant="outlined"
-                        onClick={onClickLogin}
+                        onClick={onOauth}
                     >单点登录</Button>
                 </Box>
             </Stack>

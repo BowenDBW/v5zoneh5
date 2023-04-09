@@ -70,11 +70,11 @@ const ImageBad = () => {
             localStorage.getItem("v5_token")).then((res: any) => {
             if (res.status === 200) {
                 const list = res.data.reverse();
-                console.log("test_base_url: " + GlobalParams.baseUrl);
+                console.log("test_base_url: " + GlobalParams.backendUrl);
                 list.map((item: any) => {
                     item.title = item.resourceLink;
                     item.resourceLink =
-                        GlobalParams.baseUrl
+                        GlobalParams.backendUrl
                         + "/album/download/"
                         + item.resourceLink;
                 });
@@ -100,7 +100,7 @@ const ImageBad = () => {
     };
 
     function upload(formData: FormData) {
-        fetch(GlobalParams.baseUrl + '/album/upload', {
+        fetch(GlobalParams.backendUrl + '/album/upload', {
             method: 'post',
             body: formData,
         }).then(response => response.json())

@@ -75,7 +75,7 @@ export function BudgetRow(props: any) {
 
     function upload(formData: FormData) {
         handleToggleBackdrop();
-        fetch(GlobalParams.baseUrl + '/transaction/upload', {
+        fetch(GlobalParams.backendUrl + '/transaction/upload', {
             method: 'post',
             body: formData,
         }).then(response => response.json())
@@ -107,7 +107,7 @@ export function BudgetRow(props: any) {
     };
 
     const clickDownload = (event: any) => {
-        const url = GlobalParams.baseUrl
+        const url = GlobalParams.backendUrl
             + "/transaction/download/"
             + event.target.value;
         openInNewTab(url);
@@ -284,7 +284,8 @@ export function BudgetRow(props: any) {
 
                                 <Grid xs={3}>
                                     <Button
-                                        disabled={(row.stage !== 2 && row.stage !== 3) || row.isInvoiceRequired}
+                                        disabled={(row.stage !== 2
+                                            && row.stage !== 3) || row.isInvoiceRequired}
                                         variant="contained"
                                         onClick={clickUpload}
                                         color={"success"}
@@ -298,7 +299,8 @@ export function BudgetRow(props: any) {
                                 <Grid xs={3}>
                                     <Button
                                         disabled={!(row.stage > 2
-                                            && row.type === "支出" && row.cost >= 100)}
+                                            && row.type === "支出"
+                                            && !row.isInvoiceRequired)}
                                         variant="contained"
                                         value={row.fileName}
                                         onClick={clickDownload}

@@ -4,6 +4,7 @@ import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import LockResetIcon from "@mui/icons-material/LockReset";
 import LogoutIcon from "@mui/icons-material/Logout";
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
+import ConnectWithoutContactIcon from '@mui/icons-material/ConnectWithoutContact';
 import React from "react";
 import {useNavigate} from "react-router-dom";
 import ProfileDesktop from "./desktop/ProfileDesktop";
@@ -14,6 +15,7 @@ import {post} from "./utils/Request";
 import {UploadAvatarDesktop} from "./desktop/UploadAvatarDesktop";
 import {UploadAvatarMobile} from "./mobile/UploadAvatarMobile";
 import Global from "../GlobalParams";
+import BoundToOauth from "./desktop/BoundToOauth";
 
 interface HeaderProps {
     setAnchorEl: Function,
@@ -26,7 +28,9 @@ export const HeaderMenu: React.FC<HeaderProps> = (props) => {
     const [profileDesktop, setProfileDesktop] = React.useState(false);
     const [passwordDesktop, setPasswordDesktop] = React.useState(false);
     const [uploadAvatar, setUploadAvatarDesktop] = React.useState(false);
+    const [boundGitlab, setBoundGitlab] = React.useState(false);
     const [isMonitor, setIsMonitor] = React.useState("COMMON");
+    const [hasBoundWithGitlab, setHasBoundWithGitlab] = React.useState(false);
     const {open, anchorEl, setAnchorEl} = props;
     const navigate = useNavigate();
 
@@ -36,6 +40,14 @@ export const HeaderMenu: React.FC<HeaderProps> = (props) => {
             .then((res: any) => {
                 setIsMonitor(res.data);
             })
+        post("/auth/has-bounded-gitlab", localStorage.getItem("v5_token"))
+            .then((res: any) => {
+                if(res.data.msg === "true"){
+                    setHasBoundWithGitlab(true);
+                }else {
+                    setHasBoundWithGitlab(false);
+                }
+            })
     }
 
     const handleClose = () => {
@@ -43,7 +55,8 @@ export const HeaderMenu: React.FC<HeaderProps> = (props) => {
     };
 
     const onLogout = () => {
-        navigate("/auth/login");
+        localStorage.setItem("v5_token","null");
+        navigate("/");
     }
 
     const onViewProfile = () => {
@@ -59,6 +72,12 @@ export const HeaderMenu: React.FC<HeaderProps> = (props) => {
             setUploadAvatarDesktop(true);
         } else {
             navigate("/homepage/set-avatar");
+        }
+    }
+
+    const onBound = () => {
+        if (Global.isDesktop) {
+            setBoundGitlab(true);
         }
     }
 
@@ -113,6 +132,18 @@ export const HeaderMenu: React.FC<HeaderProps> = (props) => {
                         </ListItemIcon>
                         <ListItemText>重置密码</ListItemText>
                     </MenuItem>
+                    {Global.isDesktop ?
+                        <MenuItem onClick={onBound}>
+                            <ListItemIcon>
+                                <ConnectWithoutContactIcon fontSize="small"/>
+                            </ListItemIcon>
+                            <ListItemText>
+                                {hasBoundWithGitlab ? "解绑":"绑定"}Gitlab
+                            </ListItemText>
+                        </MenuItem>
+                        :
+                        <div/>
+                    }
                     {isMonitor === "COMMON" ?
                         <div/>
                         :
@@ -162,6 +193,13 @@ export const HeaderMenu: React.FC<HeaderProps> = (props) => {
                     :
                     <UploadAvatarMobile/>
             }
+
+            <BoundToOauth
+                open={boundGitlab}
+                setOpen={setBoundGitlab}
+                setMenuClose={handleClose}
+                init={init}
+            />
         </Box>
     );
 };
