@@ -39,7 +39,7 @@ const BoundToOauth: React.FC<SimpleDialogProps> = (props) => {
                 Global.oauthId +
                 "&redirect_uri=" +
                 Global.oauthRedirectUrl +
-                "/homepage/callback" +
+                "/callback2" +
                 "&response_type=" +
                 "code" +
                 "&scope=" +
