@@ -60,9 +60,9 @@ const Manage = () => {
                 scrollButtons="auto"
                 sx={{
                     flexGrow: 1,
-                    top: 80,
+                    top: '8.1vh',
                     width: "100%",
-                    position: "sticky",
+                    position: "fixed",
                     backgroundColor: "#FFF",
                     zIndex: 10,
                 }}
@@ -79,16 +79,18 @@ const Manage = () => {
                 <Tab label="主题背景设置"/>
             </Tabs>
             <Divider/>
-            {value === 0 ? <Article/> : <div/>}
-            {value === 1 ? <PublicArticle/> : <div/>}
-            {value === 2 ? <Admission/> : <div/>}
-            {value === 3 ? <PrizeManage/> : <div/>}
-            {value === 4 ? <ImageManage/> : <div/>}
-            {value === 5 ? <MessageManage/> : <div/>}
-            {value === 6 ? <Invite/> : <div/>}
-            {value === 7 ? <Poi/> : <div/>}
-            {value === 8 ? <LifeCycle/> : <div/>}
-            {value === 9 ? <Settings/> : <div/>}
+            <Box sx={{marginTop: 5}}>
+                {value === 0 ? <Article/> : <div/>}
+                {value === 1 ? <PublicArticle/> : <div/>}
+                {value === 2 ? <Admission/> : <div/>}
+                {value === 3 ? <PrizeManage/> : <div/>}
+                {value === 4 ? <ImageManage/> : <div/>}
+                {value === 5 ? <MessageManage/> : <div/>}
+                {value === 6 ? <Invite/> : <div/>}
+                {value === 7 ? <Poi/> : <div/>}
+                {value === 8 ? <LifeCycle/> : <div/>}
+                {value === 9 ? <Settings/> : <div/>}
+            </Box>
         </Box>
     );
 };

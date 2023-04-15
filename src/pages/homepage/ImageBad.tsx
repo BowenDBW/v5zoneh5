@@ -7,7 +7,7 @@ import {
     DialogContentText,
     DialogTitle,
     Grid,
-    MenuItem,
+    MenuItem, Pagination,
     Stack,
     TextField,
     Typography
@@ -31,6 +31,8 @@ const ImageBad = () => {
     const [file, setFile] = React.useState(null);
     const [fileName, setFileName] = React.useState("");
     const [openBackDrop, setOpenBackDrop] = React.useState(false);
+    const [pageNumber, setPageNumber] = React.useState(1);
+    const [pageCount, setPageCount] = React.useState(1);
 
     const handleCloseBackdrop = () => {
         setOpenBackDrop(false);
@@ -66,25 +68,40 @@ const ImageBad = () => {
 
     function init() {
         handleToggleBackdrop();
-        post("/album/get-mine",
-            localStorage.getItem("v5_token")).then((res: any) => {
+        post("/album/get-mine-count",
+            {token: localStorage.getItem("v5_token")}
+        ).then((res: any) => {
+            if (res.status === 200) {
+                setPageCount(res.data.msg);
+            }
+            handleCloseBackdrop();
+        }).catch(() => {
+            alert("登录信息过期，请重新登录");
+            navigate("/auth/login");
+        });
+        getListByPage(pageNumber);
+    }
+
+    const getListByPage = (pageIndex:number) => {
+        post("/album/get-my-imgs-by-page",
+            {
+                token: localStorage.getItem("v5_token"),
+                message: pageIndex
+            }).then((res: any) => {
             if (res.status === 200) {
                 const list = res.data.reverse();
-                console.log("test_base_url: " + GlobalParams.backendUrl);
                 list.map((item: any) => {
                     item.title = item.resourceLink;
-                    item.resourceLink =
-                        GlobalParams.backendUrl
+                    item.resourceLink = GlobalParams.backendUrl
                         + "/album/download/"
-                        + item.resourceLink;
+                        + item.resourceLink
                 });
                 setImageList(list);
-                handleCloseBackdrop();
             }
         }).catch(() => {
             alert("登录信息过期，请重新登录");
             navigate("/auth/login");
-        })
+        });
     }
 
     useEffect(() => {
@@ -160,18 +177,6 @@ const ImageBad = () => {
                     }}
                 >我的图床</Typography>
             }
-            <Button
-                variant="contained"
-                component="label"
-                sx={{
-                    margin: 1,
-                    position: "absolute",
-                    right: 20,
-                }}
-                onClick={handleClickOpen}
-            >
-                上传新照片
-            </Button>
             <Dialog
                 open={open}
                 onClose={handleClose}
@@ -266,6 +271,58 @@ const ImageBad = () => {
                     ))}
                 </Stack>
             }
+            <Box
+                sx={{
+                    position:"fixed",
+                    top: "8vh",
+                    width:"100%",
+                    height:"5vh",
+                    background:"#ffffff",
+                    zIndex:20,
+                    display:"-flex",
+                }}
+            >
+                <Grid container>
+                    <Grid xs={2}>
+                        <Typography
+                            sx={{
+                                marginTop:1,
+                                fontFamily:"font5",
+                                fontSize:18,
+                                marginLeft: 2,
+                            }}
+                        >
+                            当前第 {pageNumber} 页，共 {pageCount} 页
+                        </Typography>
+                    </Grid>
+                    <Grid xs={7}>
+                        <Pagination
+                            sx={{marginTop:0.5}}
+                            count={pageCount}
+                            boundaryCount={2}
+                            siblingCount={2}
+                            variant="outlined"
+                            color="primary"
+                            page={pageNumber}
+                            showFirstButton
+                            showLastButton
+                            onChange={(event,page)=>{
+                                setPageNumber(page);
+                                getListByPage(page);
+                            }}
+                        />
+                    </Grid>
+                    <Grid xs={2}>
+                        <Button
+                            variant="contained"
+                            component="label"
+                            onClick={handleClickOpen}
+                        >
+                            上传新照片
+                        </Button>
+                    </Grid>
+                </Grid>
+            </Box>
         </Box>
     );
 };

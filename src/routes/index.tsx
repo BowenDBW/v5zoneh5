@@ -70,10 +70,6 @@ export default [
                 path: 'registry',
                 element: <Registry/>
             },
-            {
-                path: 'callback',
-                element: <OauthCallback/>
-            }
         ]
     },
     {
@@ -128,10 +124,14 @@ export default [
                 path: "profile",
                 element: <ProfileMobile/>
             },
-            {
-                path: "callback",
-                element: <InitOauthCallback/>
-            },
         ]
+    },
+    {
+        path: 'callback1',
+        element: <OauthCallback/>
+    },
+    {
+        path: "callback2",
+        element: <InitOauthCallback/>
     },
 ]

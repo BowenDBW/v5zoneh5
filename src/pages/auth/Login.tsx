@@ -54,7 +54,7 @@ function Login() {
             Global.oauthId +
             "&redirect_uri=" +
             Global.oauthRedirectUrl +
-            "/auth/callback" +
+            "/callback1" +
             "&response_type=" +
             "code" +
             "&scope=" +
