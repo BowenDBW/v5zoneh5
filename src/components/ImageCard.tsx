@@ -1,6 +1,15 @@
-import React, {useState} from "react";
+import React from "react";
 import {post} from "./utils/Request";
-import {Button, Card, CardActionArea, CardActions, CardMedia, MenuItem, TextField} from "@mui/material";
+import {
+    Button,
+    Card,
+    CardActionArea,
+    CardActions,
+    CardMedia,
+    MenuItem,
+    TextField,
+    Skeleton
+} from "@mui/material";
 import copy from "copy-to-clipboard";
 import CircularProgress from "@mui/material/CircularProgress";
 import Backdrop from "@mui/material/Backdrop";
@@ -8,9 +17,9 @@ import Backdrop from "@mui/material/Backdrop";
 export default function ImageCard(props: any) {
 
     const {imageUrl, access, title, init} = props;
-    const [isPublic, setIsPublic] = useState(access === true);
+    const [isPublic, setIsPublic] = React.useState(access === true);
     const [openBackDrop, setOpenBackDrop] = React.useState(false);
-
+    const [onload, setOnload] = React.useState(true);
     const handleCloseBackdrop = () => {
         setOpenBackDrop(false);
     };

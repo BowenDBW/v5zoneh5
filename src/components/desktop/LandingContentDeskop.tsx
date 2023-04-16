@@ -35,6 +35,9 @@ const LandingContentDesktop = (props: any) => {
     }
 
     const calWidth = (serial: number, count: number) => {
+        if(count === 1){
+            return "100%";
+        }
         if (count % 3 === 0) {
             if (serial % 3 === 1) {
                 return "34%";
@@ -73,7 +76,7 @@ const LandingContentDesktop = (props: any) => {
                 list.map((item: any, index: number) => {
                     item.url = "url('" + item.imageLink + "')";
                     item.naviLink = window.location.origin
-                        + "/#/"
+                        + "/"
                         + getFileType(item.fileLink)
                         + "?fileLink="
                         + item.fileLink

@@ -237,7 +237,10 @@ export default function Registry() {
                 }
                 handleCloseBackdrop();
             }
-        }))
+        })).catch(()=>{
+            alert("注册失败，清联系管理员");
+            handleCloseBackdrop();
+        })
     }
 
     const MenuProps = {
@@ -656,7 +659,7 @@ export default function Registry() {
                             label="出生日期"
                             value={dayjs(birthday)}
                             onChange={(newValue: any) => {
-                                setBirthday(newValue.toString());
+                                setBirthday(newValue.format('YYYY-MM-DD'));
                             }}
                         />
                     </LocalizationProvider>
